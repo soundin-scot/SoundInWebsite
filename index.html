@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoundIn — Built in the Highlands</title>
+  <meta name="description" content="A Scottish Highlands digital studio building venue software, lighting systems, events, and web. Three founders. Six practices. Long view." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+@font-face {
+  font-family: 'Negara Serif';
+  src: url('fonts/negara-serif-hairline-italic.woff2') format('woff2'),
+       url('fonts/NegaraSerif-HairlineItalic.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --black: #000000;
+  --scarab: #24302c;
+  --salmon: #ff7f6b;
+  --thistle: #904b90;
+  --snow: #e7dfd9;
+  --cream: rgba(231,223,217,0.85);
+  --muted: rgba(231,223,217,0.5);
+  --faint: rgba(231,223,217,0.15);
+  --ghost: rgba(231,223,217,0.06);
+  --negara: 'Negara Serif', Georgia, serif;
+  --lexend: 'Lexend Deca', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--snow);
+  font-family: var(--lexend);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   NAV
+============================================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  height: 80px;
+}
+
+.logo {
+  font-size: 20px;
+  letter-spacing: 0.02em;
+}
+
+.logo-s {
+  font-family: var(--lexend);
+  font-weight: 900;
+}
+
+.logo-i {
+  font-family: var(--negara);
+  font-weight: 100;
+  font-style: italic;
+  color: var(--salmon);
+}
+
+.nav-links {
+  display: flex;
+  gap: 48px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--lexend);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--snow);
+  transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible { opacity: 0.6; outline: none; }
+
+/* ============================================================
+   HERO — centred, minimal, like atoms
+============================================================ */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 48px;
+}
+
+/* geometric mark — abstract SoundIn symbol */
+.hero-mark {
+  width: 240px;
+  height: 240px;
+  margin-bottom: 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  opacity: 0;
+  animation: enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.hero-mark-cell {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* each cell gets a different warm-toned gradient to suggest moody highland imagery */
+.hero-mark-cell:nth-child(1) {
+  background: linear-gradient(135deg, #8b6d4a 0%, #5a3e28 100%);
+  border-bottom-right-radius: 48px;
+}
+.hero-mark-cell:nth-child(2) {
+  background: linear-gradient(225deg, #a07850 0%, #6b4c30 100%);
+  border-bottom-left-radius: 48px;
+}
+.hero-mark-cell:nth-child(3) {
+  background: linear-gradient(45deg, #7a5f3c 0%, #4d3520 100%);
+  border-top-right-radius: 48px;
+}
+.hero-mark-cell:nth-child(4) {
+  background: linear-gradient(315deg, #9a7b55 0%, #5e4028 100%);
+  border-top-left-radius: 48px;
+}
+
+.hero-headline {
+  font-family: var(--negara);
+  font-weight: 100;
+  font-style: italic;
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.3;
+  color: var(--snow);
+  max-width: 700px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.hero-headline .accent { color: var(--salmon); }
+
+.hero-link {
+  font-family: var(--lexend);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+  opacity: 0;
+  animation: enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+.hero-link:hover,
+.hero-link:focus-visible { color: var(--snow); outline: none; }
+
+/* ============================================================
+   PRACTICES — atoms "Companies" style
+============================================================ */
+.practices {
+  position: relative;
+  z-index: 1;
+  padding: 120px 64px 80px;
+}
+
+.practices-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 64px;
+}
+
+.practices-title {
+  font-family: var(--negara);
+  font-weight: 100;
+  font-style: italic;
+  font-size: clamp(36px, 5vw, 56px);
+  color: var(--snow);
+}
+
+.practices-title sup {
+  font-family: var(--lexend);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--muted);
+  vertical-align: super;
+  margin-left: 4px;
+}
+
+.practices-cta {
+  font-family: var(--lexend);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+.practices-cta:hover { color: var(--snow); }
+
+/* cards grid */
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.cards-row:last-child {
+  margin-bottom: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-visual {
+  aspect-ratio: 1 / 1.1;
+  border: 1px solid var(--faint);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s ease;
+}
+
+.card:hover .card-visual {
+  border-color: rgba(231,223,217,0.3);
+}
+
+/* each card gets a unique geometric mark inside */
+.card-mark {
+  opacity: 0.85;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.card:hover .card-mark {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+/* blurred/redacted card for Crith */
+.card-visual.redacted {
+  position: relative;
+}
+
+.card-visual.redacted::after {
+  content: '';
+  position: absolute;
+  inset: 20%;
+  background: rgba(231,223,217,0.08);
+  filter: blur(24px);
+  border-radius: 50%;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.card-name {
+  font-family: var(--lexend);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--snow);
+}
+
+.card-pill {
+  font-family: var(--lexend);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border: 1px solid var(--faint);
+  border-radius: 2px;
+  color: var(--muted);
+}
+
+.card-desc {
+  font-family: var(--lexend);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 16px;
+  max-width: 400px;
+}
+
+.card-links {
+  display: flex;
+  gap: 20px;
+}
+
+.card-links a {
+  font-family: var(--lexend);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  transition: color 0.3s ease;
+}
+
+.card-links a:hover { color: var(--snow); }
+
+/* ============================================================
+   VISION — numbered sections with thin rules
+============================================================ */
+.vision {
+  position: relative;
+  z-index: 1;
+  padding: 160px 64px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.vision-section {
+  padding: 64px 0;
+  border-top: 1px solid var(--ghost);
+}
+
+.vision-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.vision-heading {
+  font-family: var(--negara);
+  font-weight: 100;
+  font-style: italic;
+  font-size: clamp(24px, 3vw, 36px);
+  color: var(--salmon);
+}
+
+.vision-num {
+  font-family: var(--lexend);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.vision-body {
+  font-family: var(--lexend);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.8;
+  color: var(--cream);
+}
+
+.vision-body p { margin-bottom: 20px; }
+.vision-body p:last-child { margin-bottom: 0; }
+
+/* pull quote */
+.pull-quote {
+  position: relative;
+  z-index: 1;
+  padding: 160px 64px;
+  text-align: center;
+}
+
+.pull-quote-text {
+  font-family: var(--negara);
+  font-weight: 100;
+  font-style: italic;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.2;
+  color: rgba(231,223,217,0.35);
+  max-width: 900px;
+  margin: 0 auto 24px;
+}
+
+.pull-quote-attr {
+  font-family: var(--lexend);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================================
+   CONTACT — two-column like atoms
+============================================================ */
+.contact {
+  position: relative;
+  z-index: 1;
+  padding: 160px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  border-top: 1px solid var(--ghost);
+}
+
+.contact h2 {
+  font-family: var(--negara);
+  font-weight: 100;
+  font-style: italic;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.05;
+  color: var(--snow);
+  margin-bottom: 48px;
+}
+
+.contact-field {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--faint);
+  padding: 16px 0;
+  font-family: var(--lexend);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--snow);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.contact-field::placeholder { color: var(--muted); }
+.contact-field:focus { border-color: var(--salmon); }
+
+.contact-submit {
+  margin-top: 32px;
+  font-family: var(--lexend);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--snow);
+  background: none;
+  border: 1px solid var(--faint);
+  border-radius: 24px;
+  padding: 12px 32px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.contact-submit:hover,
+.contact-submit:focus-visible {
+  border-color: var(--salmon);
+  background: rgba(255,127,107,0.08);
+  outline: none;
+}
+
+.contact-right {
+  padding-top: 80px;
+}
+
+.contact-info-group {
+  margin-bottom: 40px;
+}
+
+.contact-info-label {
+  font-family: var(--negara);
+  font-weight: 100;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--salmon);
+  margin-bottom: 4px;
+}
+
+.contact-info-val {
+  font-family: var(--lexend);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--cream);
+}
+
+.contact-info-val a {
+  transition: opacity 0.3s ease;
+}
+
+.contact-info-val a:hover { opacity: 0.6; }
+
+/* ============================================================
+   FOOTER — massive wordmark
+============================================================ */
+.footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--ghost);
+  overflow: hidden;
+}
+
+.footer-wordmark {
+  font-family: var(--lexend);
+  font-weight: 900;
+  font-size: clamp(80px, 18vw, 280px);
+  color: rgba(231,223,217,0.04);
+  text-align: center;
+  line-height: 0.85;
+  padding: 40px 0 0;
+  user-select: none;
+  pointer-events: none;
+}
+
+.footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 64px 40px;
+}
+
+.footer-bar-item {
+  font-family: var(--lexend);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.footer-bar a {
+  transition: color 0.3s ease;
+}
+
+.footer-bar a:hover { color: var(--snow); }
+
+.footer-bar-links {
+  display: flex;
+  gap: 40px;
+}
+
+/* ============================================================
+   ANIMATION
+============================================================ */
+@keyframes enter {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 900px) {
+  .nav { padding: 0 24px; }
+  .nav-links { gap: 28px; }
+
+  .hero { padding: 80px 24px; }
+  .hero-mark { width: 180px; height: 180px; margin-bottom: 48px; }
+
+  .practices { padding: 80px 24px; }
+  .cards-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vision { padding: 100px 24px; }
+  .pull-quote { padding: 100px 24px; }
+
+  .contact {
+    grid-template-columns: 1fr;
+    padding: 100px 24px;
+    gap: 48px;
+  }
+  .contact-right { padding-top: 0; }
+
+  .footer-bar { padding: 24px 24px 32px; flex-wrap: wrap; gap: 16px; }
+}
+
+@media (max-width: 600px) {
+  .nav-links a:not(:last-child) { display: none; }
+
+  .cards-row {
+    grid-template-columns: 1fr;
+  }
+
+  .practices-header { flex-direction: column; gap: 12px; }
+  .footer-bar-links { gap: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="logo"><span class="logo-s">Sound</span><span class="logo-i">In</span></a>
+  <ul class="nav-links">
+    <li><a href="#practices">Work</a></li>
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-mark" aria-hidden="true">
+    <div class="hero-mark-cell"></div>
+    <div class="hero-mark-cell"></div>
+    <div class="hero-mark-cell"></div>
+    <div class="hero-mark-cell"></div>
+  </div>
+  <h1 class="hero-headline">Three founders. Six practices. Built slow, from the <span class="accent">Scottish Highlands.</span></h1>
+  <a href="#vision" class="hero-link">Read our vision &rarr;</a>
+</header>
+
+<!-- PRACTICES -->
+<section class="practices" id="practices">
+  <div class="practices-header reveal">
+    <h2 class="practices-title">Practices<sup>06</sup></h2>
+    <a href="#contact" class="practices-cta">Work with us &rarr;</a>
+  </div>
+
+  <!-- Row 1: Products -->
+  <div class="cards-row reveal">
+
+    <div class="card">
+      <div class="card-visual">
+        <svg class="card-mark" width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <rect x="8" y="8" width="28" height="28" rx="4" fill="rgba(231,223,217,0.85)"/>
+          <rect x="44" y="8" width="28" height="28" rx="4" fill="rgba(231,223,217,0.85)"/>
+          <rect x="8" y="44" width="28" height="28" rx="4" fill="rgba(231,223,217,0.85)"/>
+          <rect x="44" y="44" width="28" height="12" rx="4" fill="rgba(231,223,217,0.85)"/>
+          <rect x="44" y="60" width="12" height="12" rx="4" fill="rgba(231,223,217,0.85)"/>
+        </svg>
+      </div>
+      <div class="card-meta">
+        <span class="card-name">Holocron</span>
+        <span class="card-pill">Nightlife</span>
+      </div>
+      <p class="card-desc">SaaS venue dashboard for nightlife operators who want clarity on what's actually happening on the floor.</p>
+      <div class="card-links">
+        <a href="#">Website &#8599;</a>
+        <a href="#">LinkedIn &#8599;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-visual">
+        <svg class="card-mark" width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="28" stroke="rgba(231,223,217,0.85)" stroke-width="4" fill="none"/>
+          <circle cx="40" cy="40" r="10" fill="rgba(231,223,217,0.85)"/>
+        </svg>
+      </div>
+      <div class="card-meta">
+        <span class="card-name">Photon</span>
+        <span class="card-pill">Lighting</span>
+      </div>
+      <p class="card-desc">Open source DMX lighting control — free to use, free to extend, with expert hardware and system design available behind it.</p>
+      <div class="card-links">
+        <a href="#">Website &#8599;</a>
+        <a href="#">GitHub &#8599;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-visual redacted">
+        <svg class="card-mark" width="80" height="80" viewBox="0 0 80 80" fill="none" style="opacity:0.15; filter: blur(4px);">
+          <rect x="16" y="16" width="48" height="48" rx="24" fill="rgba(231,223,217,0.85)"/>
+        </svg>
+      </div>
+      <div class="card-meta">
+        <span class="card-name" style="opacity:0.4;">Coming soon</span>
+        <span class="card-pill">Future</span>
+      </div>
+      <p class="card-desc" style="filter: blur(4px); user-select: none;">Something we've been building quietly. You'll hear about it when it's ready.</p>
+    </div>
+
+  </div>
+
+  <!-- Row 2: Services -->
+  <div class="cards-row reveal" style="margin-top: 24px;">
+
+    <div class="card">
+      <div class="card-visual">
+        <svg class="card-mark" width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <polygon points="40,8 72,68 8,68" stroke="rgba(231,223,217,0.85)" stroke-width="3.5" fill="none" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="card-meta">
+        <span class="card-name">Events</span>
+        <span class="card-pill">Production</span>
+      </div>
+      <p class="card-desc">End-to-end production for events that demand technical precision and someone who stays until the gear is packed.</p>
+      <div class="card-links">
+        <a href="#contact">Enquire &#8599;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-visual">
+        <svg class="card-mark" width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="28" stroke="rgba(231,223,217,0.85)" stroke-width="3.5" fill="none"/>
+          <line x1="12" y1="40" x2="68" y2="40" stroke="rgba(231,223,217,0.85)" stroke-width="3.5"/>
+          <path d="M40 12 C50 28, 50 52, 40 68" stroke="rgba(231,223,217,0.85)" stroke-width="3.5" fill="none"/>
+          <path d="M40 12 C30 28, 30 52, 40 68" stroke="rgba(231,223,217,0.85)" stroke-width="3.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-meta">
+        <span class="card-name">Social</span>
+        <span class="card-pill">Marketing</span>
+      </div>
+      <p class="card-desc">Content and community management for brands that want an audience, not just a following.</p>
+      <div class="card-links">
+        <a href="#contact">Enquire &#8599;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-visual">
+        <svg class="card-mark" width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <polyline points="24,28 12,40 24,52" stroke="rgba(231,223,217,0.85)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="56,28 68,40 56,52" stroke="rgba(231,223,217,0.85)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="46" y1="20" x2="34" y2="60" stroke="rgba(231,223,217,0.85)" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-meta">
+        <span class="card-name">Web</span>
+        <span class="card-pill">Development</span>
+      </div>
+      <p class="card-desc">Websites and applications built to last — fast, accessible, and owned by you, not locked to a platform.</p>
+      <div class="card-links">
+        <a href="#contact">Enquire &#8599;</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<div class="pull-quote reveal">
+  <p class="pull-quote-text">"The Highlands taught us patience. Patience taught us to build things that last."</p>
+  <span class="pull-quote-attr">Cougar, Emma &amp; Mark &mdash; Founders, SoundIn</span>
+</div>
+
+<!-- VISION -->
+<section class="vision" id="vision">
+
+  <div class="vision-section reveal">
+    <div class="vision-header">
+      <h3 class="vision-heading">Our Mission</h3>
+      <span class="vision-num">01</span>
+    </div>
+    <div class="vision-body">
+      <p>We build things we believe in, with people we respect. Web, events, software, lighting &mdash; different disciplines, one standard of care. Every client we take on gets a founding team that is genuinely invested in what they're trying to do.</p>
+    </div>
+  </div>
+
+  <div class="vision-section reveal">
+    <div class="vision-header">
+      <h3 class="vision-heading">Highland Roots</h3>
+      <span class="vision-num">02</span>
+    </div>
+    <div class="vision-body">
+      <p>Cougar, Emma, and Mark started SoundIn in the Scottish Highlands because that's where we live &mdash; not as a brand story, but as a fact that shapes how we see time, scope, and what good work actually means.</p>
+      <p>You don't build slowly here by accident. The distance from the noise is a feature. It keeps us honest about what we take on and who we take it on for.</p>
+    </div>
+  </div>
+
+  <div class="vision-section reveal">
+    <div class="vision-header">
+      <h3 class="vision-heading">Our Approach</h3>
+      <span class="vision-num">03</span>
+    </div>
+    <div class="vision-body">
+      <p>Six practices isn't a portfolio strategy. It's the natural result of three people who each came from different disciplines and chose not to abandon any of them.</p>
+      <p>That breadth means when a client needs lighting and a website and someone to run their socials, we don't outsource the parts we find inconvenient. We do the work.</p>
+    </div>
+  </div>
+
+  <div class="vision-section reveal">
+    <div class="vision-header">
+      <h3 class="vision-heading">Values</h3>
+      <span class="vision-num">04</span>
+    </div>
+    <div class="vision-body">
+      <p>Say what you mean. Charge what the work costs. Own your mistakes. Take on less so you can do more with it. Build things that outlast the brief. Care about the people on the other side of every contract &mdash; and about the communities they operate in.</p>
+      <p>That's not a values framework. That's just how we prefer to work.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div>
+    <h2>Tell us what you're working on</h2>
+    <form onsubmit="return false;">
+      <input class="contact-field" type="text" placeholder="Name" autocomplete="name" />
+      <input class="contact-field" type="email" placeholder="Email" autocomplete="email" />
+      <input class="contact-field" type="text" placeholder="Company" autocomplete="organization" />
+      <textarea class="contact-field" placeholder="Message" rows="1" style="resize:none;"></textarea>
+      <button class="contact-submit" type="submit">Send</button>
+    </form>
+  </div>
+  <div class="contact-right">
+    <div class="contact-info-group">
+      <div class="contact-info-label">General</div>
+      <div class="contact-info-val"><a href="mailto:hello@soundin.scot">hello@soundin.scot</a></div>
+    </div>
+    <div class="contact-info-group">
+      <div class="contact-info-label">Location</div>
+      <div class="contact-info-val">Scottish Highlands, UK</div>
+    </div>
+    <div class="contact-info-group">
+      <div class="contact-info-label">Socials</div>
+      <div class="contact-info-val"><a href="#">LinkedIn</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-wordmark" aria-hidden="true">SoundIn</div>
+  <div class="footer-bar">
+    <span class="footer-bar-item">2025 &copy; SoundIn</span>
+    <div class="footer-bar-links">
+      <a href="#contact" class="footer-bar-item">Contact</a>
+      <a href="#" class="footer-bar-item">LinkedIn</a>
+      <span class="footer-bar-item">Privacy</span>
+    </div>
+    <span class="footer-bar-item">SC850719</span>
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
