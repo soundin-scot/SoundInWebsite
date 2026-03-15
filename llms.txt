@@ -1,0 +1,34 @@
+# SoundIn
+
+> SoundIn is a Scottish digital agency based in the Highlands, building web applications, venue management software, open-source DMX lighting tools, and providing event production and social media services for purpose-driven businesses across the UK.
+
+SoundIn Limited (SC850719) was founded by three partners in the Scottish Highlands. The company operates across six practice areas: web development, event production, social media management, venue technology (Holocron), lighting systems (Photon), and emerging product development.
+
+The agency works with purpose-driven businesses that want an integrated digital partner rather than multiple separate vendors. SoundIn's positioning is long-term relationship over transactional project work, with a Scotland-first go-to-market approach.
+
+## Products
+
+- Holocron: SaaS venue management dashboard built for nightlife operators. Provides operational clarity, attendance tracking, incident management, guest list management, and financial reporting.
+- Photon: Open-source DMX lighting control software. Free to use and extend under an open license. Professional hardware specification and system design services available separately.
+
+## Services
+
+- Web Development: Responsive, accessible websites and web applications. WCAG 2.1 AA compliance, performance-first architecture.
+- Event Production: End-to-end technical production for events requiring precision. AV, lighting, and logistics.
+- Social Media Management: Strategy, content creation, and community management on monthly retainers with transparent reporting.
+
+## Key Pages
+
+- [Homepage](https://soundin.scot/): Agency overview, practices, and vision
+- [Contact](https://soundin.scot/#contact): Enquire about services or partnerships
+
+## Company Details
+
+- Legal name: SoundIn Limited
+- Company number: SC850719 (registered in Scotland)
+- Location: Scottish Highlands, United Kingdom
+- Contact: hello@soundin.scot
+
+## Who We Work With
+
+Purpose-driven Scottish and UK businesses seeking integrated digital solutions. Nightlife venue operators. Event organisers requiring technical production. Organisations that value long-term partnership over lowest-price vendor relationships.
