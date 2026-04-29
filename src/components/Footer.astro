@@ -1,0 +1,50 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer relative z-[1] border-t border-[var(--color-ghost)] overflow-hidden">
+  <div class="footer-wordmark" aria-hidden="true">SoundIn</div>
+  <div class="footer-bar flex items-center justify-between px-16 pt-6 pb-10 max-[900px]:flex-wrap max-[900px]:gap-4 max-[900px]:px-6 max-[900px]:pb-8">
+    <span class="footer-bar-item">{year} &copy; SoundIn</span>
+    <div class="footer-bar-links flex gap-10 max-[600px]:gap-5">
+      <a href="/contact" class="footer-bar-item">Say Hello</a>
+      <a href="#" class="footer-bar-item">LinkedIn</a>
+      <a href="/privacy" class="footer-bar-item">Privacy</a>
+    </div>
+    <a
+      href="https://find-and-update.company-information.service.gov.uk/company/SC850719"
+      rel="noopener noreferrer"
+      target="_blank"
+      class="footer-bar-item">SC850719</a>
+  </div>
+</footer>
+
+<style>
+  .footer-wordmark {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    font-size: clamp(96px, 21vw, 320px);
+    text-align: center;
+    line-height: 0.85;
+    padding: 48px 0 0;
+    user-select: none;
+    pointer-events: none;
+    color: rgba(255, 127, 107, 0.05);
+  }
+
+  .footer-bar-item {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+
+  .footer-bar a { transition: color 0.3s ease; }
+  .footer-bar a:hover { color: var(--color-snow); }
+  .footer-bar a:focus-visible {
+    color: var(--color-snow);
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+</style>
