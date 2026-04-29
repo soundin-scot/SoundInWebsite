@@ -1,0 +1,63 @@
+---
+import Logo from './Logo.astro';
+interface Props {
+  current?: 'practices' | 'vision' | 'contact' | null;
+}
+const { current = null } = Astro.props;
+---
+
+<nav class="nav fixed top-0 left-0 right-0 z-[100] flex items-center justify-center px-6 h-20 border-b border-transparent transition-[background,border-color] duration-500">
+  <Logo />
+  <ul class="nav-links flex gap-12 list-none max-[900px]:gap-7">
+    <li class="nav-hide-mobile max-[600px]:hidden">
+      <a href="/#practices" aria-current={current === 'practices' ? 'page' : undefined}>What We Do</a>
+    </li>
+    <li class="nav-hide-mobile max-[600px]:hidden">
+      <a href="/vision" aria-current={current === 'vision' ? 'page' : undefined}>Our Story</a>
+    </li>
+    <li>
+      <a href="/contact" aria-current={current === 'contact' ? 'page' : undefined}>Say Hello</a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  .nav :global(.logo) { display: none; }
+  .nav.scrolled {
+    background: rgba(36, 48, 44, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: rgba(231, 223, 217, 0.04);
+  }
+  .nav-links a {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-snow);
+    transition: opacity 0.3s ease;
+  }
+  .nav-links a[aria-current="page"] { opacity: 0.6; }
+  .nav-links a:hover { opacity: 0.6; }
+  .nav-links a:focus-visible {
+    opacity: 0.6;
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+</style>
+
+<script>
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          nav.classList.toggle('scrolled', window.scrollY > 40);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+</script>

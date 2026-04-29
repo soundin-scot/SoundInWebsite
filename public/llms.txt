@@ -19,8 +19,9 @@ The agency works with purpose-driven businesses that want an integrated digital 
 
 ## Key Pages
 
-- [Homepage](https://soundin.scot/): Agency overview, practices, and vision
-- [Contact](https://soundin.scot/#contact): Enquire about services or partnerships
+- [Homepage](https://soundin.scot/): Agency overview and practice areas
+- [Vision](https://soundin.scot/vision): Mission, values, founding story, and approach
+- [Contact](https://soundin.scot/contact): Enquire about services or partnerships
 
 ## Company Details
 

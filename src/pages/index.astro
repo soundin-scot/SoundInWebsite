@@ -1,0 +1,399 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import HeroTopo from '@/components/HeroTopo.astro';
+import RevealScript from '@/components/RevealScript.astro';
+
+const title = 'SoundIn — Scottish Digital Agency | Web, Events & Venue Software';
+const description = 'SoundIn is a Scottish Highlands digital agency building web applications, venue management software, DMX lighting systems, and event production. Purpose-driven businesses, long-term partnerships.';
+
+const products = [
+  {
+    name: 'Holocron',
+    pill: 'Nightlife',
+    desc: 'Venue management SaaS — attendance, ticketing, incidents, guest lists, settlements, and payouts. Real-time operational intelligence for nightlife.',
+    links: [
+      { href: '#', label: 'Website', aria: 'Holocron website' },
+      { href: '#', label: 'LinkedIn', aria: 'Holocron on LinkedIn' },
+    ],
+  },
+  {
+    name: 'Photon',
+    pill: 'Lighting',
+    desc: 'Open source DMX controller — 512 channels, sub-millisecond latency. Pre-built units, hardware kits, and lighting system design consulting.',
+    links: [
+      { href: '#', label: 'Website', aria: 'Photon website' },
+      { href: '#', label: 'GitHub', aria: 'Photon on GitHub' },
+    ],
+  },
+];
+
+const services = [
+  {
+    name: 'Events',
+    pill: 'Production',
+    desc: 'Production management, technical production — lighting, sound, AV — and venue consultation. From concept through teardown.',
+    enquire: 'Enquire about event production',
+  },
+  {
+    name: 'Social',
+    pill: 'Marketing',
+    desc: 'Strategy, content creation, and community management on monthly retainers. Transparent reporting, all platforms.',
+    enquire: 'Enquire about social media',
+  },
+  {
+    name: 'Web',
+    pill: 'Development',
+    desc: 'Marketing sites, e-commerce, and custom web applications. Responsive, WCAG 2.1 AA accessible, performance-first.',
+    enquire: 'Enquire about web development',
+  },
+];
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': ['Organization', 'LocalBusiness'],
+      '@id': 'https://soundin.scot/#organization',
+      name: 'SoundIn',
+      legalName: 'SoundIn Limited',
+      url: 'https://soundin.scot',
+      email: 'hello@soundin.scot',
+      foundingDate: '2025',
+      description: 'Scottish Highlands digital agency delivering web development, venue management software, DMX lighting systems, event production, and social media management for purpose-driven businesses.',
+      identifier: { '@type': 'PropertyValue', name: 'Companies House', value: 'SC850719' },
+      address: { '@type': 'PostalAddress', addressRegion: 'Highland', addressCountry: 'GB' },
+      areaServed: [
+        { '@type': 'Country', name: 'United Kingdom' },
+        { '@type': 'AdministrativeArea', name: 'Scotland' },
+      ],
+      knowsAbout: ['Web Development', 'Digital Marketing', 'Event Production', 'Venue Management Software', 'DMX Lighting Control', 'Social Media Management'],
+      sameAs: ['https://www.linkedin.com/company/soundin'],
+    },
+  ],
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical="https://soundin.scot/"
+  current="practices"
+  skipLink={{ href: '#practices', label: 'Skip to content' }}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(orgSchema)} slot="head" />
+
+  <header class="hero">
+    <HeroTopo variant="hero" />
+
+    <div class="hero-wordmark" aria-hidden="true">
+      <span class="logo-s">Sound</span><span class="logo-i">In</span>
+    </div>
+
+    <h1 class="hero-headline">
+      Software, events, and open-source tools out of the Scottish Highlands. We don&rsquo;t pick a lane because <span class="accent">the problems don&rsquo;t.</span>
+    </h1>
+    <a href="/vision" class="hero-link">Read vision <span aria-hidden="true">&rarr;</span></a>
+  </header>
+
+  <section class="practices" id="practices" tabindex="-1">
+    <HeroTopo variant="practices" />
+
+    <div class="practices-header reveal">
+      <h2 class="practices-title">Practices<sup>06</sup></h2>
+      <a href="/contact" class="practices-cta">Work with us <span aria-hidden="true">&rarr;</span></a>
+    </div>
+
+    <div class="cards-row reveal">
+      {products.map((p) => (
+        <div class="card">
+          <div class="card-visual">
+            <span class="card-visual-label">{p.name}</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-name">{p.name}</span>
+            <span class="card-pill">{p.pill}</span>
+          </div>
+          <p class="card-desc">{p.desc}</p>
+          <div class="card-links">
+            {p.links.map((l) => (
+              <a href={l.href} aria-label={l.aria}>{l.label} <span aria-hidden="true">&#8599;</span></a>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="card">
+        <div class="card-visual redacted">
+          <span class="card-visual-label" style="opacity: 0.15; filter: blur(4px);">&mdash;</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-name" style="opacity:0.4;">Coming soon</span>
+          <span class="card-pill">Future</span>
+        </div>
+        <p class="card-desc" aria-hidden="true" style="filter: blur(4px); user-select: none;">
+          Something we&rsquo;ve been building quietly. You&rsquo;ll hear about it when it&rsquo;s ready.
+        </p>
+      </div>
+    </div>
+
+    <div class="cards-row reveal">
+      {services.map((s) => (
+        <div class="card">
+          <div class="card-visual">
+            <span class="card-visual-label">{s.name}</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-name">{s.name}</span>
+            <span class="card-pill">{s.pill}</span>
+          </div>
+          <p class="card-desc">{s.desc}</p>
+          <div class="card-links">
+            <a href="/contact" aria-label={s.enquire}>Enquire <span aria-hidden="true">&#8599;</span></a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <RevealScript />
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 48px;
+    overflow: hidden;
+  }
+
+  .hero-wordmark {
+    position: relative;
+    font-family: var(--font-sans);
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: enter 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+
+  .hero-headline {
+    position: relative;
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(36px, 4.5vw, 60px);
+    line-height: 1.2;
+    color: var(--color-snow);
+    max-width: 740px;
+    margin-bottom: 32px;
+    text-wrap: balance;
+    opacity: 0;
+    animation: enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  }
+
+  .hero-headline .accent { color: var(--color-salmon); }
+
+  .hero-link {
+    position: relative;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+    opacity: 0;
+    animation: enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  }
+
+  .hero-link:hover { color: var(--color-snow); }
+  .hero-link:focus-visible {
+    color: var(--color-snow);
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .practices {
+    position: relative;
+    z-index: 1;
+    padding: 160px 64px 100px;
+    overflow: hidden;
+  }
+
+  .practices-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 80px;
+  }
+
+  .practices-title {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(36px, 5vw, 56px);
+    color: var(--color-snow);
+    text-wrap: balance;
+  }
+
+  .practices-title sup {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-muted);
+    vertical-align: super;
+    margin-left: 4px;
+  }
+
+  .practices-cta {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+  }
+
+  .practices-cta:hover { color: var(--color-snow); }
+  .practices-cta:focus-visible {
+    color: var(--color-snow);
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .cards-row:last-child { margin-bottom: 0; }
+
+  .card { display: flex; flex-direction: column; }
+
+  .card-visual {
+    aspect-ratio: 1 / 1.1;
+    border: 1px solid rgba(231, 223, 217, 0.08);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color 0.45s ease, background 0.45s ease, box-shadow 0.45s ease;
+  }
+
+  .card:hover .card-visual,
+  .card:focus-within .card-visual {
+    border-color: rgba(255, 127, 107, 0.2);
+    background: rgba(0, 0, 0, 0.22);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(231, 223, 217, 0.05);
+  }
+
+  .card-visual-label {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    font-size: clamp(28px, 3vw, 40px);
+    color: var(--color-snow);
+    opacity: 0.88;
+    transition: opacity 0.45s ease;
+  }
+
+  .card:hover .card-visual-label,
+  .card:focus-within .card-visual-label { opacity: 1; }
+
+  .card-visual.redacted::after {
+    content: '';
+    position: absolute;
+    inset: 20%;
+    background: rgba(231, 223, 217, 0.08);
+    filter: blur(24px);
+    border-radius: 50%;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .card-name {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-snow);
+  }
+
+  .card-pill {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border: 1px solid var(--color-faint);
+    border-radius: 2px;
+    color: var(--color-muted);
+  }
+
+  .card-desc {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin-bottom: 16px;
+    max-width: 400px;
+  }
+
+  .card-links { display: flex; gap: 20px; }
+
+  .card-links a {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-muted);
+    padding: 12px 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+  }
+
+  .card-links a:hover { color: var(--color-snow); }
+  .card-links a:focus-visible {
+    color: var(--color-snow);
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .hero { padding: 80px 24px; }
+    .practices { padding: 120px 24px 80px; }
+    .cards-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .cards-row { grid-template-columns: 1fr; }
+    .practices-header { flex-direction: column; gap: 12px; }
+  }
+</style>

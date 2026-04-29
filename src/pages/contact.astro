@@ -1,0 +1,231 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Contact SoundIn — Scottish Digital Agency';
+const description = 'Get in touch with SoundIn. Based in the Scottish Highlands - web development, venue software, event production, lighting, and social media management.';
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  '@id': 'https://soundin.scot/contact#webpage',
+  url: 'https://soundin.scot/contact',
+  name: 'Contact SoundIn',
+  isPartOf: { '@id': 'https://soundin.scot/#organization' },
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical="https://soundin.scot/contact"
+  current="contact"
+  skipLink={{ href: '#contact-form', label: 'Skip to contact form' }}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(contactSchema)} slot="head" />
+
+  <section class="contact page-top">
+    <div>
+      <h1>Tell me what you&rsquo;re working on</h1>
+      <form id="contact-form">
+        <div class="field-group">
+          <label for="contact-name" class="field-label">Name</label>
+          <input id="contact-name" name="name" class="contact-field" type="text" autocomplete="name" required />
+        </div>
+        <div class="field-group">
+          <label for="contact-email" class="field-label">Email</label>
+          <input id="contact-email" name="email" class="contact-field" type="email" autocomplete="email" spellcheck="false" required />
+        </div>
+        <div class="field-group">
+          <label for="contact-company" class="field-label">Company</label>
+          <input id="contact-company" name="company" class="contact-field" type="text" autocomplete="organization" />
+        </div>
+        <div class="field-group">
+          <label for="contact-message" class="field-label">Message</label>
+          <textarea id="contact-message" name="message" class="contact-field" rows="4" required></textarea>
+        </div>
+        <button class="contact-submit" type="submit">Send Message</button>
+        <div id="form-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+    <div class="contact-right">
+      <dl>
+        <div class="contact-info-group">
+          <dt class="contact-info-label">General</dt>
+          <dd class="contact-info-val"><a href="mailto:hello@soundin.scot">hello@soundin.scot</a></dd>
+        </div>
+        <div class="contact-info-group">
+          <dt class="contact-info-label">Location</dt>
+          <dd class="contact-info-val">Scottish Highlands, UK</dd>
+        </div>
+        <div class="contact-info-group">
+          <dt class="contact-info-label">Socials</dt>
+          <dd class="contact-info-val"><a href="#">LinkedIn</a></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-top { padding-top: 200px; }
+
+  .contact {
+    position: relative;
+    z-index: 1;
+    padding: 160px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .contact h1 {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    color: var(--color-snow);
+    margin-bottom: 48px;
+    text-wrap: balance;
+  }
+
+  .field-group { margin-bottom: 0; }
+
+  .field-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    padding-top: 16px;
+    margin-bottom: 0;
+  }
+
+  .contact-field {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--color-faint);
+    padding: 8px 0 16px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-snow);
+    transition: border-color 0.3s ease;
+  }
+
+  textarea.contact-field { resize: none; }
+  .contact-field::placeholder { color: rgba(231, 223, 217, 0.3); }
+
+  .contact-field:focus-visible {
+    border-color: var(--color-salmon);
+    outline: 2px solid rgba(255, 127, 107, 0.4);
+    outline-offset: 4px;
+  }
+
+  .contact-submit {
+    margin-top: 32px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-snow);
+    background: none;
+    border: 1px solid var(--color-faint);
+    border-radius: 24px;
+    padding: 12px 32px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .contact-submit:hover {
+    border-color: var(--color-salmon);
+    background: rgba(255, 127, 107, 0.08);
+  }
+
+  .contact-submit:focus-visible {
+    border-color: var(--color-salmon);
+    background: rgba(255, 127, 107, 0.08);
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+  }
+
+  .contact-submit:disabled { opacity: 0.6; cursor: default; }
+
+  .contact-right { padding-top: 80px; }
+
+  .contact-info-group { margin-bottom: 40px; }
+
+  .contact-info-label {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--color-salmon);
+    margin-bottom: 4px;
+  }
+
+  .contact-info-val {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-cream);
+  }
+
+  .contact-info-val a { transition: opacity 0.3s ease; }
+  .contact-info-val a:hover { opacity: 0.6; }
+  .contact-info-val a:focus-visible {
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  #form-status {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-top: 12px;
+    min-height: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .contact { grid-template-columns: 1fr; padding: 100px 24px; gap: 48px; }
+    .contact-right { padding-top: 0; }
+    .page-top { padding-top: 140px; }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const ta = document.getElementById('contact-message') as HTMLTextAreaElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector<HTMLButtonElement>('.contact-submit');
+    const status = document.getElementById('form-status');
+    if (!btn || !status) return;
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+      btn.textContent = 'Sent';
+      status.textContent = "We’ll be in touch.";
+      btn.style.borderColor = 'rgba(231,223,217,0.3)';
+    } catch {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      status.textContent = 'Something went wrong - email us at hello@soundin.scot';
+    }
+  });
+
+  ta?.addEventListener('input', () => {
+    ta.style.height = 'auto';
+    ta.style.height = ta.scrollHeight + 'px';
+  });
+</script>

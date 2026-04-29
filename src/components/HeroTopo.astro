@@ -1,0 +1,64 @@
+---
+interface Props {
+  variant?: 'hero' | 'practices' | 'quote';
+}
+const { variant = 'hero' } = Astro.props;
+---
+
+{variant === 'hero' && (
+  <svg class="hero-topo" aria-hidden="true" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <path d="M-40 740 C220 700, 460 760, 680 700 C880 650, 1060 720, 1260 660 C1380 620, 1480 680, 1540 650" stroke="rgba(231,223,217,0.05)" stroke-width="1.2" fill="none"/>
+    <path d="M-40 620 C200 570, 400 640, 620 580 C820 520, 1000 600, 1200 540 C1340 490, 1460 550, 1540 520" stroke="rgba(231,223,217,0.06)" stroke-width="1.2" fill="none"/>
+    <path d="M-40 500 C180 460, 360 520, 580 450 C760 390, 940 470, 1140 410 C1300 360, 1420 420, 1540 390" stroke="rgba(231,223,217,0.055)" stroke-width="1.2" fill="none"/>
+    <path d="M-40 380 C210 330, 440 400, 640 330 C820 270, 1000 350, 1200 290 C1340 250, 1460 310, 1540 280" stroke="rgba(231,223,217,0.04)" stroke-width="1.2" fill="none"/>
+    <path d="M-40 270 C190 240, 380 280, 580 230 C760 190, 960 250, 1160 200 C1310 170, 1440 210, 1540 190" stroke="rgba(231,223,217,0.03)" stroke-width="1" fill="none"/>
+    <path d="M-40 180 C200 160, 400 190, 600 155 C800 125, 1000 165, 1200 135 C1350 115, 1460 145, 1540 130" stroke="rgba(231,223,217,0.02)" stroke-width="1" fill="none"/>
+    <path d="M-40 680 C190 650, 430 700, 650 640 C850 590, 1030 660, 1230 600 C1360 560, 1470 620, 1540 590" stroke="rgba(231,223,217,0.025)" stroke-width="0.6" fill="none"/>
+    <path d="M-40 560 C190 530, 380 570, 600 510 C790 460, 970 530, 1170 470 C1320 430, 1440 490, 1540 460" stroke="rgba(231,223,217,0.025)" stroke-width="0.6" fill="none"/>
+    <path d="M-40 440 C200 400, 380 450, 610 390 C790 340, 970 410, 1170 350 C1310 310, 1440 370, 1540 340" stroke="rgba(231,223,217,0.02)" stroke-width="0.6" fill="none"/>
+    <path d="M-40 320 C200 285, 410 340, 630 280 C810 230, 980 300, 1180 240 C1330 210, 1450 260, 1540 230" stroke="rgba(231,223,217,0.02)" stroke-width="0.6" fill="none"/>
+    <path d="M-40 560 C200 510, 420 580, 640 510 C840 450, 1020 530, 1220 470 C1360 420, 1470 490, 1540 460" stroke="rgba(255,127,107,0.04)" stroke-width="1.8" fill="none"/>
+    <circle cx="620" cy="510" r="2.5" fill="rgba(255,127,107,0.18)"/>
+    <circle cx="1140" cy="410" r="2" fill="rgba(255,127,107,0.12)"/>
+    <circle cx="210" cy="650" r="2" fill="rgba(255,127,107,0.1)"/>
+    <circle cx="880" cy="450" r="1.5" fill="rgba(255,127,107,0.08)"/>
+    <line x1="360" y1="0" x2="360" y2="900" stroke="rgba(231,223,217,0.015)" stroke-width="0.5"/>
+    <line x1="720" y1="0" x2="720" y2="900" stroke="rgba(231,223,217,0.015)" stroke-width="0.5"/>
+    <line x1="1080" y1="0" x2="1080" y2="900" stroke="rgba(231,223,217,0.015)" stroke-width="0.5"/>
+    <text x="1340" y="840" fill="rgba(231,223,217,0.08)" font-family="'Lexend Deca', sans-serif" font-size="10" font-weight="400" letter-spacing="0.08em">57.48&deg;N</text>
+  </svg>
+)}
+
+{variant === 'practices' && (
+  <svg class="practices-topo" aria-hidden="true" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <path d="M-40 80 C220 50, 460 100, 680 60 C880 30, 1060 80, 1260 50 C1380 30, 1480 70, 1540 50" stroke="rgba(231,223,217,0.03)" stroke-width="1" fill="none"/>
+    <path d="M-40 180 C200 150, 400 200, 620 160 C820 120, 1000 180, 1200 140 C1340 110, 1460 160, 1540 140" stroke="rgba(231,223,217,0.025)" stroke-width="0.8" fill="none"/>
+    <path d="M-40 480 C180 440, 380 500, 580 450 C780 400, 960 470, 1160 420 C1300 390, 1420 440, 1540 420" stroke="rgba(231,223,217,0.02)" stroke-width="0.8" fill="none"/>
+    <path d="M-40 560 C200 530, 420 570, 640 530 C840 490, 1020 550, 1220 510 C1360 480, 1470 530, 1540 510" stroke="rgba(231,223,217,0.025)" stroke-width="0.6" fill="none"/>
+    <circle cx="680" cy="60" r="1.5" fill="rgba(255,127,107,0.08)"/>
+  </svg>
+)}
+
+{variant === 'quote' && (
+  <svg class="hero-topo" aria-hidden="true" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <path d="M-40 420 C200 380, 400 440, 620 380 C820 320, 1000 400, 1200 340 C1340 300, 1460 360, 1540 330" stroke="rgba(231,223,217,0.04)" stroke-width="1" fill="none"/>
+    <path d="M-40 320 C180 280, 380 340, 580 280 C780 230, 960 300, 1160 250 C1300 210, 1420 270, 1540 240" stroke="rgba(231,223,217,0.03)" stroke-width="1" fill="none"/>
+    <path d="M-40 220 C200 190, 420 240, 640 190 C820 150, 1000 210, 1200 170 C1340 140, 1460 190, 1540 170" stroke="rgba(231,223,217,0.025)" stroke-width="0.8" fill="none"/>
+    <circle cx="620" cy="380" r="2" fill="rgba(255,127,107,0.1)"/>
+  </svg>
+)}
+
+<style>
+  .hero-topo,
+  .practices-topo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .hero-topo {
+    opacity: 0;
+    animation: topo-enter 2.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+  }
+</style>

@@ -1,0 +1,213 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import HeroTopo from '@/components/HeroTopo.astro';
+import RevealScript from '@/components/RevealScript.astro';
+
+const title = 'Our Mission & Values — SoundIn';
+const description = 'SoundIn exists to build things we believe in. Six practices, three founders, one standard of care - from the Scottish Highlands.';
+
+const sections = [
+  {
+    num: '01',
+    heading: 'Our Mission',
+    body: [
+      "I started SoundIn because I wanted to build things I believe in, with people I respect. Web, events, software, lighting - different disciplines, one standard of care. Every client I take on gets me and my team genuinely invested in what they’re trying to do.",
+    ],
+  },
+  {
+    num: '02',
+    heading: 'Highland Roots',
+    body: [
+      "I started SoundIn in the Scottish Highlands because that’s where I live - not as a brand story, but as a fact that shapes how I see time, scope, and what good work actually means. Emma and Mark bring everything I can’t do alone.",
+      "You don’t build slowly here by accident. The distance from the noise is a feature. It keeps me honest about what I take on and who I take it on for.",
+    ],
+  },
+  {
+    num: '03',
+    heading: 'Our Approach',
+    body: [
+      "Six practices isn’t a portfolio strategy. It’s what happens when you come from production, know how to build software, and refuse to hand off the parts you find inconvenient.",
+      "When a client needs lighting and a website and someone to run their socials, I don’t outsource it. I do the work - or I bring in Emma and Mark, who are as invested as I am.",
+    ],
+  },
+  {
+    num: '04',
+    heading: 'Values',
+    body: [
+      "Say what you mean. Charge what the work costs. Own your mistakes. Take on less so you can do more with it. Build things that outlast the brief. Care about the people on the other side of every contract - and about the communities they operate in.",
+      "That’s not a values framework. That’s just how I prefer to work.",
+    ],
+  },
+];
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  '@id': 'https://soundin.scot/vision#webpage',
+  url: 'https://soundin.scot/vision',
+  name: 'Our Mission & Values — SoundIn',
+  description,
+  isPartOf: { '@id': 'https://soundin.scot/#organization' },
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical="https://soundin.scot/vision"
+  current="vision"
+  skipLink={{ href: '#vision-content', label: 'Skip to content' }}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(aboutSchema)} slot="head" />
+
+  <blockquote class="pull-quote page-top" style="overflow: hidden;">
+    <HeroTopo variant="quote" />
+    <p class="pull-quote-text">&ldquo;I&rsquo;d rather do fewer things properly than chase every brief that comes through the door.&rdquo;</p>
+    <cite class="pull-quote-attr">Cougar MacDougall - Founder, SoundIn</cite>
+  </blockquote>
+
+  <hr class="section-divider" aria-hidden="true" />
+
+  <section class="vision" id="vision-content" tabindex="-1">
+    <h1 class="sr-only">Our Mission, Values & Approach</h1>
+
+    {sections.map((s) => (
+      <div class="vision-section reveal">
+        <div class="vision-header">
+          <h2 class="vision-heading">{s.heading}</h2>
+          <span class="vision-num">{s.num}</span>
+        </div>
+        <div class="vision-body">
+          {s.body.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    ))}
+
+    <div class="vision-section reveal vision-cta">
+      <a href="/contact" class="practices-cta">Work with us <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <RevealScript />
+</Layout>
+
+<style>
+  .page-top { padding-top: 200px; }
+
+  .pull-quote {
+    position: relative;
+    z-index: 1;
+    padding: 160px 64px;
+    text-align: center;
+  }
+
+  .pull-quote-text {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(32px, 5vw, 64px);
+    line-height: 1.2;
+    color: rgba(231, 223, 217, 0.55);
+    max-width: 900px;
+    margin: 0 auto 24px;
+    text-wrap: balance;
+  }
+
+  .pull-quote-attr {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    font-style: normal;
+  }
+
+  .section-divider {
+    position: relative;
+    z-index: 1;
+    height: 1px;
+    border: none;
+    margin: 0 64px;
+    background: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.08) 30%, rgba(255, 127, 107, 0.12) 50%, rgba(231, 223, 217, 0.08) 70%, transparent 100%);
+  }
+
+  .vision {
+    position: relative;
+    z-index: 1;
+    padding: 160px 64px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .vision-section {
+    padding: 64px 0;
+    border-top: 1px solid var(--color-ghost);
+  }
+
+  .vision-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .vision-heading {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(24px, 3vw, 36px);
+    color: var(--color-salmon);
+  }
+
+  .vision-num {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+
+  .vision-body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.8;
+    color: var(--color-cream);
+  }
+
+  .vision-body p { margin-bottom: 20px; }
+  .vision-body p:last-child { margin-bottom: 0; }
+
+  .vision-cta {
+    border-top: none;
+    text-align: center;
+    padding: 80px 0 0;
+  }
+
+  .vision-cta .practices-cta {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+    justify-content: center;
+  }
+
+  .vision-cta .practices-cta:hover { color: var(--color-snow); }
+  .vision-cta .practices-cta:focus-visible {
+    color: var(--color-snow);
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .section-divider { margin: 0 24px; }
+    .vision { padding: 100px 24px; }
+    .pull-quote { padding: 120px 24px; }
+    .page-top { padding-top: 140px; }
+  }
+</style>
