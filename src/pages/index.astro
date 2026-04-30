@@ -412,8 +412,8 @@ const orgSchema = {
     pointer-events: none;
   }
 
-  /* Listbox dropdown */
-  .portal-search-listbox {
+  /* Listbox dropdown — :global so dynamically-injected items inherit styles */
+  :global(.portal-search-listbox) {
     position: absolute;
     top: calc(100% + 12px);
     left: 0;
@@ -428,12 +428,19 @@ const orgSchema = {
     z-index: 50;
     isolation: isolate;
     overflow: hidden;
+    transform-origin: top center;
+    animation: portal-listbox-in 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  .portal-search-listbox[hidden] { display: none; }
+  :global(.portal-search-listbox[hidden]) { display: none; }
 
-  .portal-search-group {
-    padding: 12px 16px 6px;
+  @keyframes portal-listbox-in {
+    from { opacity: 0; transform: translateY(-4px) scale(0.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  :global(.portal-search-group) {
+    padding: 14px 16px 8px;
     font-family: var(--font-sans);
     font-size: 10px;
     font-weight: 700;
@@ -441,27 +448,27 @@ const orgSchema = {
     text-transform: uppercase;
     color: rgba(36, 48, 44, 0.45);
   }
-  .portal-search-group:first-child { padding-top: 8px; }
+  :global(.portal-search-group:first-child) { padding-top: 8px; }
 
-  .portal-search-option {
+  :global(.portal-search-option) {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
       "label arrow"
       "desc arrow";
     column-gap: 12px;
-    padding: 10px 16px;
+    padding: 12px 16px;
     border-radius: 14px;
     cursor: pointer;
     transition: background 0.15s ease;
   }
 
-  .portal-search-option:hover,
-  .portal-search-option.is-active {
+  :global(.portal-search-option:hover),
+  :global(.portal-search-option.is-active) {
     background: rgba(255, 127, 107, 0.12);
   }
 
-  .portal-search-option-label {
+  :global(.portal-search-option-label) {
     grid-area: label;
     font-family: var(--font-sans);
     font-size: 14px;
@@ -470,17 +477,17 @@ const orgSchema = {
     line-height: 1.3;
   }
 
-  .portal-search-option-desc {
+  :global(.portal-search-option-desc) {
     grid-area: desc;
     font-family: var(--font-sans);
     font-size: 12px;
     font-weight: 400;
     color: rgba(36, 48, 44, 0.65);
-    line-height: 1.4;
+    line-height: 1.45;
     margin-top: 2px;
   }
 
-  .portal-search-option-arrow {
+  :global(.portal-search-option-arrow) {
     grid-area: arrow;
     align-self: center;
     font-family: var(--font-sans);
@@ -489,8 +496,8 @@ const orgSchema = {
     transition: color 0.15s ease, transform 0.15s ease;
   }
 
-  .portal-search-option.is-active .portal-search-option-arrow,
-  .portal-search-option:hover .portal-search-option-arrow {
+  :global(.portal-search-option.is-active .portal-search-option-arrow),
+  :global(.portal-search-option:hover .portal-search-option-arrow) {
     color: var(--color-salmon);
     transform: translateX(2px);
   }
@@ -498,13 +505,15 @@ const orgSchema = {
   /* Pills */
   .portal-pills,
   .portal-foot {
-    transition: opacity 0.2s ease, visibility 0.2s ease;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
   }
 
   .portal.is-searching .portal-pills,
   .portal.is-searching .portal-foot {
     opacity: 0;
-    visibility: hidden;
+    transform: translateY(8px);
     pointer-events: none;
   }
 
