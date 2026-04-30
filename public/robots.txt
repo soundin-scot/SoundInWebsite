@@ -4,6 +4,9 @@ Allow: /
 User-agent: GPTBot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: PerplexityBot
 Allow: /
 
@@ -13,10 +16,7 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-User-agent: OAI-SearchBot
-Allow: /
-
 User-agent: GoogleOther
 Allow: /
 
-Sitemap: https://soundin.scot/sitemap.xml
+Sitemap: https://soundin.scot/sitemap-index.xml

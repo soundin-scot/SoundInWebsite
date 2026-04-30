@@ -1,35 +1,73 @@
 # SoundIn
 
-> SoundIn is a Scottish digital agency based in the Highlands, building web applications, venue management software, open-source DMX lighting tools, and providing event production and social media services for purpose-driven businesses across the UK.
+> SoundIn Limited is a Scottish Highlands technology and creative company building a family of B2B software products for the hospitality and nightlife industry, alongside a focused set of agency services for purpose-driven businesses across the UK.
 
-SoundIn Limited (SC850719) was founded by three partners in the Scottish Highlands. The company operates across six practice areas: web development, event production, social media management, venue technology (Holocron), lighting systems (Photon), and emerging product development.
+SoundIn was founded by three directors - Cougar, Emma, and Mark - and is registered in Scotland (SC850719). The company operates from the Scottish Highlands, with clients and customers across the United Kingdom.
 
-The agency works with purpose-driven businesses that want an integrated digital partner rather than multiple separate vendors. SoundIn's positioning is long-term relationship over transactional project work, with a Scotland-first go-to-market approach.
+SoundIn's work splits into two parts: a product family of four software products built and owned end-to-end by SoundIn, and three agency service verticals. The product family is the long-term core of the business. The services are intentionally capped in scope and serve as both a revenue stream and a source of real-world product insight.
 
-## Products
+## Product Family
 
-- Holocron: SaaS venue management dashboard built for nightlife operators. Provides operational clarity, attendance tracking, incident management, guest list management, and financial reporting.
-- Photon: Open-source DMX lighting control software. Free to use and extend under an open license. Professional hardware specification and system design services available separately.
+SoundIn builds four products that are designed to work together. Each one addresses a different layer of what a live venue or event space needs to operate.
 
-## Services
+### Holocron
 
-- Web Development: Responsive, accessible websites and web applications. WCAG 2.1 AA compliance, performance-first architecture.
-- Event Production: End-to-end technical production for events requiring precision. AV, lighting, and logistics.
-- Social Media Management: Strategy, content creation, and community management on monthly retainers with transparent reporting.
+Holocron is a venue management SaaS product for nightlife operators. It handles the operational layer of running a live venue: attendance tracking, incident management, guest list management, ticketing, financial settlements, and compliance. Holocron is live and serving paying customers. It is built on Next.js, React, and Supabase, and is hosted at holocron.scot.
+
+Target customers: nightlife venues, clubs, bars, and live event spaces in the United Kingdom. Priced on a subscription basis with a free trial period.
+
+### Photon
+
+Photon is an open-core DMX lighting control system for live events and installed venues. The core software is available under an open license. SoundIn provides professional hardware specification, system design consulting, and support services alongside it.
+
+Photon gives venue operators and event technicians programmatic control over DMX-512 lighting rigs with sub-millisecond latency across 512 channels. The product is pre-build as of 2026 and will reach public release later in the year.
+
+### Doppler
+
+Doppler is an open-core music platform for independent artists and venues. It handles music cataloguing, analysis, and intelligent playback for hospitality environments. Doppler uses machine learning to extract musical features from tracks and match them to the energy and context of a live space.
+
+Doppler is in pre-build as of 2026.
+
+### Marquee
+
+Marquee is a digital signage and display system for hospitality venues. It provides a dynamic, tenant-configurable display layer that connects to venue operational data. Phase one delivers a hosted web-based display (Next.js, SSE-driven live updates). Phase two adds a dedicated media player for permanent installations.
+
+Marquee is in active development as of 2026.
+
+## Service Verticals
+
+SoundIn offers three agency service verticals. These are intentionally capped - SoundIn does not scale these beyond a small number of client relationships at a time.
+
+### Events
+
+End-to-end technical event production: production management, AV, lighting, and sound. SoundIn produces electronic music events in unique locations across the Scottish Highlands and takes on event production engagements for other organisations.
+
+### Social Media Management
+
+Monthly retainer social media management covering strategy, content creation, and community management. Transparent reporting across LinkedIn, Instagram, and TikTok. SoundIn writes the strategy, creates the content, and runs the community.
+
+### Web Development
+
+Marketing sites, e-commerce stores, and custom web applications built on Next.js and Astro, deployed on Vercel. Every project is WCAG 2.1 AA accessible and built to Core Web Vitals targets. SoundIn has delivered sites for clients including Skyebound (Isle of Skye tour operator) and Mumbai Thistle.
 
 ## Key Pages
 
-- [Homepage](https://soundin.scot/): Agency overview and practice areas
-- [Vision](https://soundin.scot/vision): Mission, values, founding story, and approach
-- [Contact](https://soundin.scot/contact): Enquire about services or partnerships
+- [Homepage](https://soundin.scot/): Overview of SoundIn's products and services
+- [Vision](https://soundin.scot/vision): Mission, values, and the founding story
+- [Contact](https://soundin.scot/contact): Get in touch with SoundIn
+- [Privacy](https://soundin.scot/privacy): Privacy notice and data handling
 
 ## Company Details
 
 - Legal name: SoundIn Limited
 - Company number: SC850719 (registered in Scotland)
+- Founded: 2025
+- Directors: Cougar Macdougall, Emma, Mark
 - Location: Scottish Highlands, United Kingdom
-- Contact: hello@soundin.scot
+- Email: hello@soundin.scot
+- LinkedIn: https://www.linkedin.com/company/soundin-ltd
+- Domain: soundin.scot
 
 ## Who We Work With
 
-Purpose-driven Scottish and UK businesses seeking integrated digital solutions. Nightlife venue operators. Event organisers requiring technical production. Organisations that value long-term partnership over lowest-price vendor relationships.
+Nightlife venue operators and club owners in the UK who need better operational tooling. Live event organisers who need technical production they can trust. Purpose-driven Scottish and UK businesses looking for a long-term web and digital partner rather than a project-by-project vendor.
