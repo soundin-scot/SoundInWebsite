@@ -4,24 +4,35 @@ import Layout from '@/layouts/Layout.astro';
 const title = 'Contact SoundIn — Scottish Digital Agency';
 const description = 'Get in touch with SoundIn. Based in the Scottish Highlands - web development, venue software, event production, lighting, and social media management.';
 
-const contactSchema = {
+const pageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'ContactPage',
-  '@id': 'https://soundin.scot/contact#webpage',
-  url: 'https://soundin.scot/contact',
-  name: 'Contact SoundIn',
-  isPartOf: { '@id': 'https://soundin.scot/#organization' },
+  '@graph': [
+    {
+      '@type': 'ContactPage',
+      '@id': 'https://soundin.scot/contact/#webpage',
+      url: 'https://soundin.scot/contact/',
+      name: 'Contact SoundIn',
+      isPartOf: { '@id': 'https://soundin.scot/#organization' },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://soundin.scot/' },
+        { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://soundin.scot/contact/' },
+      ],
+    },
+  ],
 };
 ---
 
 <Layout
   title={title}
   description={description}
-  canonical="https://soundin.scot/contact"
+  canonical="https://soundin.scot/contact/"
   current="contact"
   skipLink={{ href: '#contact-form', label: 'Skip to contact form' }}
 >
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(contactSchema)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(pageSchema)} slot="head" />
 
   <section class="contact page-top">
     <div>

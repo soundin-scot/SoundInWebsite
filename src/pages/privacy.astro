@@ -6,6 +6,27 @@ const description = 'How SoundIn Limited collects, uses, and protects your perso
 
 const lastUpdated = 'April 2026';
 
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': 'https://soundin.scot/privacy/#webpage',
+      url: 'https://soundin.scot/privacy/',
+      name: 'Privacy Notice — SoundIn',
+      description,
+      isPartOf: { '@id': 'https://soundin.scot/#organization' },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://soundin.scot/' },
+        { '@type': 'ListItem', position: 2, name: 'Privacy Notice', item: 'https://soundin.scot/privacy/' },
+      ],
+    },
+  ],
+};
+
 const sections = [
   {
     num: '01',
@@ -59,10 +80,12 @@ const sections = [
 <Layout
   title={title}
   description={description}
-  canonical="https://soundin.scot/privacy"
+  canonical="https://soundin.scot/privacy/"
   current={null}
   skipLink={{ href: '#privacy-content', label: 'Skip to content' }}
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(pageSchema)} slot="head" />
+
   <section class="vision page-top" id="privacy-content" tabindex="-1">
     <header class="privacy-header">
       <h1 class="privacy-title">Privacy Notice</h1>
