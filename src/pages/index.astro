@@ -6,24 +6,23 @@ import RevealScript from '@/components/RevealScript.astro';
 const title = 'SoundIn — Scottish Digital Agency | Web, Events & Venue Software';
 const description = 'SoundIn is a Scottish Highlands digital agency building web applications, venue management software, DMX lighting systems, and event production. Purpose-driven businesses, long-term partnerships.';
 
-const products = [
+type ProductLink = { href: string; label: string; aria: string; external?: boolean };
+type Product = { name: string; pill: string; desc: string; links: ProductLink[] };
+
+const products: Product[] = [
   {
     name: 'Holocron',
     pill: 'Nightlife',
     desc: 'Venue management SaaS — attendance, ticketing, incidents, guest lists, settlements, and payouts. Real-time operational intelligence for nightlife.',
     links: [
-      { href: '#', label: 'Website', aria: 'Holocron website' },
-      { href: '#', label: 'LinkedIn', aria: 'Holocron on LinkedIn' },
+      { href: 'https://holocron.scot', label: 'Website', aria: 'Holocron website', external: true },
     ],
   },
   {
     name: 'Photon',
     pill: 'Lighting',
     desc: 'Open source DMX controller — 512 channels, sub-millisecond latency. Pre-built units, hardware kits, and lighting system design consulting.',
-    links: [
-      { href: '#', label: 'Website', aria: 'Photon website' },
-      { href: '#', label: 'GitHub', aria: 'Photon on GitHub' },
-    ],
+    links: [],
   },
 ];
 
@@ -67,7 +66,7 @@ const orgSchema = {
         { '@type': 'AdministrativeArea', name: 'Scotland' },
       ],
       knowsAbout: ['Web Development', 'Digital Marketing', 'Event Production', 'Venue Management Software', 'DMX Lighting Control', 'Social Media Management'],
-      sameAs: ['https://www.linkedin.com/company/soundin'],
+      sameAs: ['https://www.linkedin.com/company/soundin-ltd'],
     },
   ],
 };
@@ -114,11 +113,18 @@ const orgSchema = {
             <span class="card-pill">{p.pill}</span>
           </div>
           <p class="card-desc">{p.desc}</p>
-          <div class="card-links">
-            {p.links.map((l) => (
-              <a href={l.href} aria-label={l.aria}>{l.label} <span aria-hidden="true">&#8599;</span></a>
-            ))}
-          </div>
+          {p.links.length > 0 && (
+            <div class="card-links">
+              {p.links.map((l) => (
+                <a
+                  href={l.href}
+                  aria-label={l.aria}
+                  rel={l.external ? 'noopener noreferrer' : undefined}
+                  target={l.external ? '_blank' : undefined}
+                >{l.label} <span aria-hidden="true">&#8599;</span></a>
+              ))}
+            </div>
+          )}
         </div>
       ))}
 
