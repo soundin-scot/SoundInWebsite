@@ -1,0 +1,160 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Privacy Notice — SoundIn';
+const description = 'How SoundIn Limited collects, uses, and protects your personal data. Plain-English summary of our UK GDPR obligations.';
+
+const lastUpdated = 'April 2026';
+
+const sections = [
+  {
+    num: '01',
+    heading: 'Who we are',
+    body: [
+      "SoundIn Limited (Companies House SC850719), based in the Scottish Highlands, is the data controller for any personal information you share with us through this site or by email.",
+      "Questions about this notice or your data: hello@soundin.scot.",
+    ],
+  },
+  {
+    num: '02',
+    heading: 'What we collect',
+    body: [
+      "When you submit the contact form we receive your name, email, optional company name, and the message you send us. That is the only personal data this website actively collects.",
+      "Like most sites, our hosting provider records standard server logs (IP address, user agent, request path) for security and reliability. We do not use those logs for marketing.",
+    ],
+  },
+  {
+    num: '03',
+    heading: 'Why we use it',
+    body: [
+      "We process your contact form submission solely to reply to your enquiry, scope work, and keep a record of our discussions. The lawful basis is our legitimate interest in running a business and responding to people who choose to contact us.",
+      "We do not sell your data, and we do not share it with anyone outside the team unless you have explicitly agreed (e.g. introducing you to a partner).",
+    ],
+  },
+  {
+    num: '04',
+    heading: 'How long we keep it',
+    body: [
+      "Enquiries that do not become engagements are deleted within 12 months. Records associated with active or completed engagements are kept for the duration of our working relationship plus seven years to meet UK accounting and tax obligations.",
+    ],
+  },
+  {
+    num: '05',
+    heading: 'Your rights',
+    body: [
+      "Under UK GDPR you can request a copy of the personal data we hold on you, ask us to correct or delete it, or object to how we use it. Email hello@soundin.scot and we will respond within one month.",
+      "You also have the right to complain to the Information Commissioner's Office (ico.org.uk).",
+    ],
+  },
+  {
+    num: '06',
+    heading: 'Cookies and tracking',
+    body: [
+      "This site does not use marketing cookies, advertising trackers, or third-party analytics that profile you. We may add lightweight, privacy-respecting analytics in future; if we do, we will update this notice and obtain consent where required.",
+    ],
+  },
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical="https://soundin.scot/privacy"
+  current={null}
+  skipLink={{ href: '#privacy-content', label: 'Skip to content' }}
+>
+  <section class="vision page-top" id="privacy-content" tabindex="-1">
+    <header class="privacy-header">
+      <h1 class="privacy-title">Privacy Notice</h1>
+      <p class="privacy-meta">Last updated {lastUpdated}</p>
+    </header>
+
+    {sections.map((s) => (
+      <div class="vision-section">
+        <div class="vision-header">
+          <h2 class="vision-heading">{s.heading}</h2>
+          <span class="vision-num">{s.num}</span>
+        </div>
+        <div class="vision-body">
+          {s.body.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    ))}
+  </section>
+</Layout>
+
+<style>
+  .page-top { padding-top: 200px; }
+
+  .vision {
+    position: relative;
+    z-index: 1;
+    padding: 160px 64px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .privacy-header { margin-bottom: 24px; }
+
+  .privacy-title {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(36px, 5vw, 56px);
+    color: var(--color-snow);
+    margin-bottom: 8px;
+    text-wrap: balance;
+  }
+
+  .privacy-meta {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .vision-section {
+    padding: 48px 0;
+    border-top: 1px solid var(--color-ghost);
+  }
+
+  .vision-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .vision-heading {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(22px, 2.5vw, 32px);
+    color: var(--color-salmon);
+  }
+
+  .vision-num {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+
+  .vision-body {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--color-cream);
+  }
+
+  .vision-body p { margin-bottom: 16px; }
+  .vision-body p:last-child { margin-bottom: 0; }
+
+  @media (max-width: 900px) {
+    .vision { padding: 100px 24px; }
+    .page-top { padding-top: 140px; }
+  }
+</style>
