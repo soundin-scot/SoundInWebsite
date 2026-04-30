@@ -25,6 +25,101 @@ const pills: Pill[] = [
 const newsletterPosts = await getCollection('newsletter');
 const newsletterSlugs = newsletterPosts.map((p) => p.id);
 
+type Suggestion = {
+  id: string;
+  group: 'Pages' | 'Newsletter';
+  label: string;
+  description: string;
+  href: string;
+  external?: boolean;
+  keywords: string[];
+};
+
+const pageSuggestions: Suggestion[] = [
+  {
+    id: 'sug-vision',
+    group: 'Pages',
+    label: 'Vision',
+    description: 'Mission, values, and the founder story.',
+    href: '/vision',
+    keywords: ['vision', 'about', 'mission', 'values', 'who', 'team', 'founders', 'story', 'cougar', 'emma', 'mark'],
+  },
+  {
+    id: 'sug-agency',
+    group: 'Pages',
+    label: 'Agency',
+    description: 'Web development, social media, marketing.',
+    href: '/agency',
+    keywords: ['agency', 'services', 'web', 'website', 'app', 'development', 'dev', 'next', 'nextjs', 'astro', 'social', 'marketing', 'instagram', 'tiktok', 'linkedin', 'content'],
+  },
+  {
+    id: 'sug-ecosystem',
+    group: 'Pages',
+    label: 'Ecosystem',
+    description: 'Holocron and the products in development.',
+    href: '/ecosystem',
+    keywords: ['ecosystem', 'product', 'products', 'holocron', 'venue', 'nightlife', 'club', 'ticketing', 'incidents', 'photon', 'lighting', 'dmx', 'saas'],
+  },
+  {
+    id: 'sug-events',
+    group: 'Pages',
+    label: 'Events',
+    description: 'Electronic music in unique Highland locations.',
+    href: '/events',
+    keywords: ['event', 'events', 'gig', 'club', 'music', 'electronic', 'rave', 'dj', 'highland', 'distillery', 'venue night'],
+  },
+  {
+    id: 'sug-newsletter',
+    group: 'Pages',
+    label: 'Newsletter',
+    description: 'Subscribe and read past issues.',
+    href: '/newsletter',
+    keywords: ['newsletter', 'subscribe', 'email', 'updates', 'archive', 'posts', 'writing', 'subscribe'],
+  },
+  {
+    id: 'sug-contact',
+    group: 'Pages',
+    label: 'Contact',
+    description: 'Send us an email or use the form.',
+    href: '/contact',
+    keywords: ['contact', 'hello', 'talk', 'reach', 'enquire', 'enquiry', 'email', 'message'],
+  },
+  {
+    id: 'sug-holocron-ext',
+    group: 'Pages',
+    label: 'Holocron',
+    description: 'holocron.scot — venue management SaaS.',
+    href: 'https://holocron.scot',
+    external: true,
+    keywords: ['holocron', 'venue', 'nightlife', 'club', 'ticketing', 'incidents', 'guest list'],
+  },
+  {
+    id: 'sug-privacy',
+    group: 'Pages',
+    label: 'Privacy notice',
+    description: 'How we collect and use your data.',
+    href: '/privacy',
+    keywords: ['privacy', 'gdpr', 'data', 'cookies', 'legal'],
+  },
+];
+
+const newsletterSuggestions: Suggestion[] = newsletterPosts
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .map((p) => ({
+    id: `sug-news-${p.id}`,
+    group: 'Newsletter' as const,
+    label: p.data.title,
+    description: p.data.summary,
+    href: `/newsletter/${p.id}`,
+    keywords: [...p.data.tags, p.data.title, p.data.summary]
+      .join(' ')
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter((w) => w.length > 2),
+  }));
+
+const suggestions: Suggestion[] = [...pageSuggestions, ...newsletterSuggestions];
+
 const orgSchema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -58,8 +153,9 @@ const orgSchema = {
   skipLink={{ href: '#portal-search', label: 'Skip to search' }}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(orgSchema)} slot="head" />
-  <script is:inline define:vars={{ slugs: newsletterSlugs }}>
+  <script is:inline define:vars={{ slugs: newsletterSlugs, suggestions }}>
     window.__newsletterSlugs = slugs;
+    window.__searchSuggestions = suggestions;
   </script>
 
   <main class="portal">
@@ -72,25 +168,40 @@ const orgSchema = {
         <span class="gaelic">Fàilte.</span> What can we help you find?
       </p>
 
-      <form id="portal-search" class="portal-search" role="search" aria-label="Site search">
-        <span class="portal-search-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="7"/>
-            <path d="m21 21-4.3-4.3"/>
-          </svg>
-        </span>
-        <input
-          id="portal-search-input"
-          name="q"
-          type="search"
-          class="portal-search-input"
-          placeholder="e.g. events, holocron, who we are…"
-          autocomplete="off"
-          spellcheck="false"
-          aria-label="Search the SoundIn site"
-        />
-        <span id="portal-search-hint" class="portal-search-hint" aria-live="polite"></span>
-      </form>
+      <div class="portal-search-wrap">
+        <form id="portal-search" class="portal-search" role="search" aria-label="Site search">
+          <span class="portal-search-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="m21 21-4.3-4.3"/>
+            </svg>
+          </span>
+          <input
+            id="portal-search-input"
+            name="q"
+            type="text"
+            class="portal-search-input"
+            placeholder="e.g. events, holocron, who we are…"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            role="combobox"
+            aria-label="Search the SoundIn site"
+            aria-expanded="false"
+            aria-controls="portal-search-listbox"
+            aria-autocomplete="list"
+          />
+          <span id="portal-search-hint" class="portal-search-hint" aria-live="polite"></span>
+        </form>
+        <ul
+          id="portal-search-listbox"
+          class="portal-search-listbox"
+          role="listbox"
+          aria-label="Search suggestions"
+          hidden
+        ></ul>
+      </div>
 
       <ul class="portal-pills" aria-label="Quick links">
         {pills.map((p) => (
@@ -238,6 +349,14 @@ const orgSchema = {
   }
 
   /* Search */
+  .portal-search-wrap {
+    position: relative;
+    width: 100%;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  }
+
   .portal-search {
     position: relative;
     display: flex;
@@ -247,9 +366,6 @@ const orgSchema = {
     border-radius: 999px;
     padding: 4px 4px 4px 24px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 0 1px 0 rgba(255, 255, 255, 0.04);
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
 
@@ -292,6 +408,89 @@ const orgSchema = {
     color: var(--color-muted);
     text-align: left;
     pointer-events: none;
+  }
+
+  /* Listbox dropdown */
+  .portal-search-listbox {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    right: 0;
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+    background: var(--color-snow);
+    border-radius: 24px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.04);
+    text-align: left;
+    z-index: 10;
+    max-height: min(60vh, 480px);
+    overflow-y: auto;
+  }
+
+  .portal-search-listbox[hidden] { display: none; }
+
+  .portal-search-group {
+    padding: 12px 16px 6px;
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(36, 48, 44, 0.45);
+  }
+  .portal-search-group:first-child { padding-top: 8px; }
+
+  .portal-search-option {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "label arrow"
+      "desc arrow";
+    column-gap: 12px;
+    padding: 10px 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .portal-search-option:hover,
+  .portal-search-option.is-active {
+    background: rgba(255, 127, 107, 0.12);
+  }
+
+  .portal-search-option-label {
+    grid-area: label;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-scarab);
+    line-height: 1.3;
+  }
+
+  .portal-search-option-desc {
+    grid-area: desc;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(36, 48, 44, 0.65);
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  .portal-search-option-arrow {
+    grid-area: arrow;
+    align-self: center;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: rgba(36, 48, 44, 0.4);
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+
+  .portal-search-option.is-active .portal-search-option-arrow,
+  .portal-search-option:hover .portal-search-option-arrow {
+    color: var(--color-salmon);
+    transform: translateX(2px);
   }
 
   /* Pills */
@@ -377,51 +576,202 @@ const orgSchema = {
 </style>
 
 <script>
-  type Route = { keywords: string[]; href: string; label: string };
+  type Suggestion = {
+    id: string;
+    group: 'Pages' | 'Newsletter';
+    label: string;
+    description: string;
+    href: string;
+    external?: boolean;
+    keywords: string[];
+  };
 
-  const routes: Route[] = [
-    { keywords: ['vision', 'about', 'mission', 'values', 'who', 'team', 'founders', 'story'], href: '/vision', label: 'vision' },
-    { keywords: ['agency', 'services', 'offerings', 'web', 'website', 'app', 'application', 'development', 'dev', 'frontend', 'next', 'astro', 'social', 'marketing', 'instagram', 'tiktok', 'linkedin'], href: '/agency', label: 'agency' },
-    { keywords: ['ecosystem', 'product', 'products', 'holocron', 'venue', 'nightlife', 'club', 'ticketing', 'incidents', 'photon', 'lighting', 'dmx'], href: '/ecosystem', label: 'ecosystem' },
-    { keywords: ['event', 'events', 'gig', 'club night', 'music', 'electronic', 'rave', 'dj', 'venue night'], href: '/events', label: 'events' },
-    { keywords: ['newsletter', 'subscribe', 'email list', 'updates', 'archive', 'posts', 'writing'], href: '/newsletter', label: 'newsletter' },
-    { keywords: ['contact', 'hello', 'talk', 'reach', 'enquire', 'enquiry'], href: '/contact', label: 'contact' },
-    { keywords: ['privacy', 'gdpr', 'data'], href: '/privacy', label: 'privacy' },
-  ];
+  const suggestions: Suggestion[] =
+    (window as unknown as { __searchSuggestions?: Suggestion[] }).__searchSuggestions ?? [];
 
   const input = document.getElementById('portal-search-input') as HTMLInputElement | null;
   const form = document.getElementById('portal-search') as HTMLFormElement | null;
   const hint = document.getElementById('portal-search-hint');
+  const listbox = document.getElementById('portal-search-listbox') as HTMLUListElement | null;
 
-  function findRoute(query: string): Route | null {
-    const q = query.toLowerCase().trim();
-    if (!q) return null;
-    for (const r of routes) {
-      if (r.keywords.some((k) => q.includes(k))) return r;
+  let activeIndex = -1;
+  let visible: Suggestion[] = [];
+
+  function score(s: Suggestion, q: string): number {
+    const ql = q.toLowerCase().trim();
+    if (!ql) return 0;
+    const label = s.label.toLowerCase();
+    const desc = s.description.toLowerCase();
+    if (label === ql) return 100;
+    if (label.startsWith(ql)) return 80;
+    if (label.includes(ql)) return 60;
+    if (s.keywords.some((k) => k.toLowerCase() === ql)) return 70;
+    if (s.keywords.some((k) => k.toLowerCase().startsWith(ql))) return 50;
+    if (s.keywords.some((k) => k.toLowerCase().includes(ql))) return 40;
+    if (desc.includes(ql)) return 20;
+    return 0;
+  }
+
+  function filter(query: string): Suggestion[] {
+    if (!query.trim()) return [];
+    return suggestions
+      .map((s) => ({ s, score: score(s, query) }))
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 6)
+      .map((x) => x.s);
+  }
+
+  function escapeHtml(s: string): string {
+    return s.replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string),
+    );
+  }
+
+  function render() {
+    if (!listbox || !input) return;
+
+    if (visible.length === 0) {
+      listbox.hidden = true;
+      listbox.innerHTML = '';
+      input.setAttribute('aria-expanded', 'false');
+      input.removeAttribute('aria-activedescendant');
+      return;
     }
-    return null;
+
+    let html = '';
+    let lastGroup = '';
+    visible.forEach((s, i) => {
+      if (s.group !== lastGroup) {
+        html += `<li class="portal-search-group" role="presentation">${escapeHtml(s.group)}</li>`;
+        lastGroup = s.group;
+      }
+      const isActive = i === activeIndex;
+      html += `
+        <li
+          id="${s.id}"
+          class="portal-search-option${isActive ? ' is-active' : ''}"
+          role="option"
+          aria-selected="${isActive}"
+          data-href="${escapeHtml(s.href)}"
+          data-external="${s.external ? '1' : ''}"
+        >
+          <span class="portal-search-option-label">${escapeHtml(s.label)}</span>
+          <span class="portal-search-option-desc">${escapeHtml(s.description)}</span>
+          <span class="portal-search-option-arrow" aria-hidden="true">${s.external ? '↗' : '→'}</span>
+        </li>
+      `;
+    });
+
+    listbox.innerHTML = html;
+    listbox.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+    if (activeIndex >= 0 && visible[activeIndex]) {
+      input.setAttribute('aria-activedescendant', visible[activeIndex].id);
+    } else {
+      input.removeAttribute('aria-activedescendant');
+    }
+  }
+
+  function navigate(s: Suggestion) {
+    if (s.external) {
+      window.open(s.href, '_blank', 'noopener');
+    } else {
+      window.location.href = s.href;
+    }
+  }
+
+  function close() {
+    visible = [];
+    activeIndex = -1;
+    render();
   }
 
   function updateHint() {
-    if (!input || !hint) return;
-    const r = findRoute(input.value);
-    hint.textContent = r ? `↵ go to ${r.label}` : '';
+    if (!hint || !input) return;
+    if (visible.length > 0) {
+      hint.textContent = '';
+    } else if (input.value.trim()) {
+      hint.textContent = 'No matches. Try a different word.';
+    } else {
+      hint.textContent = '';
+    }
   }
 
-  input?.addEventListener('input', updateHint);
+  input?.addEventListener('input', () => {
+    if (!input) return;
+    visible = filter(input.value);
+    activeIndex = visible.length > 0 ? 0 : -1;
+    render();
+    updateHint();
+  });
+
+  input?.addEventListener('focus', () => {
+    if (!input) return;
+    if (input.value.trim()) {
+      visible = filter(input.value);
+      activeIndex = visible.length > 0 ? 0 : -1;
+      render();
+      updateHint();
+    }
+  });
+
+  input?.addEventListener('keydown', (e) => {
+    if (visible.length === 0) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIndex = (activeIndex + 1) % visible.length;
+      render();
+      updateHint();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIndex = activeIndex <= 0 ? visible.length - 1 : activeIndex - 1;
+      render();
+      updateHint();
+    } else if (e.key === 'Escape') {
+      close();
+      updateHint();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!input?.contains(target) && !listbox?.contains(target)) close();
+  });
+
+  listbox?.addEventListener('mousedown', (e) => {
+    const li = (e.target as HTMLElement).closest<HTMLLIElement>('li.portal-search-option');
+    if (!li) return;
+    e.preventDefault();
+    const href = li.dataset.href;
+    if (!href) return;
+    navigate({
+      id: li.id,
+      group: 'Pages',
+      label: '',
+      description: '',
+      href,
+      external: li.dataset.external === '1',
+      keywords: [],
+    });
+  });
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!input) return;
-    const r = findRoute(input.value);
-    if (r) {
-      if (r.href.startsWith('http')) {
-        window.open(r.href, '_blank', 'noopener');
-      } else {
-        window.location.href = r.href;
-      }
-    } else if (input.value.trim()) {
-      window.location.href = '/practices';
+
+    if (activeIndex >= 0 && visible[activeIndex]) {
+      navigate(visible[activeIndex]);
+      return;
+    }
+
+    if (visible.length > 0) {
+      navigate(visible[0]);
+      return;
+    }
+
+    if (input.value.trim()) {
+      window.location.href = '/agency';
     }
   });
 
