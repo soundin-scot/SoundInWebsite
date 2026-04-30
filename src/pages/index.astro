@@ -1,24 +1,29 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
 const title = 'SoundIn — Scottish Digital Agency | Web, Events & Venue Software';
-const description = 'SoundIn is a Scottish Highlands digital agency building web applications, venue management software, DMX lighting systems, and event production. Tell us what you’re looking for.';
+const description = 'SoundIn is a Scottish Highlands digital agency building web applications, venue management software, and hosted electronic music events. Tell us what you’re looking for.';
 
 type Pill = {
   label: string;
   href: string;
   external?: boolean;
-  icon: 'story' | 'agency' | 'ecosystem' | 'events' | 'contact' | 'surprise';
+  icon: 'vision' | 'agency' | 'ecosystem' | 'events' | 'contact' | 'newsletter' | 'surprise';
 };
 
 const pills: Pill[] = [
-  { label: 'story', href: '/vision', icon: 'story' },
-  { label: 'agency', href: '/practices', icon: 'agency' },
-  { label: 'ecosystem', href: '/practices#ecosystem', icon: 'ecosystem' },
-  { label: 'events', href: '/practices#events', icon: 'events' },
+  { label: 'vision', href: '/vision', icon: 'vision' },
+  { label: 'agency', href: '/agency', icon: 'agency' },
+  { label: 'ecosystem', href: '/ecosystem', icon: 'ecosystem' },
+  { label: 'events', href: '/events', icon: 'events' },
   { label: 'contact', href: '/contact', icon: 'contact' },
+  { label: 'newsletter', href: '/newsletter', icon: 'newsletter' },
   { label: 'surprise me', href: '#surprise', icon: 'surprise' },
 ];
+
+const newsletterPosts = await getCollection('newsletter');
+const newsletterSlugs = newsletterPosts.map((p) => p.id);
 
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -53,6 +58,9 @@ const orgSchema = {
   skipLink={{ href: '#portal-search', label: 'Skip to search' }}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(orgSchema)} slot="head" />
+  <script is:inline define:vars={{ slugs: newsletterSlugs }}>
+    window.__newsletterSlugs = slugs;
+  </script>
 
   <main class="portal">
     <div class="portal-inner">
@@ -96,10 +104,18 @@ const orgSchema = {
               target={p.external ? '_blank' : undefined}
             >
               <span class="portal-pill-icon" aria-hidden="true">
-                {p.icon === 'story' && (
+                {p.icon === 'vision' && (
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                )}
+                {p.icon === 'newsletter' && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 4H6a2 2 0 0 0-2 2v14h16V6a2 2 0 0 0-2-2Z"/>
+                    <path d="M8 8h8"/>
+                    <path d="M8 12h8"/>
+                    <path d="M8 16h5"/>
                   </svg>
                 )}
                 {p.icon === 'agency' && (
@@ -161,9 +177,6 @@ const orgSchema = {
 </Layout>
 
 <style>
-  :global(body) { background: #24302c; }
-  :global(body::after) { display: none !important; }
-
   .portal {
     position: relative;
     min-height: 100vh;
@@ -367,14 +380,12 @@ const orgSchema = {
   type Route = { keywords: string[]; href: string; label: string };
 
   const routes: Route[] = [
-    { keywords: ['vision', 'story', 'about', 'mission', 'values', 'who', 'team', 'founders'], href: '/vision', label: 'our story' },
-    { keywords: ['practice', 'practices', 'services', 'offerings', 'what'], href: '/practices', label: 'practices' },
-    { keywords: ['holocron', 'venue', 'nightlife', 'club', 'ticketing', 'incidents'], href: 'https://holocron.scot', label: 'holocron' },
-    { keywords: ['photon', 'lighting', 'dmx', 'lights'], href: '/practices#photon', label: 'photon' },
-    { keywords: ['event', 'events', 'production', 'av', 'audio', 'sound'], href: '/practices#events', label: 'events' },
-    { keywords: ['web', 'website', 'site', 'app', 'application', 'development', 'dev', 'frontend'], href: '/practices#web', label: 'web' },
-    { keywords: ['social', 'marketing', 'instagram', 'tiktok', 'linkedin'], href: '/practices#social', label: 'social' },
-    { keywords: ['contact', 'hello', 'talk', 'email', 'reach', 'enquire', 'enquiry'], href: '/contact', label: 'contact' },
+    { keywords: ['vision', 'about', 'mission', 'values', 'who', 'team', 'founders', 'story'], href: '/vision', label: 'vision' },
+    { keywords: ['agency', 'services', 'offerings', 'web', 'website', 'app', 'application', 'development', 'dev', 'frontend', 'next', 'astro', 'social', 'marketing', 'instagram', 'tiktok', 'linkedin'], href: '/agency', label: 'agency' },
+    { keywords: ['ecosystem', 'product', 'products', 'holocron', 'venue', 'nightlife', 'club', 'ticketing', 'incidents', 'photon', 'lighting', 'dmx'], href: '/ecosystem', label: 'ecosystem' },
+    { keywords: ['event', 'events', 'gig', 'club night', 'music', 'electronic', 'rave', 'dj', 'venue night'], href: '/events', label: 'events' },
+    { keywords: ['newsletter', 'subscribe', 'email list', 'updates', 'archive', 'posts', 'writing'], href: '/newsletter', label: 'newsletter' },
+    { keywords: ['contact', 'hello', 'talk', 'reach', 'enquire', 'enquiry'], href: '/contact', label: 'contact' },
     { keywords: ['privacy', 'gdpr', 'data'], href: '/privacy', label: 'privacy' },
   ];
 
@@ -414,12 +425,16 @@ const orgSchema = {
     }
   });
 
-  // Surprise me
+  // Surprise me — picks a random newsletter issue
   const surprisePill = document.querySelector<HTMLAnchorElement>('a[data-label="surprise me"]');
   surprisePill?.addEventListener('click', (e) => {
     e.preventDefault();
-    const candidates = ['/vision', '/practices', '/practices#photon', '/practices#events', '/practices#holocron', '/contact'];
-    const pick = candidates[Math.floor(Math.random() * candidates.length)];
-    window.location.href = pick;
+    const slugs = (window as unknown as { __newsletterSlugs?: string[] }).__newsletterSlugs ?? [];
+    if (slugs.length === 0) {
+      window.location.href = '/newsletter';
+      return;
+    }
+    const pick = slugs[Math.floor(Math.random() * slugs.length)];
+    window.location.href = `/newsletter/${pick}`;
   });
 </script>

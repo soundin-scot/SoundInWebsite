@@ -1,6 +1,5 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import HeroTopo from '@/components/HeroTopo.astro';
 import RevealScript from '@/components/RevealScript.astro';
 
 const title = 'Our Mission & Values — SoundIn';
@@ -61,7 +60,6 @@ const aboutSchema = {
   <script is:inline type="application/ld+json" set:html={JSON.stringify(aboutSchema)} slot="head" />
 
   <blockquote class="pull-quote page-top" style="overflow: hidden;">
-    <HeroTopo variant="quote" />
     <p class="pull-quote-text">&ldquo;I&rsquo;d rather do fewer things properly than chase every brief that comes through the door.&rdquo;</p>
     <cite class="pull-quote-attr">Cougar MacDougall - Founder, SoundIn</cite>
   </blockquote>
