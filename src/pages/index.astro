@@ -8,16 +8,16 @@ type Pill = {
   label: string;
   href: string;
   external?: boolean;
-  icon: 'compass' | 'practices' | 'holocron' | 'events' | 'mail' | 'shuffle';
+  icon: 'story' | 'agency' | 'ecosystem' | 'events' | 'contact' | 'surprise';
 };
 
 const pills: Pill[] = [
-  { label: 'our story', href: '/vision', icon: 'compass' },
-  { label: 'practices', href: '/practices', icon: 'practices' },
-  { label: 'holocron', href: 'https://holocron.scot', external: true, icon: 'holocron' },
+  { label: 'story', href: '/vision', icon: 'story' },
+  { label: 'agency', href: '/practices', icon: 'agency' },
+  { label: 'ecosystem', href: '/practices#ecosystem', icon: 'ecosystem' },
   { label: 'events', href: '/practices#events', icon: 'events' },
-  { label: 'contact', href: '/contact', icon: 'mail' },
-  { label: 'surprise me', href: '#surprise', icon: 'shuffle' },
+  { label: 'contact', href: '/contact', icon: 'contact' },
+  { label: 'surprise me', href: '#surprise', icon: 'surprise' },
 ];
 
 const orgSchema = {
@@ -55,26 +55,6 @@ const orgSchema = {
   <script is:inline type="application/ld+json" set:html={JSON.stringify(orgSchema)} slot="head" />
 
   <main class="portal">
-    <!-- Topographic backdrop -->
-    <svg
-      class="portal-topo"
-      aria-hidden="true"
-      viewBox="0 0 1440 900"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="xMidYMid slice"
-    >
-      <path d="M-40 740 C220 700, 460 760, 680 700 C880 650, 1060 720, 1260 660 C1380 620, 1480 680, 1540 650" stroke="rgba(231,223,217,0.05)" stroke-width="1.2" fill="none"/>
-      <path d="M-40 620 C200 570, 400 640, 620 580 C820 520, 1000 600, 1200 540 C1340 490, 1460 550, 1540 520" stroke="rgba(231,223,217,0.05)" stroke-width="1.2" fill="none"/>
-      <path d="M-40 500 C180 460, 360 520, 580 450 C760 390, 940 470, 1140 410 C1300 360, 1420 420, 1540 390" stroke="rgba(231,223,217,0.05)" stroke-width="1.2" fill="none"/>
-      <path d="M-40 380 C210 330, 440 400, 640 330 C820 270, 1000 350, 1200 290 C1340 250, 1460 310, 1540 280" stroke="rgba(231,223,217,0.04)" stroke-width="1.2" fill="none"/>
-      <path d="M-40 270 C190 240, 380 280, 580 230 C760 190, 960 250, 1160 200 C1310 170, 1440 210, 1540 190" stroke="rgba(231,223,217,0.03)" stroke-width="1" fill="none"/>
-      <path d="M-40 560 C200 510, 420 580, 640 510 C840 450, 1020 530, 1220 470 C1360 420, 1470 490, 1540 460" stroke="rgba(255,127,107,0.04)" stroke-width="1.8" fill="none"/>
-      <circle cx="620" cy="510" r="2.5" fill="rgba(255,127,107,0.18)"/>
-      <circle cx="1140" cy="410" r="2" fill="rgba(255,127,107,0.12)"/>
-      <text x="1340" y="840" fill="rgba(231,223,217,0.08)" font-family="'Lexend Deca', sans-serif" font-size="10" font-weight="400" letter-spacing="0.08em">57.48&deg;N</text>
-    </svg>
-
     <div class="portal-inner">
       <h1 class="portal-wordmark">
         <span class="logo-s">Sound</span><span class="logo-i">In</span>
@@ -116,49 +96,52 @@ const orgSchema = {
               target={p.external ? '_blank' : undefined}
             >
               <span class="portal-pill-icon" aria-hidden="true">
-                {p.icon === 'compass' && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                {p.icon === 'story' && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
                   </svg>
                 )}
-                {p.icon === 'practices' && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="7" height="7"/>
-                    <rect x="14" y="3" width="7" height="7"/>
-                    <rect x="14" y="14" width="7" height="7"/>
-                    <rect x="3" y="14" width="7" height="7"/>
+                {p.icon === 'agency' && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/>
+                    <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/>
+                    <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/>
+                    <path d="M10 6h4"/>
+                    <path d="M10 10h4"/>
+                    <path d="M10 14h4"/>
+                    <path d="M10 18h4"/>
                   </svg>
                 )}
-                {p.icon === 'holocron' && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="9"/>
-                    <circle cx="12" cy="12" r="4"/>
-                    <line x1="12" y1="3" x2="12" y2="8"/>
-                    <line x1="12" y1="16" x2="12" y2="21"/>
+                {p.icon === 'ecosystem' && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/>
+                    <ellipse cx="12" cy="12" rx="10" ry="4"/>
+                    <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>
+                    <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>
                   </svg>
                 )}
                 {p.icon === 'events' && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="4" width="18" height="18" rx="2"/>
-                    <line x1="16" y1="2" x2="16" y2="6"/>
-                    <line x1="8" y1="2" x2="8" y2="6"/>
-                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
+                    <path d="M13 5v2"/>
+                    <path d="M13 17v2"/>
+                    <path d="M13 11v2"/>
                   </svg>
                 )}
-                {p.icon === 'mail' && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="5" width="18" height="14" rx="2"/>
-                    <polyline points="3 7 12 13 21 7"/>
+                {p.icon === 'contact' && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/>
+                    <path d="m21.854 2.147-10.94 10.939"/>
                   </svg>
                 )}
-                {p.icon === 'shuffle' && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="16 3 21 3 21 8"/>
-                    <line x1="4" y1="20" x2="21" y2="3"/>
-                    <polyline points="21 16 21 21 16 21"/>
-                    <line x1="15" y1="15" x2="21" y2="21"/>
-                    <line x1="4" y1="4" x2="9" y2="9"/>
+                {p.icon === 'surprise' && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3 9.91 9.91 3 12l6.91 2.09L12 21l2.09-6.91L21 12l-6.91-2.09Z"/>
+                    <path d="M5 3v4"/>
+                    <path d="M19 17v4"/>
+                    <path d="M3 5h4"/>
+                    <path d="M17 19h4"/>
                   </svg>
                 )}
               </span>
@@ -178,7 +161,8 @@ const orgSchema = {
 </Layout>
 
 <style>
-  body { background: var(--color-scarab); }
+  :global(body) { background: #24302c; }
+  :global(body::after) { display: none !important; }
 
   .portal {
     position: relative;
@@ -189,22 +173,7 @@ const orgSchema = {
     align-items: center;
     justify-content: center;
     padding: 64px 24px 24px;
-    overflow: hidden;
-  }
-
-  .portal-topo {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    opacity: 0;
-    animation: portal-topo-enter 2.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
-  }
-
-  @keyframes portal-topo-enter {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    background: #24302c;
   }
 
   .portal-inner {
