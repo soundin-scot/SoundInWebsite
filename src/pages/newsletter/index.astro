@@ -4,7 +4,7 @@ import PageHeader from '@/components/PageHeader.astro';
 import RevealScript from '@/components/RevealScript.astro';
 import { getCollection } from 'astro:content';
 
-const title = 'Newsletter — SoundIn | Notes from the Highlands';
+const title = 'Newsletter: SoundIn | Notes from the Highlands';
 const description = 'Quiet, irregular notes on building software, hosting events, and running a small agency from the Scottish Highlands. Subscribe or browse the archive.';
 
 const posts = (await getCollection('newsletter')).sort(
@@ -55,7 +55,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
       <div class="signup-text">
         <span class="section-num">01 / subscribe</span>
         <h2 class="section-headline">
-          Hear it before <span class="accent">anyone else does.</span>
+          The announcement <span class="accent">goes here first.</span>
         </h2>
         <p class="section-sub">
           Event announcements, product launches, and the occasional honest write-up. Sent only when there&rsquo;s something worth your inbox.
@@ -86,7 +86,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
         Past issues. <span class="accent">All of them.</span>
       </h2>
       <p class="section-sub">
-        Indexed by issue number, oldest at the bottom. Each one stays online forever — no link rot.
+        Indexed by issue number, oldest at the bottom. Each one stays online forever. No link rot.
       </p>
     </div>
 
@@ -292,7 +292,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     if (!input || !status || !button) return;
 
     if (!input.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
-      status.textContent = 'That doesn’t look like an email — try again?';
+      status.textContent = 'That doesn’t look like an email. Try again?';
       input.focus();
       return;
     }
