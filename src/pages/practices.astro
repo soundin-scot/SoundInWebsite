@@ -1,0 +1,655 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import HeroTopo from '@/components/HeroTopo.astro';
+import RevealScript from '@/components/RevealScript.astro';
+
+const title = 'Practices — SoundIn | Web, Events, Software, Lighting';
+const description = 'Six practices, one team. Holocron venue software, Photon DMX lighting, web development, event production, social, and a quiet new product in development.';
+
+const markers = [
+  { value: '06', label: 'practices' },
+  { value: '03', label: 'founders' },
+  { value: '57.48°N', label: 'highland HQ' },
+  { value: '2025', label: 'founded' },
+];
+
+type Practice = {
+  id: string;
+  name: string;
+  kind: 'product' | 'service';
+  pill: string;
+  desc: string;
+  link?: { href: string; label: string; external?: boolean };
+};
+
+const practices: Practice[] = [
+  {
+    id: 'holocron',
+    name: 'Holocron',
+    kind: 'product',
+    pill: 'Nightlife software',
+    desc: 'Venue management SaaS — attendance, ticketing, incidents, guest lists, settlements. Real operational clarity for nightlife.',
+    link: { href: 'https://holocron.scot', label: 'holocron.scot', external: true },
+  },
+  {
+    id: 'photon',
+    name: 'Photon',
+    kind: 'product',
+    pill: 'Lighting',
+    desc: 'Open-source DMX controller — 512 channels, sub-millisecond latency. Pre-built units and lighting design alongside.',
+    link: { href: '/contact', label: 'Get notified' },
+  },
+  {
+    id: 'web',
+    name: 'Web',
+    kind: 'service',
+    pill: 'Development',
+    desc: 'Marketing sites, e-commerce, and custom applications. Responsive, WCAG 2.1 AA, performance-first.',
+    link: { href: '/contact', label: 'Start a project' },
+  },
+  {
+    id: 'events',
+    name: 'Events',
+    kind: 'service',
+    pill: 'Production',
+    desc: 'Production management and technical production — lighting, sound, AV — plus venue consultation. Concept through teardown.',
+    link: { href: '/contact', label: 'Tell us about it' },
+  },
+  {
+    id: 'social',
+    name: 'Social',
+    kind: 'service',
+    pill: 'Marketing',
+    desc: 'Strategy, content creation, and community management on monthly retainers. Transparent reporting, every platform.',
+    link: { href: '/contact', label: 'See if we fit' },
+  },
+  {
+    id: 'coming-soon',
+    name: 'Coming soon',
+    kind: 'product',
+    pill: 'In development',
+    desc: 'Something we’ve been building quietly. You’ll hear about it when it’s ready.',
+  },
+];
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': ['Organization', 'LocalBusiness'],
+      '@id': 'https://soundin.scot/#organization',
+      name: 'SoundIn',
+      legalName: 'SoundIn Limited',
+      url: 'https://soundin.scot',
+      email: 'hello@soundin.scot',
+      foundingDate: '2025',
+      description: 'Scottish Highlands digital agency delivering web development, venue management software, DMX lighting systems, event production, and social media management for purpose-driven businesses.',
+      identifier: { '@type': 'PropertyValue', name: 'Companies House', value: 'SC850719' },
+      address: { '@type': 'PostalAddress', addressRegion: 'Highland', addressCountry: 'GB' },
+      areaServed: [
+        { '@type': 'Country', name: 'United Kingdom' },
+        { '@type': 'AdministrativeArea', name: 'Scotland' },
+      ],
+      knowsAbout: ['Web Development', 'Digital Marketing', 'Event Production', 'Venue Management Software', 'DMX Lighting Control', 'Social Media Management'],
+      sameAs: ['https://www.linkedin.com/company/soundin-ltd'],
+    },
+  ],
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical="https://soundin.scot/practices"
+  current="practices"
+  skipLink={{ href: '#practices', label: 'Skip to content' }}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(orgSchema)} slot="head" />
+
+  <!-- COMPACT HEADER -->
+  <header class="practices-hero">
+    <HeroTopo variant="practices" />
+    <div class="practices-hero-inner">
+      <span class="section-num">practices</span>
+      <h1 class="practices-hero-headline">
+        Software, events, and open-source tools <span class="accent">out of the Scottish Highlands.</span>
+      </h1>
+    </div>
+  </header>
+
+  <!-- MARKERS -->
+  <section class="markers reveal" aria-label="At a glance">
+    {markers.map((m) => (
+      <div class="marker">
+        <div class="marker-value">{m.value}</div>
+        <div class="marker-label">{m.label}</div>
+      </div>
+    ))}
+  </section>
+
+  <!-- PRACTICES -->
+  <section class="section practices" id="practices" tabindex="-1">
+    <HeroTopo variant="practices" />
+
+    <div class="section-head reveal">
+      <span class="section-num">01 / what we do</span>
+      <h2 class="section-headline">
+        Six practices. <span class="accent">One standard of care.</span>
+      </h2>
+      <p class="section-sub">
+        Web, events, software, lighting. Different disciplines, same team, same way of working.
+      </p>
+    </div>
+
+    <div class="practice-grid reveal">
+      {practices.map((p) => (
+        <article id={p.id} class={`practice-card practice-${p.kind}`}>
+          <div class="practice-card-head">
+            <span class="practice-name">{p.name}</span>
+            <span class="practice-pill">{p.pill}</span>
+          </div>
+          <p class="practice-desc">{p.desc}</p>
+          {p.link && (
+            <a
+              class="practice-link"
+              href={p.link.href}
+              rel={p.link.external ? 'noopener noreferrer' : undefined}
+              target={p.link.external ? '_blank' : undefined}
+            >
+              {p.link.label} <span aria-hidden="true">{p.link.external ? '↗' : '→'}</span>
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- WHO WE ARE -->
+  <section class="section founders">
+    <div class="section-head reveal">
+      <span class="section-num">02 / who we are</span>
+      <h2 class="section-headline">
+        Three founders. <span class="accent">Highland roots.</span>
+      </h2>
+    </div>
+
+    <div class="founder-body reveal">
+      <p>
+        SoundIn is Cougar, Emma, and Mark. We started it because we wanted to build things we believe in, with people we respect — and because the problems clients bring rarely respect the lines that agencies draw between disciplines.
+      </p>
+      <p>
+        We work out of the Scottish Highlands. The distance from the noise is a feature, not a brand story. It keeps us honest about what we take on and who we take it on for.
+      </p>
+      <a href="/vision" class="hero-link">Read the longer story <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- WHO WE WORK WITH -->
+  <section class="section manifesto">
+    <div class="section-head reveal">
+      <span class="section-num">03 / who we work with</span>
+    </div>
+    <blockquote class="manifesto-statement reveal">
+      <p>
+        Purpose-driven Scottish and UK businesses who want an integrated partner — not <span class="accent">five separate vendors</span> stitched together with status meetings.
+      </p>
+    </blockquote>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="cta-card reveal">
+      <span class="section-num">04 / ready to talk?</span>
+      <h2 class="cta-headline">Tell us what you&rsquo;re working on.</h2>
+      <p class="cta-sub">We&rsquo;ll come back within a working day. No qualifying call, no pipeline scoring — just a reply from one of us.</p>
+      <div class="cta-actions">
+        <a href="/contact" class="cta-button">Start a conversation <span aria-hidden="true">&rarr;</span></a>
+        <a href="mailto:hello@soundin.scot" class="cta-secondary">hello@soundin.scot</a>
+      </div>
+    </div>
+  </section>
+
+  <RevealScript />
+</Layout>
+
+<style>
+  /* ============================================================
+     COMPACT HEADER (replaces full-screen hero on /practices)
+  ============================================================ */
+  .practices-hero {
+    position: relative;
+    z-index: 1;
+    padding: 200px 64px 80px;
+    overflow: hidden;
+  }
+
+  .practices-hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .practices-hero .section-num {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: lowercase;
+    color: var(--color-muted);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+
+  .practices-hero-headline {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.1;
+    color: var(--color-snow);
+    text-wrap: balance;
+    opacity: 0;
+    animation: enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  }
+
+  .practices-hero-headline .accent { color: var(--color-salmon); }
+
+  .hero-headline .accent { color: var(--color-salmon); }
+
+  .hero-link {
+    position: relative;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+    opacity: 0;
+    animation: enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  }
+
+  .hero-link:hover { color: var(--color-snow); }
+  .hero-link:focus-visible {
+    color: var(--color-snow);
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* ============================================================
+     MARKERS
+  ============================================================ */
+  .markers {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--color-ghost);
+    border-bottom: 1px solid var(--color-ghost);
+    margin: 0 64px;
+  }
+
+  .marker {
+    padding: 48px 32px;
+    border-right: 1px solid var(--color-ghost);
+    text-align: left;
+  }
+  .marker:last-child { border-right: none; }
+
+  .marker-value {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    font-size: clamp(40px, 4.5vw, 64px);
+    line-height: 1;
+    color: var(--color-snow);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .marker-label {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(16px, 1.4vw, 20px);
+    color: var(--color-salmon);
+  }
+
+  /* ============================================================
+     SECTIONS (shared)
+  ============================================================ */
+  .section {
+    position: relative;
+    z-index: 1;
+    padding: 160px 64px;
+    overflow: hidden;
+  }
+
+  .section-head {
+    max-width: 880px;
+    margin-bottom: 80px;
+  }
+
+  .section-num {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    color: var(--color-muted);
+    margin-bottom: 32px;
+  }
+
+  .section-headline {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 1.05;
+    color: var(--color-snow);
+    text-wrap: balance;
+    margin-bottom: 24px;
+  }
+
+  .section-headline .accent { color: var(--color-salmon); }
+
+  .section-sub {
+    font-family: var(--font-sans);
+    font-size: clamp(15px, 1.4vw, 18px);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-cream);
+    max-width: 560px;
+  }
+
+  /* ============================================================
+     PRACTICE GRID
+  ============================================================ */
+  .practice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--color-ghost);
+  }
+
+  .practice-card {
+    padding: 48px 40px 56px;
+    border-bottom: 1px solid var(--color-ghost);
+    border-right: 1px solid var(--color-ghost);
+    display: flex;
+    flex-direction: column;
+    transition: background 0.45s ease;
+    position: relative;
+  }
+
+  .practice-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(255, 127, 107, 0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
+  }
+
+  .practice-card:hover::before,
+  .practice-card:focus-within::before {
+    opacity: 1;
+  }
+
+  .practice-grid > .practice-card:nth-child(3n) { border-right: none; }
+
+  .practice-card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .practice-name {
+    font-family: var(--font-sans);
+    font-size: clamp(22px, 2vw, 28px);
+    font-weight: 700;
+    color: var(--color-snow);
+    letter-spacing: -0.01em;
+  }
+
+  .practice-product .practice-name {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(28px, 2.4vw, 36px);
+    color: var(--color-salmon);
+  }
+
+  .practice-pill {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--color-faint);
+    border-radius: 999px;
+    color: var(--color-muted);
+    white-space: nowrap;
+  }
+
+  .practice-desc {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-cream);
+    margin-bottom: 32px;
+    flex: 1;
+  }
+
+  .practice-link {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-snow);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    border-bottom: 1px solid var(--color-faint);
+    padding-bottom: 4px;
+    transition: color 0.3s ease, border-color 0.3s ease, gap 0.3s ease;
+  }
+
+  .practice-link:hover {
+    color: var(--color-salmon);
+    border-bottom-color: var(--color-salmon);
+    gap: 12px;
+  }
+
+  .practice-link:focus-visible {
+    color: var(--color-salmon);
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* ============================================================
+     FOUNDERS
+  ============================================================ */
+  .founder-body {
+    max-width: 720px;
+    font-family: var(--font-sans);
+    font-size: clamp(17px, 1.5vw, 19px);
+    line-height: 1.7;
+    color: var(--color-cream);
+  }
+
+  .founder-body p { margin-bottom: 24px; }
+
+  .founder-body .hero-link {
+    animation: none;
+    opacity: 1;
+    margin-top: 16px;
+  }
+
+  /* ============================================================
+     MANIFESTO
+  ============================================================ */
+  .manifesto {
+    border-top: 1px solid var(--color-ghost);
+  }
+
+  .manifesto-statement {
+    margin: 0;
+  }
+
+  .manifesto-statement p {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.1;
+    color: rgba(231, 223, 217, 0.55);
+    max-width: 1100px;
+    text-wrap: balance;
+  }
+
+  .manifesto-statement .accent {
+    color: var(--color-salmon);
+  }
+
+  /* ============================================================
+     CTA
+  ============================================================ */
+  .cta-section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .cta-card {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 96px 64px;
+    border: 1px solid var(--color-ghost);
+    border-radius: 24px;
+    background: linear-gradient(180deg, rgba(255, 127, 107, 0.04) 0%, rgba(0, 0, 0, 0.2) 100%);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .cta-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top, rgba(255, 127, 107, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-card > * { position: relative; z-index: 1; }
+
+  .cta-card .section-num { margin-bottom: 24px; }
+
+  .cta-headline {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.05;
+    color: var(--color-snow);
+    margin-bottom: 24px;
+    text-wrap: balance;
+  }
+
+  .cta-sub {
+    font-family: var(--font-sans);
+    font-size: clamp(15px, 1.3vw, 17px);
+    line-height: 1.7;
+    color: var(--color-cream);
+    max-width: 560px;
+    margin: 0 auto 48px;
+  }
+
+  .cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--color-scarab);
+    background: var(--color-salmon);
+    padding: 16px 32px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, gap 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(255, 127, 107, 0.3);
+    gap: 12px;
+  }
+
+  .cta-button:focus-visible {
+    outline: 2px solid var(--color-snow);
+    outline-offset: 4px;
+  }
+
+  .cta-secondary {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-muted);
+    transition: color 0.3s ease;
+  }
+
+  .cta-secondary:hover { color: var(--color-snow); }
+  .cta-secondary:focus-visible {
+    color: var(--color-snow);
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+  @media (max-width: 900px) {
+    .practices-hero { padding: 140px 24px 64px; }
+    .markers { margin: 0 24px; grid-template-columns: repeat(2, 1fr); }
+    .marker { padding: 32px 20px; border-bottom: 1px solid var(--color-ghost); }
+    .marker:nth-child(2) { border-right: none; }
+    .marker:nth-last-child(-n+2) { border-bottom: none; }
+    .section { padding: 100px 24px; }
+    .practice-grid { grid-template-columns: repeat(2, 1fr); }
+    .practice-grid > .practice-card:nth-child(3n) { border-right: 1px solid var(--color-ghost); }
+    .practice-grid > .practice-card:nth-child(2n) { border-right: none; }
+    .practice-card { padding: 40px 28px; }
+    .cta-card { padding: 72px 32px; border-radius: 20px; }
+  }
+
+  @media (max-width: 600px) {
+    .markers { grid-template-columns: 1fr; }
+    .marker { border-right: none; border-bottom: 1px solid var(--color-ghost); }
+    .marker:last-child { border-bottom: none; }
+    .practice-grid { grid-template-columns: 1fr; }
+    .practice-grid > .practice-card { border-right: none !important; }
+    .section-head { margin-bottom: 56px; }
+    .cta-actions { flex-direction: column; gap: 16px; }
+  }
+</style>
