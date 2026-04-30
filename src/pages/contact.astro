@@ -129,32 +129,36 @@ const contactSchema = {
   }
 
   .contact-submit {
-    margin-top: 32px;
+    margin-top: 40px;
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
-    color: var(--color-snow);
-    background: none;
-    border: 1px solid var(--color-faint);
-    border-radius: 24px;
-    padding: 12px 32px;
+    letter-spacing: 0.02em;
+    color: var(--color-scarab);
+    background: var(--color-salmon);
+    border: none;
+    border-radius: 999px;
+    padding: 16px 32px;
     cursor: pointer;
-    transition: border-color 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .contact-submit:hover {
-    border-color: var(--color-salmon);
-    background: rgba(255, 127, 107, 0.08);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(255, 127, 107, 0.3);
   }
 
   .contact-submit:focus-visible {
-    border-color: var(--color-salmon);
-    background: rgba(255, 127, 107, 0.08);
-    outline: 2px solid var(--color-salmon);
+    outline: 2px solid var(--color-snow);
     outline-offset: 4px;
   }
 
-  .contact-submit:disabled { opacity: 0.6; cursor: default; }
+  .contact-submit:disabled {
+    opacity: 0.6;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+  }
 
   .contact-right { padding-top: 80px; }
 

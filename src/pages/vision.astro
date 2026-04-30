@@ -73,10 +73,8 @@ const aboutSchema = {
 
     {sections.map((s) => (
       <div class="vision-section reveal">
-        <div class="vision-header">
-          <h2 class="vision-heading">{s.heading}</h2>
-          <span class="vision-num">{s.num}</span>
-        </div>
+        <span class="vision-num">{s.num} / {s.heading.toLowerCase()}</span>
+        <h2 class="vision-heading">{s.heading}</h2>
         <div class="vision-body">
           {s.body.map((p) => <p>{p}</p>)}
         </div>
@@ -84,7 +82,8 @@ const aboutSchema = {
     ))}
 
     <div class="vision-section reveal vision-cta">
-      <a href="/contact" class="practices-cta">Work with us <span aria-hidden="true">&rarr;</span></a>
+      <h2 class="vision-cta-headline">Want to build something together?</h2>
+      <a href="/contact" class="cta-button">Tell us what you&rsquo;re working on <span aria-hidden="true">&rarr;</span></a>
     </div>
   </section>
 
@@ -145,33 +144,33 @@ const aboutSchema = {
     border-top: 1px solid var(--color-ghost);
   }
 
-  .vision-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 28px;
+  .vision-num {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    color: var(--color-muted);
+    margin-bottom: 24px;
   }
 
   .vision-heading {
     font-family: var(--font-serif);
     font-weight: 100;
     font-style: italic;
-    font-size: clamp(24px, 3vw, 36px);
-    color: var(--color-salmon);
-  }
-
-  .vision-num {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--color-muted);
+    font-size: clamp(32px, 4.5vw, 56px);
+    line-height: 1.05;
+    color: var(--color-snow);
+    margin-bottom: 32px;
+    text-wrap: balance;
   }
 
   .vision-body {
     font-family: var(--font-sans);
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1.8;
+    font-size: clamp(16px, 1.4vw, 18px);
+    font-weight: 400;
+    line-height: 1.7;
     color: var(--color-cream);
   }
 
@@ -181,27 +180,44 @@ const aboutSchema = {
   .vision-cta {
     border-top: none;
     text-align: center;
-    padding: 80px 0 0;
+    padding: 96px 0 0;
   }
 
-  .vision-cta .practices-cta {
+  .vision-cta-headline {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.1;
+    color: var(--color-snow);
+    margin-bottom: 32px;
+    text-wrap: balance;
+  }
+
+  .cta-button {
     font-family: var(--font-sans);
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--color-muted);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--color-scarab);
+    background: var(--color-salmon);
+    padding: 16px 32px;
+    border-radius: 999px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    transition: color 0.3s ease;
-    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, gap 0.3s ease;
   }
 
-  .vision-cta .practices-cta:hover { color: var(--color-snow); }
-  .vision-cta .practices-cta:focus-visible {
-    color: var(--color-snow);
-    outline: 2px solid var(--color-salmon);
+  .cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(255, 127, 107, 0.3);
+    gap: 12px;
+  }
+
+  .cta-button:focus-visible {
+    outline: 2px solid var(--color-snow);
     outline-offset: 4px;
-    border-radius: 2px;
   }
 
   @media (max-width: 900px) {
