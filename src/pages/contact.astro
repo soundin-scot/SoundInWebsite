@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 
-const title = 'Contact SoundIn — Scottish Digital Agency';
+const title = 'Contact SoundIn: Scottish Digital Agency';
 const description = 'Get in touch with SoundIn. Based in the Scottish Highlands - web development, venue software, event production, lighting, and social media management.';
 
 const contactSchema = {
@@ -59,7 +59,7 @@ const contactSchema = {
         </div>
         <div class="contact-info-group">
           <dt class="contact-info-label">Socials</dt>
-          <dd class="contact-info-val"><a href="#">LinkedIn</a></dd>
+          <dd class="contact-info-val"><a href="https://www.linkedin.com/company/soundin-ltd" rel="noopener noreferrer" target="_blank">LinkedIn</a></dd>
         </div>
       </dl>
     </div>
@@ -224,7 +224,7 @@ const contactSchema = {
     } catch {
       btn.textContent = 'Send Message';
       btn.disabled = false;
-      status.textContent = 'Something went wrong - email us at hello@soundin.scot';
+      status.textContent = 'Something went wrong. Email us at hello@soundin.scot';
     }
   });
 
