@@ -1,0 +1,17 @@
+---
+interface Props {
+  label: string;
+  headline: string;
+  accent?: string;
+}
+const { label, headline, accent } = Astro.props;
+---
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <span class="section-num">{label}</span>
+    <h1 class="page-header-headline">
+      {headline}{accent && (<> <span class="accent">{accent}</span></>)}
+    </h1>
+  </div>
+</header>

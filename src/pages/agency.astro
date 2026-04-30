@@ -1,0 +1,156 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import RevealScript from '@/components/RevealScript.astro';
+
+const title = 'Agency: SoundIn | Web Development, Social Media, Marketing';
+const description = 'Web development on Next.js and Astro, organic social media management, and marketing for purpose-driven Scottish and UK businesses.';
+
+type Service = {
+  id: string;
+  name: string;
+  pill: string;
+  desc: string;
+  detail?: string[];
+  cta: { label: string };
+};
+
+const services: Service[] = [
+  {
+    id: 'web',
+    name: 'Web development',
+    pill: 'Next.js · Astro',
+    desc: 'Marketing sites, e-commerce, and product UIs. We build on Next.js when an app needs deep server logic, and on Astro when content speed and accessibility matter most.',
+    detail: [
+      'Next.js for app surfaces: auth, dashboards, server actions, streaming UI',
+      'Astro for marketing and content: static-first, near-zero JS by default',
+      'WCAG 2.1 AA, Core Web Vitals in the green, deployed on Vercel',
+    ],
+    cta: { label: 'Start a project' },
+  },
+  {
+    id: 'social',
+    name: 'Social media management',
+    pill: 'Strategy · Content · Community',
+    desc: 'Organic-first social on monthly retainers. We write the strategy, make the content, and run the community, with transparent reporting that names what worked and what did not.',
+    detail: [
+      'Channel strategy and content pillars for LinkedIn, Instagram, TikTok',
+      'In-house copy and creative. No off-shore content mills.',
+      'Monthly reports with the numbers and the call-out for next month',
+    ],
+    cta: { label: 'See if we fit' },
+  },
+  {
+    id: 'marketing',
+    name: 'Marketing',
+    pill: 'Brand · Copy · Campaigns',
+    desc: 'We work best with founders who want a partner in the room, not a deck delivered over email. Positioning, messaging, and end-to-end campaign execution.',
+    detail: [
+      'Brand strategy, voice, and messaging architecture',
+      'Landing pages, lifecycle email, and paid creative when it earns its place',
+      'Audit-first engagements. We tell you what to stop doing before what to start.',
+    ],
+    cta: { label: 'Tell us what you need' },
+  },
+];
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://soundin.scot/agency#service',
+  name: 'SoundIn Agency Services',
+  serviceType: ['Web Development', 'Social Media Management', 'Marketing'],
+  provider: { '@id': 'https://soundin.scot/#organization' },
+  areaServed: ['United Kingdom', 'Scotland'],
+  description,
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical="https://soundin.scot/agency"
+  current={null}
+  skipLink={{ href: '#agency-services', label: 'Skip to services' }}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(aboutSchema)} slot="head" />
+
+  <PageHeader
+    label="agency"
+    headline="Web, social, and marketing."
+    accent="Same people from kickoff to done."
+  />
+
+  <section class="section" id="agency-services" tabindex="-1">
+    <div class="section-head reveal">
+      <span class="section-num">01 / what we offer</span>
+      <h2 class="section-headline">
+        Three disciplines. <span class="accent">One team across all of them.</span>
+      </h2>
+      <p class="section-sub">
+        Same people from kickoff to launch. Nothing routed to a contractor you've never met. No version of the brief that's been through four pairs of hands.
+      </p>
+    </div>
+
+    <div class="practice-grid reveal">
+      {services.map((s) => (
+        <article id={s.id} class="practice-card practice-service">
+          <div class="practice-card-head">
+            <span class="practice-name">{s.name}</span>
+            <span class="practice-pill">{s.pill}</span>
+          </div>
+          <p class="practice-desc">{s.desc}</p>
+          {s.detail && (
+            <ul class="service-detail">
+              {s.detail.map((d) => <li>{d}</li>)}
+            </ul>
+          )}
+          <a class="practice-link" href="/contact">
+            {s.cta.label} <span aria-hidden="true">→</span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div class="cta-card reveal">
+      <span class="section-num">02 / ready to talk?</span>
+      <h2 class="cta-headline">Easy to reach. Easy to start.</h2>
+      <p class="cta-sub">We&rsquo;ll come back within a working day. No qualifying call, no pipeline scoring. Just a reply from one of us.</p>
+      <div class="cta-actions">
+        <a href="/contact" class="cta-button">Start a conversation <span aria-hidden="true">→</span></a>
+        <a href="mailto:hello@soundin.scot" class="cta-secondary">hello@soundin.scot</a>
+      </div>
+    </div>
+  </section>
+
+  <RevealScript />
+</Layout>
+
+<style>
+  .service-detail {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--color-muted);
+  }
+
+  .service-detail li {
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .service-detail li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 1px;
+    background: var(--color-faint);
+  }
+</style>

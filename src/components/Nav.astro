@@ -1,28 +1,54 @@
 ---
 import Logo from './Logo.astro';
+type NavKey = 'vision' | 'agency' | 'ecosystem' | 'events' | 'newsletter' | 'contact' | null;
 interface Props {
-  current?: 'practices' | 'vision' | 'contact' | null;
+  current?: NavKey;
 }
 const { current = null } = Astro.props;
+
+const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
+  { key: 'vision', label: 'vision', href: '/vision' },
+  { key: 'agency', label: 'agency', href: '/agency' },
+  { key: 'ecosystem', label: 'ecosystem', href: '/ecosystem' },
+  { key: 'events', label: 'events', href: '/events' },
+  { key: 'newsletter', label: 'newsletter', href: '/newsletter' },
+  { key: 'contact', label: 'contact', href: '/contact' },
+];
 ---
 
-<nav class="nav fixed top-0 left-0 right-0 z-[100] flex items-center justify-center px-6 h-20 border-b border-transparent transition-[background,border-color] duration-500">
-  <Logo />
-  <ul class="nav-links flex gap-12 list-none max-[900px]:gap-7">
-    <li class="nav-hide-mobile max-[600px]:hidden">
-      <a href="/#practices" aria-current={current === 'practices' ? 'page' : undefined}>What We Do</a>
-    </li>
-    <li class="nav-hide-mobile max-[600px]:hidden">
-      <a href="/vision" aria-current={current === 'vision' ? 'page' : undefined}>Our Story</a>
-    </li>
-    <li>
-      <a href="/contact" aria-current={current === 'contact' ? 'page' : undefined}>Say Hello</a>
-    </li>
+<nav class="nav fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 h-20 border-b border-transparent transition-[background,border-color] duration-500">
+  <a href="/" class="nav-home" aria-label="SoundIn home">
+    <Logo />
+  </a>
+  <ul class="nav-links flex gap-8 list-none max-[1100px]:gap-5">
+    {links.map((l, i) => (
+      <li class={i < links.length - 1 ? 'nav-hide-mobile' : ''}>
+        <a href={l.href} aria-current={current === l.key ? 'page' : undefined}>{l.label}</a>
+      </li>
+    ))}
   </ul>
 </nav>
 
 <style>
-  .nav :global(.logo) { display: none; }
+  .nav-home {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-snow);
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    transition: opacity 0.3s ease;
+  }
+  .nav-home:hover { opacity: 0.7; }
+  .nav-home:focus-visible {
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+  .nav-home :global(.logo) {
+    font-size: 18px;
+  }
   .nav.scrolled {
     background: rgba(36, 48, 44, 0.4);
     backdrop-filter: blur(16px);
@@ -35,6 +61,10 @@ const { current = null } = Astro.props;
     font-weight: 400;
     color: var(--color-snow);
     transition: opacity 0.3s ease;
+  }
+  .nav-hide-mobile { }
+  @media (max-width: 800px) {
+    .nav-hide-mobile { display: none; }
   }
   .nav-links a[aria-current="page"] { opacity: 0.6; }
   .nav-links a:hover { opacity: 0.6; }

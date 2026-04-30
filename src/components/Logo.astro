@@ -3,7 +3,7 @@ interface Props {
   ariaLabel?: string;
   href?: string;
 }
-const { ariaLabel = 'SoundIn — return to homepage', href = '/' } = Astro.props;
+const { ariaLabel = 'SoundIn: return to homepage', href = '/' } = Astro.props;
 ---
 
 <a href={href} class="logo" aria-label={ariaLabel}>

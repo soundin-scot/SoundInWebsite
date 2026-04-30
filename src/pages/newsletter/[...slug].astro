@@ -1,0 +1,245 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import RevealScript from '@/components/RevealScript.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('newsletter');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const title = `${post.data.title} | SoundIn Newsletter`;
+const canonical = `https://soundin.scot/newsletter/${post.id}`;
+
+const dateFmt = new Intl.DateTimeFormat('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const blogPostSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${canonical}#blog-post`,
+  headline: post.data.title,
+  description: post.data.summary,
+  datePublished: post.data.publishedAt.toISOString(),
+  url: canonical,
+  isPartOf: { '@id': 'https://soundin.scot/newsletter#blog' },
+  publisher: { '@id': 'https://soundin.scot/#organization' },
+  author: { '@id': 'https://soundin.scot/#organization' },
+  keywords: post.data.tags.join(', '),
+};
+---
+
+<Layout
+  title={title}
+  description={post.data.summary}
+  canonical={canonical}
+  ogType="article"
+  current={null}
+  skipLink={{ href: '#post-content', label: 'Skip to content' }}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(blogPostSchema)} slot="head" />
+
+  <article class="post" id="post-content" tabindex="-1">
+    <header class="post-header">
+      <a href="/newsletter" class="post-back">
+        <span aria-hidden="true">←</span> Back to the archive
+      </a>
+      <div class="post-meta">
+        <span class="post-issue">№ {String(post.data.issue).padStart(2, '0')}</span>
+        <time datetime={post.data.publishedAt.toISOString()} class="post-date">
+          {dateFmt.format(post.data.publishedAt)}
+        </time>
+      </div>
+      <h1 class="post-title">{post.data.title}</h1>
+      <p class="post-summary">{post.data.summary}</p>
+    </header>
+
+    <div class="post-body">
+      <Content />
+    </div>
+
+    <footer class="post-footer">
+      <h2 class="post-footer-headline">Get the next issue <span class="accent">when it goes out.</span></h2>
+      <p class="post-footer-sub">Issues land in your inbox the day they go out.</p>
+      <a href="/newsletter#newsletter-signup" class="cta-button">Subscribe <span aria-hidden="true">→</span></a>
+    </footer>
+  </article>
+
+  <RevealScript />
+</Layout>
+
+<style>
+  .post {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 200px 24px 120px;
+  }
+
+  .post-header { margin-bottom: 64px; }
+
+  .post-back {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 48px;
+    transition: color 0.3s ease, gap 0.3s ease;
+  }
+  .post-back:hover { color: var(--color-salmon); gap: 10px; }
+  .post-back:focus-visible {
+    color: var(--color-salmon);
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .post-issue {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--color-salmon);
+  }
+
+  .post-date {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .post-title {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.05;
+    color: var(--color-snow);
+    margin-bottom: 24px;
+    text-wrap: balance;
+  }
+
+  .post-summary {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.4vw, 18px);
+    line-height: 1.6;
+    color: var(--color-cream);
+    text-wrap: balance;
+  }
+
+  .post-body {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--color-cream);
+  }
+
+  .post-body :global(p) { margin: 0 0 24px; }
+  .post-body :global(h2) {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(28px, 3vw, 36px);
+    line-height: 1.1;
+    color: var(--color-snow);
+    margin: 56px 0 20px;
+  }
+  .post-body :global(h3) {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-snow);
+    margin: 40px 0 16px;
+  }
+  .post-body :global(a) {
+    color: var(--color-salmon);
+    border-bottom: 1px solid rgba(255, 127, 107, 0.4);
+    transition: border-color 0.3s ease;
+  }
+  .post-body :global(a:hover) { border-bottom-color: var(--color-salmon); }
+  .post-body :global(blockquote) {
+    border-left: 2px solid var(--color-salmon);
+    padding-left: 24px;
+    margin: 32px 0;
+    font-style: italic;
+    color: var(--color-snow);
+  }
+  .post-body :global(em) { color: var(--color-snow); font-style: italic; }
+  .post-body :global(ul), .post-body :global(ol) {
+    margin: 0 0 24px;
+    padding-left: 24px;
+  }
+  .post-body :global(li) { margin-bottom: 8px; }
+  .post-body :global(code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .post-body :global(hr) {
+    border: none;
+    height: 1px;
+    background: var(--color-ghost);
+    margin: 48px 0;
+  }
+
+  /* Footer CTA */
+  .post-footer {
+    margin-top: 96px;
+    padding-top: 64px;
+    border-top: 1px solid var(--color-ghost);
+    text-align: center;
+  }
+
+  .post-footer-headline {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(28px, 3.5vw, 40px);
+    line-height: 1.1;
+    color: var(--color-snow);
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+
+  .post-footer-headline .accent { color: var(--color-salmon); }
+
+  .post-footer-sub {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-cream);
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 600px) {
+    .post { padding: 140px 24px 80px; }
+    .post-header { margin-bottom: 48px; }
+  }
+</style>

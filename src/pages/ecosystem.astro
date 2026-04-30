@@ -1,0 +1,136 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import RevealScript from '@/components/RevealScript.astro';
+
+const title = 'Ecosystem: SoundIn | Products We Build Ourselves';
+const description = 'Holocron is live. Three more in development. The SoundIn ecosystem is the software and tooling we own end-to-end and ship under our own name.';
+
+type Card = {
+  id: string;
+  state: 'live' | 'soon';
+  name: string;
+  pill: string;
+  desc: string;
+  link?: { href: string; label: string; external?: boolean };
+};
+
+const cards: Card[] = [
+  {
+    id: 'holocron',
+    state: 'live',
+    name: 'Holocron',
+    pill: 'Live · Nightlife software',
+    desc: 'Venue management SaaS for nightlife, in production with paying customers. Attendance, ticketing, incidents, guest lists, settlements.',
+    link: { href: 'https://holocron.scot', label: 'holocron.scot', external: true },
+  },
+  {
+    id: 'soon-01',
+    state: 'soon',
+    name: 'Coming soon',
+    pill: 'In development',
+    desc: 'Something we’ve been building quietly. You’ll hear about it when it’s ready.',
+  },
+  {
+    id: 'soon-02',
+    state: 'soon',
+    name: 'Coming soon',
+    pill: 'In development',
+    desc: 'Something we’ve been building quietly. You’ll hear about it when it’s ready.',
+  },
+  {
+    id: 'soon-03',
+    state: 'soon',
+    name: 'Coming soon',
+    pill: 'In development',
+    desc: 'Something we’ve been building quietly. You’ll hear about it when it’s ready.',
+  },
+];
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': 'https://soundin.scot/ecosystem#webpage',
+  name: title,
+  description,
+  url: 'https://soundin.scot/ecosystem',
+  isPartOf: { '@id': 'https://soundin.scot/#organization' },
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical="https://soundin.scot/ecosystem"
+  current={null}
+  skipLink={{ href: '#ecosystem-list', label: 'Skip to products' }}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionSchema)} slot="head" />
+
+  <PageHeader
+    label="ecosystem"
+    headline="Products we build"
+    accent="ourselves."
+  />
+
+  <section class="section" id="ecosystem-list" tabindex="-1">
+    <div class="section-head reveal">
+      <span class="section-num">01 / the catalogue</span>
+      <h2 class="section-headline">
+        One in production. <span class="accent">Three in the workshop.</span>
+      </h2>
+      <p class="section-sub">
+        Each one started as a problem we couldn&rsquo;t buy a fix for. Holocron has paying customers; the rest are not announced because they&rsquo;re not ready.
+      </p>
+    </div>
+
+    <div class="practice-grid cols-2 reveal">
+      {cards.map((c) => (
+        <article id={c.id} class={`practice-card practice-product ${c.state === 'soon' ? 'card-soon' : ''}`}>
+          <div class="practice-card-head">
+            <span class="practice-name">{c.name}</span>
+            <span class="practice-pill">{c.pill}</span>
+          </div>
+          <p class="practice-desc">{c.desc}</p>
+          {c.link ? (
+            <a
+              class="practice-link"
+              href={c.link.href}
+              rel={c.link.external ? 'noopener noreferrer' : undefined}
+              target={c.link.external ? '_blank' : undefined}
+            >
+              {c.link.label} <span aria-hidden="true">{c.link.external ? '↗' : '→'}</span>
+            </a>
+          ) : (
+            <a class="practice-link" href="/newsletter">
+              Hear about it first <span aria-hidden="true">→</span>
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div class="cta-card reveal">
+      <span class="section-num">02 / get the next one early</span>
+      <h2 class="cta-headline">The next announcement goes to the newsletter first.</h2>
+      <p class="cta-sub">The newsletter goes out when something new is ready, not on a schedule. Quiet, and only the things worth your inbox.</p>
+      <div class="cta-actions">
+        <a href="/newsletter" class="cta-button">Subscribe to the newsletter <span aria-hidden="true">→</span></a>
+        <a href="/contact" class="cta-secondary">or build something with us</a>
+      </div>
+    </div>
+  </section>
+
+  <RevealScript />
+</Layout>
+
+<style>
+  .card-soon .practice-name {
+    color: rgba(255, 127, 107, 0.4);
+  }
+  .card-soon .practice-desc {
+    color: var(--color-muted);
+  }
+</style>
