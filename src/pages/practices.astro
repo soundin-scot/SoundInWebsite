@@ -22,23 +22,7 @@ type Practice = {
   link?: { href: string; label: string; external?: boolean };
 };
 
-const practices: Practice[] = [
-  {
-    id: 'holocron',
-    name: 'Holocron',
-    kind: 'product',
-    pill: 'Nightlife software',
-    desc: 'Venue management SaaS — attendance, ticketing, incidents, guest lists, settlements. Real operational clarity for nightlife.',
-    link: { href: 'https://holocron.scot', label: 'holocron.scot', external: true },
-  },
-  {
-    id: 'photon',
-    name: 'Photon',
-    kind: 'product',
-    pill: 'Lighting',
-    desc: 'Open-source DMX controller — 512 channels, sub-millisecond latency. Pre-built units and lighting design alongside.',
-    link: { href: '/contact', label: 'Get notified' },
-  },
+const services: Practice[] = [
   {
     id: 'web',
     name: 'Web',
@@ -62,6 +46,25 @@ const practices: Practice[] = [
     pill: 'Marketing',
     desc: 'Strategy, content creation, and community management on monthly retainers. Transparent reporting, every platform.',
     link: { href: '/contact', label: 'See if we fit' },
+  },
+];
+
+const ecosystem: Practice[] = [
+  {
+    id: 'holocron',
+    name: 'Holocron',
+    kind: 'product',
+    pill: 'Nightlife software',
+    desc: 'Venue management SaaS — attendance, ticketing, incidents, guest lists, settlements. Real operational clarity for nightlife.',
+    link: { href: 'https://holocron.scot', label: 'holocron.scot', external: true },
+  },
+  {
+    id: 'photon',
+    name: 'Photon',
+    kind: 'product',
+    pill: 'Lighting',
+    desc: 'Open-source DMX controller — 512 channels, sub-millisecond latency. Pre-built units and lighting design alongside.',
+    link: { href: '/contact', label: 'Get notified' },
   },
   {
     id: 'coming-soon',
@@ -127,22 +130,57 @@ const orgSchema = {
     ))}
   </section>
 
-  <!-- PRACTICES -->
+  <!-- SERVICES -->
   <section class="section practices" id="practices" tabindex="-1">
     <HeroTopo variant="practices" />
 
     <div class="section-head reveal">
-      <span class="section-num">01 / what we do</span>
+      <span class="section-num">01 / services</span>
       <h2 class="section-headline">
-        Six practices. <span class="accent">One standard of care.</span>
+        Three disciplines. <span class="accent">One standard of care.</span>
       </h2>
       <p class="section-sub">
-        Web, events, software, lighting. Different disciplines, same team, same way of working.
+        Web, events, social. Same team across every brief; nothing handed off to subcontractors you've never met.
       </p>
     </div>
 
-    <div class="practice-grid reveal">
-      {practices.map((p) => (
+    <div class="practice-grid practice-grid-3 reveal">
+      {services.map((p) => (
+        <article id={p.id} class={`practice-card practice-${p.kind}`}>
+          <div class="practice-card-head">
+            <span class="practice-name">{p.name}</span>
+            <span class="practice-pill">{p.pill}</span>
+          </div>
+          <p class="practice-desc">{p.desc}</p>
+          {p.link && (
+            <a
+              class="practice-link"
+              href={p.link.href}
+              rel={p.link.external ? 'noopener noreferrer' : undefined}
+              target={p.link.external ? '_blank' : undefined}
+            >
+              {p.link.label} <span aria-hidden="true">{p.link.external ? '↗' : '→'}</span>
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- ECOSYSTEM -->
+  <section class="section ecosystem-section" id="ecosystem" tabindex="-1">
+    <div class="section-head reveal">
+      <span class="section-num">02 / ecosystem</span>
+      <h2 class="section-headline">
+        Products we build <span class="accent">ourselves.</span>
+      </h2>
+      <p class="section-sub">
+        Software and open-source tooling we own end-to-end. Each one started as a problem we couldn't buy a fix for.
+      </p>
+    </div>
+
+    <div class="practice-grid practice-grid-3 reveal">
+      {ecosystem.map((p) => (
         <article id={p.id} class={`practice-card practice-${p.kind}`}>
           <div class="practice-card-head">
             <span class="practice-name">{p.name}</span>
@@ -167,7 +205,7 @@ const orgSchema = {
   <!-- WHO WE ARE -->
   <section class="section founders">
     <div class="section-head reveal">
-      <span class="section-num">02 / who we are</span>
+      <span class="section-num">03 / who we are</span>
       <h2 class="section-headline">
         Three founders. <span class="accent">Highland roots.</span>
       </h2>
@@ -187,7 +225,7 @@ const orgSchema = {
   <!-- WHO WE WORK WITH -->
   <section class="section manifesto">
     <div class="section-head reveal">
-      <span class="section-num">03 / who we work with</span>
+      <span class="section-num">04 / who we work with</span>
     </div>
     <blockquote class="manifesto-statement reveal">
       <p>
@@ -199,7 +237,7 @@ const orgSchema = {
   <!-- CTA -->
   <section class="section cta-section">
     <div class="cta-card reveal">
-      <span class="section-num">04 / ready to talk?</span>
+      <span class="section-num">05 / ready to talk?</span>
       <h2 class="cta-headline">Tell us what you&rsquo;re working on.</h2>
       <p class="cta-sub">We&rsquo;ll come back within a working day. No qualifying call, no pipeline scoring — just a reply from one of us.</p>
       <div class="cta-actions">
