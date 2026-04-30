@@ -355,6 +355,8 @@ const orgSchema = {
     margin-bottom: 32px;
     opacity: 0;
     animation: enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+    z-index: 5;
+    isolation: isolate;
   }
 
   .portal-search {
@@ -423,9 +425,9 @@ const orgSchema = {
     border-radius: 24px;
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.04);
     text-align: left;
-    z-index: 10;
-    max-height: min(60vh, 480px);
-    overflow-y: auto;
+    z-index: 50;
+    isolation: isolate;
+    overflow: hidden;
   }
 
   .portal-search-listbox[hidden] { display: none; }
@@ -494,6 +496,18 @@ const orgSchema = {
   }
 
   /* Pills */
+  .portal-pills,
+  .portal-foot {
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .portal.is-searching .portal-pills,
+  .portal.is-searching .portal-foot {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
   .portal-pills {
     list-style: none;
     margin: 0;
@@ -593,6 +607,7 @@ const orgSchema = {
   const form = document.getElementById('portal-search') as HTMLFormElement | null;
   const hint = document.getElementById('portal-search-hint');
   const listbox = document.getElementById('portal-search-listbox') as HTMLUListElement | null;
+  const portal = document.querySelector<HTMLElement>('main.portal');
 
   let activeIndex = -1;
   let visible: Suggestion[] = [];
@@ -636,8 +651,11 @@ const orgSchema = {
       listbox.innerHTML = '';
       input.setAttribute('aria-expanded', 'false');
       input.removeAttribute('aria-activedescendant');
+      portal?.classList.remove('is-searching');
       return;
     }
+
+    portal?.classList.add('is-searching');
 
     let html = '';
     let lastGroup = '';
