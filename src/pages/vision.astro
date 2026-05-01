@@ -40,25 +40,36 @@ const sections = [
   },
 ];
 
-const aboutSchema = {
+const pageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'AboutPage',
-  '@id': 'https://soundin.scot/vision#webpage',
-  url: 'https://soundin.scot/vision',
-  name: 'Our Mission & Values — SoundIn',
-  description,
-  isPartOf: { '@id': 'https://soundin.scot/#organization' },
+  '@graph': [
+    {
+      '@type': 'AboutPage',
+      '@id': 'https://soundin.scot/vision/#webpage',
+      url: 'https://soundin.scot/vision/',
+      name: 'Our Mission & Values — SoundIn',
+      description,
+      isPartOf: { '@id': 'https://soundin.scot/#organization' },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://soundin.scot/' },
+        { '@type': 'ListItem', position: 2, name: 'Vision', item: 'https://soundin.scot/vision/' },
+      ],
+    },
+  ],
 };
 ---
 
 <Layout
   title={title}
   description={description}
-  canonical="https://soundin.scot/vision"
+  canonical="https://soundin.scot/vision/"
   current="vision"
   skipLink={{ href: '#vision-content', label: 'Skip to content' }}
 >
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(aboutSchema)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(pageSchema)} slot="head" />
 
   <blockquote class="pull-quote page-top" style="overflow: hidden;">
     <HeroTopo variant="quote" />
