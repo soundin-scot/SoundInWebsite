@@ -1,0 +1,56 @@
+version: 2
+
+projectIgnorePaths:
+  - "**/node_modules/**"
+  - "**/.next/**"
+  - "**/.turbo/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/.vercel/**"
+
+githubApp:
+  enabled: true
+  pullRequestAlertsEnabled: true
+  projectReportsEnabled: true
+  secretScanningEnabled: true
+
+issueRules:
+  # Critical — block on any of these
+  malware: error
+  gptMalware: error
+  didYouMean: error
+
+  # Supply chain integrity
+  # installScripts: catches exotic subdependencies running arbitrary code at install time
+  installScripts: error
+  shellAccess: error
+  envVars: error
+  networkAccess: error
+  filesystemAccess: warn
+  hasNativeCode: warn
+  obfuscatedFile: error
+
+  # Vulnerability
+  criticalCVE: error
+  cve: warn
+  mediumCVE: warn
+  mildCVE: false
+
+  # Quality / maintenance (warn, not block)
+  deprecated: warn
+  unmaintained: warn
+  licenseChange: warn
+  dynamicRequire: warn
+  telemetry: warn
+
+  # Noise — suppress
+  unpopularPackage: false
+  minifiedFile: false
+  badSemverDependency: false
+  floatingDependency: false
+  trivialPackage: false
+
+# NOTE: min-release-age (7-day rule) is configured in the Socket dashboard
+# under Organisation Settings -> Security Policy -> Package Age Threshold.
+# This blocks installs of packages published within 7 days — requires paid plan.
+
