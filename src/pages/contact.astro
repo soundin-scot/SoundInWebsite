@@ -1,8 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 
-const title = 'Contact SoundIn — Scottish Digital Agency';
-const description = 'Get in touch with SoundIn. Based in the Scottish Highlands - web development, venue software, event production, lighting, and social media management.';
+const title = 'Contact SoundIn';
+const description = 'Get in touch with SoundIn. Based in the Scottish Highlands, building compliance-first software for the UK night time economy.';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -220,18 +220,37 @@ const pageSchema = {
     const status = document.getElementById('form-status');
     if (!btn || !status) return;
 
+    const data = new FormData(form);
+    const body = {
+      name: (data.get('name') as string).trim(),
+      email: (data.get('email') as string).trim(),
+      company: (data.get('company') as string).trim(),
+      message: (data.get('message') as string).trim(),
+    };
+
     btn.textContent = 'Sending…';
     btn.disabled = true;
+    status.textContent = '';
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-      btn.textContent = 'Sent';
-      status.textContent = "We’ll be in touch.";
-      btn.style.borderColor = 'rgba(231,223,217,0.3)';
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      if (res.ok) {
+        btn.textContent = 'Sent';
+        status.textContent = "We'll be in touch.";
+        btn.style.borderColor = 'rgba(231,223,217,0.3)';
+        form.reset();
+      } else {
+        throw new Error('non-ok response');
+      }
     } catch {
       btn.textContent = 'Send Message';
       btn.disabled = false;
-      status.textContent = 'Something went wrong - email us at hello@soundin.scot';
+      status.textContent = 'Something went wrong  -  email us at hello@soundin.scot';
     }
   });
 
