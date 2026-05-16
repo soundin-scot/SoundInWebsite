@@ -3,8 +3,8 @@ import Layout from '@/layouts/Layout.astro';
 import HeroTopo from '@/components/HeroTopo.astro';
 import RevealScript from '@/components/RevealScript.astro';
 
-const title = 'SoundIn - Venue Management Software for the UK Night Time Economy';
-const description = 'SoundIn builds Holocron, compliance-first venue management software for UK nightlife operators. Attendance, incidents, compliance, and financial settlements. Based in the Scottish Highlands.';
+const title = 'SoundIn - Run a Tighter Venue. Stay Compliant. Get Paid.';
+const description = 'SoundIn helps UK nightlife operators stay compliant, in control, and profitable. Attendance, incidents, guest lists, ticketing, and financial settlements - without the spreadsheets.';
 
 type ProductLink = { href: string; label: string; aria: string; external?: boolean };
 type Product = { name: string; pill: string; desc: string; links: ProductLink[] };
@@ -13,7 +13,7 @@ const products: Product[] = [
   {
     name: 'Holocron',
     pill: 'Nightlife',
-    desc: 'Venue management SaaS for UK nightlife operators. Attendance, ticketing, incidents, guest lists, financial settlements, and compliance reporting - in one place.',
+    desc: 'Attendance, ticketing, incidents, guest lists, financial settlements, and compliance reporting - all in one place. Stop firefighting. Run your venue.',
     links: [
       { href: 'https://holocron.scot', label: 'Website', aria: 'Holocron website', external: true },
     ],
@@ -116,7 +116,7 @@ const orgSchema = {
     </div>
 
     <h1 class="hero-headline">
-      Compliance-first venue management for <span class="accent">UK nightlife operators.</span> Built in the Scottish Highlands.
+      Most venues run on spreadsheets and gut instinct. <span class="accent">There&rsquo;s a better way.</span>
     </h1>
     <a href="/vision" class="hero-link">Read vision <span aria-hidden="true">&rarr;</span></a>
   </header>
