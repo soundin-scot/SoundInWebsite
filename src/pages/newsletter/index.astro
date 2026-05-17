@@ -292,7 +292,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     if (!input || !status || !button) return;
 
     if (!input.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
-      status.textContent = 'That doesn’t look like an email. Try again?';
+      status.textContent = "That doesn't look like an email. Try again?";
       input.focus();
       return;
     }
@@ -303,7 +303,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
 
     // Replace with real endpoint when ready (Buttondown/Resend/HubSpot)
     await new Promise((resolve) => setTimeout(resolve, 900));
-    status.textContent = 'You’re on the list. We’ll be in touch.';
+    status.textContent = "You're on the list. We'll be in touch.";
     button.textContent = 'Subscribed';
     input.value = '';
   });

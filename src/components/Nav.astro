@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-type NavKey = 'vision' | 'agency' | 'ecosystem' | 'events' | 'newsletter' | 'contact' | null;
+type NavKey = 'vision' | 'ecosystem' | 'newsletter' | 'contact' | null;
 interface Props {
   current?: NavKey;
 }
@@ -8,9 +8,7 @@ const { current = null } = Astro.props;
 
 const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
   { key: 'vision', label: 'vision', href: '/vision' },
-  { key: 'agency', label: 'agency', href: '/agency' },
-  { key: 'ecosystem', label: 'ecosystem', href: '/ecosystem' },
-  { key: 'events', label: 'events', href: '/events' },
+  { key: 'ecosystem', label: 'products', href: '/ecosystem' },
   { key: 'newsletter', label: 'newsletter', href: '/newsletter' },
   { key: 'contact', label: 'contact', href: '/contact' },
 ];
