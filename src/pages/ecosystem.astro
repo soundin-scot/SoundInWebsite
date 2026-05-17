@@ -3,8 +3,8 @@ import Layout from '@/layouts/Layout.astro';
 import PageHeader from '@/components/PageHeader.astro';
 import RevealScript from '@/components/RevealScript.astro';
 
-const title = 'Ecosystem: SoundIn | Products We Build Ourselves';
-const description = 'Holocron is live. Three more in development. The SoundIn ecosystem is the software and tooling we own end-to-end and ship under our own name.';
+const title = 'Products: SoundIn | Software We Build and Own';
+const description = 'Holocron is live and in production with paying customers. SoundIn builds compliance-first software for the UK night time economy.';
 
 type Card = {
   id: string;
@@ -21,7 +21,7 @@ const cards: Card[] = [
     state: 'live',
     name: 'Holocron',
     pill: 'Live · Nightlife software',
-    desc: 'Venue management SaaS for nightlife, in production with paying customers. Attendance, ticketing, incidents, guest lists, settlements.',
+    desc: 'Compliance-first venue management for UK nightlife operators. Attendance, ticketing, incidents, guest lists, financial settlements - without the spreadsheets.',
     link: { href: 'https://holocron.scot', label: 'holocron.scot', external: true },
   },
   {
@@ -29,21 +29,14 @@ const cards: Card[] = [
     state: 'soon',
     name: 'Coming soon',
     pill: 'In development',
-    desc: 'Something we’ve been building quietly. You’ll hear about it when it’s ready.',
+    desc: "Something I've been building quietly. You'll hear about it when it's ready.",
   },
   {
     id: 'soon-02',
     state: 'soon',
     name: 'Coming soon',
     pill: 'In development',
-    desc: 'Something we’ve been building quietly. You’ll hear about it when it’s ready.',
-  },
-  {
-    id: 'soon-03',
-    state: 'soon',
-    name: 'Coming soon',
-    pill: 'In development',
-    desc: 'Something we’ve been building quietly. You’ll hear about it when it’s ready.',
+    desc: "Something I've been building quietly. You'll hear about it when it's ready.",
   },
 ];
 
@@ -68,19 +61,19 @@ const collectionSchema = {
   <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionSchema)} slot="head" />
 
   <PageHeader
-    label="ecosystem"
-    headline="Products we build"
-    accent="ourselves."
+    label="products"
+    headline="Software we build"
+    accent="and own."
   />
 
   <section class="section" id="ecosystem-list" tabindex="-1">
     <div class="section-head reveal">
       <span class="section-num">01 / the catalogue</span>
       <h2 class="section-headline">
-        One in production. <span class="accent">Three in the workshop.</span>
+        One in production. <span class="accent">More to come.</span>
       </h2>
       <p class="section-sub">
-        Each one started as a problem we couldn&rsquo;t buy a fix for. Holocron has paying customers; the rest are not announced because they&rsquo;re not ready.
+        Each product started as a problem I couldn&rsquo;t buy a fix for. Holocron has paying customers; the rest are not announced because they&rsquo;re not ready.
       </p>
     </div>
 
