@@ -6,12 +6,14 @@ const description = 'SoundIn is the company behind Holocron. One product, one fo
 
 const sections = [
   {
+    num: '01',
     heading: 'Our Mission',
     body: [
       "I started SoundIn because I believed there was a better way to run a nightclub than a pile of spreadsheets and WhatsApp groups. Holocron is the product I wish had existed when I was on the floor — one place for attendance, incidents, guest lists, ticketing, and settlements, built around how venues actually operate.",
     ],
   },
   {
+    num: '02',
     heading: 'Highland Roots',
     body: [
       "I built this from the Scottish Highlands because that's where I live. Not as a brand story, but as a fact that shapes how I see time, scope, and what good work actually means.",
@@ -19,6 +21,7 @@ const sections = [
     ],
   },
   {
+    num: '03',
     heading: 'Our Approach',
     body: [
       "Solo doesn't mean small. It means I have to be deliberate — deliberate about what goes in the product, deliberate about who I work with, deliberate about every hour spent.",
@@ -26,6 +29,7 @@ const sections = [
     ],
   },
   {
+    num: '04',
     heading: 'Values',
     body: [
       "Say what you mean. Charge what the work costs. Own your mistakes. Take on less so you can do more with it. Build things that outlast the brief. Care about the people on the other side of every contract, and about the communities they operate in.",
@@ -54,94 +58,107 @@ const aboutSchema = {
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(aboutSchema)} slot="head" />
 
-  <main class="essay" id="vision-content" tabindex="-1">
-    <header class="essay-head">
-      <h1>Mission &amp; Values</h1>
-    </header>
+  <div class="page-hero" id="vision-content" tabindex="-1">
+    <div class="page-hero-inner">
+      <span class="page-hero-kicker">vision</span>
+      <h1 class="page-hero-title">Mission &amp;<br />Values</h1>
+      <p class="page-hero-desc">One product. One founder. One standard of care — from the Scottish Highlands.</p>
+    </div>
+  </div>
 
-    <blockquote class="essay-lead">
+  <div class="vision-quote-band">
+    <blockquote class="vision-quote">
       <p>&ldquo;I&rsquo;d rather do fewer things properly than chase every brief that comes through the door.&rdquo;</p>
-      <cite>Cougar Macdougall, Founder, SoundIn</cite>
+      <cite>Cougar Macdougall &mdash; Founder, SoundIn</cite>
     </blockquote>
+  </div>
 
+  <div class="vision-body">
     {sections.map((s) => (
-      <div class="essay-section">
-        <h2>{s.heading}</h2>
-        <div class="essay-body">
+      <section class="vsec">
+        <header class="vsec-hd">
+          <span class="vsec-num">{s.num}</span>
+          <h2 class="vsec-title">{s.heading}</h2>
+        </header>
+        <div class="vsec-text">
           {s.body.map((p) => <p>{p}</p>)}
         </div>
-      </div>
+      </section>
     ))}
 
-    <div class="essay-close">
-      <p>Running a venue? <a href="/contact">Get in touch &rarr;</a></p>
+    <div class="vision-cta">
+      <p>Running a venue?</p>
+      <a href="/contact" class="cta-button">Get in touch <span aria-hidden="true">&rarr;</span></a>
     </div>
-  </main>
+  </div>
 </Layout>
 
 <style>
-  .essay {
-    max-width: 700px;
+  .vision-quote-band {
+    padding: 88px 64px 72px;
+    max-width: 960px;
     margin: 0 auto;
-    padding: 180px 32px 120px;
   }
 
-  .essay-head {
-    margin-bottom: 56px;
-  }
-
-  .essay-head h1 {
+  .vision-quote p {
     font-family: var(--font-serif);
     font-weight: 100;
     font-style: italic;
-    font-size: clamp(40px, 5vw, 64px);
-    line-height: 1.05;
+    font-size: clamp(26px, 3.8vw, 50px);
+    line-height: 1.2;
     color: var(--color-snow);
-  }
-
-  .essay-lead {
-    margin: 0 0 72px;
-    padding: 0 0 0 20px;
-    border-left: 2px solid var(--color-salmon);
-  }
-
-  .essay-lead p {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
-    font-size: clamp(19px, 2.4vw, 26px);
-    line-height: 1.45;
-    color: var(--color-snow);
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     text-wrap: balance;
   }
 
-  .essay-lead cite {
+  .vision-quote cite {
     font-family: var(--font-sans);
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--color-muted);
     font-style: normal;
   }
 
-  .essay-section {
-    padding: 48px 0;
+  .vision-body {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 64px 120px;
     border-top: 1px solid var(--color-ghost);
   }
 
-  .essay-section h2 {
+  .vsec {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--color-ghost);
+  }
+
+  .vsec-hd {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .vsec-num {
     font-family: var(--font-serif);
     font-weight: 100;
     font-style: italic;
-    font-size: clamp(22px, 2.8vw, 32px);
-    color: var(--color-snow);
-    margin-bottom: 20px;
-    line-height: 1.2;
+    font-size: 22px;
+    color: var(--color-salmon);
+    flex-shrink: 0;
   }
 
-  .essay-body p {
+  .vsec-title {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(28px, 3.5vw, 44px);
+    line-height: 1.1;
+    color: var(--color-snow);
+  }
+
+  .vsec-text p {
     font-family: var(--font-sans);
     font-size: 17px;
     line-height: 1.75;
@@ -149,35 +166,29 @@ const aboutSchema = {
     margin-bottom: 16px;
   }
 
-  .essay-body p:last-child { margin-bottom: 0; }
+  .vsec-text p:last-child { margin-bottom: 0; }
 
-  .essay-close {
-    padding: 48px 0;
-    border-top: 1px solid var(--color-ghost);
+  .vision-cta {
+    padding-top: 72px;
+    text-align: center;
   }
 
-  .essay-close p {
-    font-family: var(--font-sans);
-    font-size: 16px;
-    color: var(--color-muted);
+  .vision-cta p {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(20px, 2.5vw, 30px);
+    color: var(--color-snow);
+    margin-bottom: 28px;
   }
 
-  .essay-close a {
-    color: var(--color-salmon);
-    border-bottom: 1px solid rgba(255, 127, 107, 0.3);
-    transition: border-color 0.3s ease;
-  }
-
-  .essay-close a:hover { border-bottom-color: var(--color-salmon); }
-
-  .essay-close a:focus-visible {
-    outline: 2px solid var(--color-salmon);
-    outline-offset: 3px;
-    border-radius: 2px;
+  @media (max-width: 900px) {
+    .vision-quote-band { padding: 64px 24px 56px; }
+    .vision-body { padding: 0 24px 80px; }
   }
 
   @media (max-width: 600px) {
-    .essay { padding: 140px 24px 80px; }
-    .essay-lead { margin-bottom: 56px; }
+    .vsec { padding: 44px 0; }
+    .vsec-hd { gap: 14px; }
   }
 </style>

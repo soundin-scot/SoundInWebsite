@@ -42,15 +42,19 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(blogSchema)} slot="head" />
 
-  <main class="nl" id="newsletter-content" tabindex="-1">
-    <header class="nl-head">
-      <h1>Notes from<br />the Highlands</h1>
-      <p class="nl-sub">
-        Quiet, irregular dispatches from SoundIn — event announcements, product launches, and the occasional honest write-up. Sent when there&rsquo;s something worth your inbox.
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-hero-kicker">newsletter</span>
+      <h1 class="page-hero-title">Notes from<br />the Highlands</h1>
+      <p class="page-hero-desc">
+        Quiet, irregular dispatches — event announcements, product launches, and the occasional honest write-up. Sent when there&rsquo;s something worth your inbox.
       </p>
-    </header>
+    </div>
+  </div>
 
-    <div class="nl-signup" id="newsletter-signup" tabindex="-1">
+  <main class="nl-body">
+    <section class="nl-signup" id="newsletter-signup" tabindex="-1">
+      <h2 class="nl-signup-title">The announcement goes here first.</h2>
       <form id="signup-form" class="signup-form" novalidate>
         <label for="signup-email" class="sr-only">Email address</label>
         <div class="signup-row">
@@ -68,7 +72,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
         </div>
         <p id="signup-status" class="signup-status" role="status" aria-live="polite"></p>
       </form>
-    </div>
+    </section>
 
     {posts.length > 0 && (
       <section class="nl-archive">
@@ -98,37 +102,32 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
 </Layout>
 
 <style>
-  .nl {
-    max-width: 700px;
+  .nl-body {
+    max-width: 820px;
     margin: 0 auto;
-    padding: 180px 32px 120px;
-  }
-
-  .nl-head {
-    margin-bottom: 56px;
-  }
-
-  .nl-head h1 {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
-    font-size: clamp(40px, 5vw, 64px);
-    line-height: 1.1;
-    color: var(--color-snow);
-    margin-bottom: 24px;
-  }
-
-  .nl-sub {
-    font-family: var(--font-sans);
-    font-size: clamp(15px, 1.4vw, 17px);
-    line-height: 1.7;
-    color: var(--color-cream);
-    max-width: 520px;
+    padding: 80px 64px 120px;
   }
 
   /* Signup */
   .nl-signup {
+    padding-bottom: 72px;
+    border-bottom: 1px solid var(--color-ghost);
     margin-bottom: 72px;
+  }
+
+  .nl-signup-title {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(28px, 3.5vw, 44px);
+    line-height: 1.1;
+    color: var(--color-snow);
+    margin-bottom: 32px;
+    text-wrap: balance;
+  }
+
+  .signup-form {
+    max-width: 520px;
   }
 
   .signup-row {
@@ -166,18 +165,13 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
   }
 
   /* Archive */
-  .nl-archive {
-    border-top: 1px solid var(--color-ghost);
-    padding-top: 48px;
-  }
-
   .nl-archive-title {
     font-family: var(--font-serif);
     font-weight: 100;
     font-style: italic;
-    font-size: clamp(22px, 2.8vw, 32px);
+    font-size: clamp(24px, 3vw, 36px);
     color: var(--color-snow);
-    margin-bottom: 32px;
+    margin-bottom: 40px;
   }
 
   .archive-list {
@@ -192,7 +186,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     display: flex;
     gap: 24px;
     align-items: baseline;
-    padding: 32px 0;
+    padding: 36px 0;
     transition: padding-left 0.3s ease;
   }
 
@@ -216,7 +210,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     font-family: var(--font-serif);
     font-weight: 100;
     font-style: italic;
-    font-size: 20px;
+    font-size: 22px;
     color: var(--color-salmon);
   }
 
@@ -235,7 +229,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     font-family: var(--font-serif);
     font-weight: 100;
     font-style: italic;
-    font-size: clamp(20px, 2.2vw, 26px);
+    font-size: clamp(20px, 2.2vw, 28px);
     line-height: 1.2;
     color: var(--color-snow);
     margin-bottom: 6px;
@@ -261,8 +255,11 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
 
   .archive-link:hover .archive-cta { color: var(--color-salmon); }
 
+  @media (max-width: 900px) {
+    .nl-body { padding: 64px 24px 80px; }
+  }
+
   @media (max-width: 600px) {
-    .nl { padding: 140px 24px 80px; }
     .signup-row { flex-direction: column; }
     .archive-link { flex-wrap: wrap; gap: 12px; }
     .archive-meta { width: auto; flex-direction: row; align-items: baseline; gap: 12px; }

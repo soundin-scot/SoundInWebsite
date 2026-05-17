@@ -135,6 +135,75 @@
   }
 
   /* ============================================================
+     PAGE HERO — always dark, atmospheric, full-width
+  ============================================================ */
+  .page-hero {
+    position: relative;
+    z-index: 1;
+    padding: 200px 64px 88px;
+    overflow: hidden;
+    background: #24302c;
+    --color-snow: #e7dfd9;
+    --color-cream: rgba(231, 223, 217, 0.85);
+    --color-muted: rgba(231, 223, 217, 0.5);
+    --color-faint: rgba(231, 223, 217, 0.15);
+    --color-ghost: rgba(231, 223, 217, 0.1);
+  }
+
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 85% 80% at -5% 115%, rgba(255, 127, 107, 0.11) 0%, transparent 55%),
+      radial-gradient(ellipse 55% 55% at 110% -10%, rgba(144, 75, 144, 0.07) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .page-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .page-hero-kicker {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+
+  .page-hero-title {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(64px, 9vw, 108px);
+    line-height: 0.95;
+    color: var(--color-snow);
+    text-wrap: balance;
+    opacity: 0;
+    animation: enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+  }
+
+  .page-hero-desc {
+    font-family: var(--font-sans);
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.65;
+    color: var(--color-cream);
+    max-width: 480px;
+    margin-top: 28px;
+    opacity: 0;
+    animation: enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+  }
+
+  /* ============================================================
      PAGE HEADER (compact hero shared across subpages)
   ============================================================ */
   .page-header {
@@ -456,6 +525,7 @@
      RESPONSIVE
   ============================================================ */
   @media (max-width: 900px) {
+    .page-hero { padding: 160px 24px 64px; }
     .page-header { padding: 140px 24px 64px; }
     .section { padding: 80px 24px; }
     .practice-grid,

@@ -23,10 +23,16 @@ const contactSchema = {
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(contactSchema)} slot="head" />
 
-  <section class="contact">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-hero-kicker">contact</span>
+      <h1 class="page-hero-title">Tell me what<br />you&rsquo;re working on</h1>
+    </div>
+  </div>
+
+  <section class="contact" id="contact-form">
     <div>
-      <h1>Tell me what you&rsquo;re working on</h1>
-      <form id="contact-form">
+      <form id="contact-form-el">
         <div class="field-group">
           <label for="contact-name" class="field-label">Name</label>
           <input id="contact-name" name="name" class="contact-field" type="text" autocomplete="name" required />
@@ -72,22 +78,11 @@ const contactSchema = {
     z-index: 1;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 180px 32px 120px;
+    padding: 80px 64px 120px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: start;
-  }
-
-  .contact h1 {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
-    font-size: clamp(36px, 5vw, 56px);
-    line-height: 1.05;
-    color: var(--color-snow);
-    margin-bottom: 40px;
-    text-wrap: balance;
   }
 
   .field-group { margin-bottom: 0; }
@@ -160,7 +155,7 @@ const contactSchema = {
     box-shadow: none;
   }
 
-  .contact-right { padding-top: 80px; }
+  .contact-right { padding-top: 24px; }
 
   .contact-info-group { margin-bottom: 40px; }
 
@@ -197,13 +192,13 @@ const contactSchema = {
   }
 
   @media (max-width: 900px) {
-    .contact { grid-template-columns: 1fr; padding: 140px 24px 80px; gap: 48px; }
+    .contact { grid-template-columns: 1fr; padding: 64px 24px 80px; gap: 48px; }
     .contact-right { padding-top: 0; }
   }
 </style>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const form = document.getElementById('contact-form-el') as HTMLFormElement | null;
   const ta = document.getElementById('contact-message') as HTMLTextAreaElement | null;
 
   form?.addEventListener('submit', async (e) => {
