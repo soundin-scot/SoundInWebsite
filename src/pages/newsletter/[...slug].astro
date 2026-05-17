@@ -205,7 +205,7 @@ const blogPostSchema = {
   .post-body :global(hr) {
     border: none;
     height: 1px;
-    background: var(--color-ghost);
+    background: linear-gradient(to right, transparent, rgba(231, 223, 217, 0.13) 20%, rgba(144, 75, 144, 0.15) 50%, rgba(231, 223, 217, 0.13) 80%, transparent);
     margin: 48px 0;
   }
 
@@ -213,7 +213,8 @@ const blogPostSchema = {
   .post-footer {
     margin-top: 96px;
     padding-top: 64px;
-    border-top: 1px solid var(--color-ghost);
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 15%, rgba(144, 75, 144, 0.15) 50%, rgba(231, 223, 217, 0.12) 85%, transparent 100%) 1;
     text-align: center;
   }
 

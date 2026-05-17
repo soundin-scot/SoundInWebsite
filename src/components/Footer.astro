@@ -2,9 +2,8 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="footer relative z-[1] border-t border-[var(--color-ghost)] overflow-hidden">
-  <div class="footer-wordmark" aria-hidden="true">SoundIn</div>
-  <div class="footer-bar flex items-center justify-between px-16 pt-6 pb-10 max-[900px]:flex-wrap max-[900px]:gap-4 max-[900px]:px-6 max-[900px]:pb-8">
+<footer class="footer">
+  <div class="footer-bar flex items-center justify-between px-16 pt-10 pb-10 max-[900px]:flex-wrap max-[900px]:gap-4 max-[900px]:px-6 max-[900px]:pb-8">
     <span class="footer-bar-item">&copy; {year} SoundIn Limited</span>
     <div class="footer-bar-links flex gap-10 max-[600px]:gap-5">
       <a href="/contact" class="footer-bar-item">Say Hello</a>
@@ -24,16 +23,11 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
-  .footer-wordmark {
-    font-family: var(--font-sans);
-    font-weight: 900;
-    font-size: clamp(96px, 21vw, 320px);
-    text-align: center;
-    line-height: 0.85;
-    padding: 48px 0 0;
-    user-select: none;
-    pointer-events: none;
-    color: rgba(255, 127, 107, 0.05);
+  .footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 15%, rgba(144, 75, 144, 0.15) 50%, rgba(231, 223, 217, 0.12) 85%, transparent 100%) 1;
   }
 
   .footer-bar-item {

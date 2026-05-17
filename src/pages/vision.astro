@@ -96,6 +96,7 @@ const aboutSchema = {
     z-index: 1;
     padding: 160px 64px;
     text-align: center;
+    background: radial-gradient(ellipse 70% 60% at 20% 50%, rgba(144, 75, 144, 0.07) 0%, transparent 60%);
   }
 
   .pull-quote-text {
@@ -126,7 +127,7 @@ const aboutSchema = {
     height: 1px;
     border: none;
     margin: 0 64px;
-    background: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.08) 30%, rgba(255, 127, 107, 0.12) 50%, rgba(231, 223, 217, 0.08) 70%, transparent 100%);
+    background: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.08) 25%, rgba(144, 75, 144, 0.18) 50%, rgba(231, 223, 217, 0.08) 75%, transparent 100%);
   }
 
   .vision {
@@ -139,7 +140,8 @@ const aboutSchema = {
 
   .vision-section {
     padding: 64px 0;
-    border-top: 1px solid var(--color-ghost);
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 10%, rgba(231, 223, 217, 0.12) 90%, transparent 100%) 1;
   }
 
   .vision-num {
