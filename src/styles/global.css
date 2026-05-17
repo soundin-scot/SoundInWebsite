@@ -18,7 +18,7 @@
   --color-cream: rgba(231, 223, 217, 0.85);
   --color-muted: rgba(231, 223, 217, 0.5);
   --color-faint: rgba(231, 223, 217, 0.15);
-  --color-ghost: rgba(231, 223, 217, 0.06);
+  --color-ghost: rgba(231, 223, 217, 0.1);
 
   --font-sans: 'Lexend Deca', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-serif: 'Negara Serif', Georgia, serif;
@@ -36,7 +36,10 @@
   }
 
   body {
-    background: var(--color-scarab);
+    background-color: var(--color-scarab);
+    background-image:
+      radial-gradient(ellipse 100% 55% at 50% -5%, rgba(144, 75, 144, 0.1) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255, 127, 107, 0.05) 0%, transparent 55%);
     color: var(--color-snow);
     font-family: var(--font-sans);
     overflow-x: hidden;
@@ -47,7 +50,7 @@
   a, button, input, textarea, select { touch-action: manipulation; }
   a { color: inherit; text-decoration: none; }
 
-  [id] { scroll-margin-top: 96px; }
+  [id] { scroll-margin-top: 140px; }
 
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: smooth; }
@@ -132,7 +135,16 @@
     padding: 200px 64px 80px;
   }
 
+  .page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 127, 107, 0.09) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
   .page-header-inner {
+    position: relative;
     max-width: 1100px;
     margin: 0 auto;
     text-align: center;
@@ -218,8 +230,8 @@
   .practice-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--color-ghost);
+    gap: 1px;
+    background: rgba(231, 223, 217, 0.07);
   }
 
   .practice-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
@@ -227,11 +239,9 @@
 
   .practice-card {
     padding: 48px 36px 56px;
-    border-bottom: 1px solid var(--color-ghost);
-    border-right: 1px solid var(--color-ghost);
+    background: var(--color-scarab);
     display: flex;
     flex-direction: column;
-    transition: background 0.45s ease;
     position: relative;
   }
 
@@ -239,7 +249,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at top left, rgba(255, 127, 107, 0.06) 0%, transparent 60%);
+    background: radial-gradient(circle at top left, rgba(255, 127, 107, 0.07) 0%, transparent 60%);
     opacity: 0;
     transition: opacity 0.45s ease;
     pointer-events: none;
@@ -247,12 +257,6 @@
 
   .practice-card:hover::before,
   .practice-card:focus-within::before { opacity: 1; }
-
-  .practice-grid > .practice-card:nth-child(3n) { border-right: none; }
-  .practice-grid.cols-4 > .practice-card:nth-child(3n) { border-right: 1px solid var(--color-ghost); }
-  .practice-grid.cols-4 > .practice-card:nth-child(4n) { border-right: none; }
-  .practice-grid.cols-2 > .practice-card:nth-child(3n) { border-right: 1px solid var(--color-ghost); }
-  .practice-grid.cols-2 > .practice-card:nth-child(2n) { border-right: none; }
 
   .practice-card-head {
     display: flex;
@@ -441,11 +445,6 @@
     .practice-grid,
     .practice-grid.cols-4,
     .practice-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-    .practice-grid > .practice-card:nth-child(3n),
-    .practice-grid.cols-4 > .practice-card:nth-child(3n),
-    .practice-grid.cols-4 > .practice-card:nth-child(4n) { border-right: 1px solid var(--color-ghost); }
-    .practice-grid > .practice-card:nth-child(2n),
-    .practice-grid.cols-4 > .practice-card:nth-child(2n) { border-right: none; }
     .practice-card { padding: 36px 24px; }
     .cta-section { padding: 48px 24px 64px; }
     .cta-card { padding: 72px 32px; border-radius: 20px; }
@@ -455,7 +454,6 @@
     .practice-grid,
     .practice-grid.cols-4,
     .practice-grid.cols-2 { grid-template-columns: 1fr; }
-    .practice-grid > .practice-card { border-right: none !important; }
     .section-head { margin-bottom: 48px; }
     .cta-actions { flex-direction: column; gap: 16px; }
   }
