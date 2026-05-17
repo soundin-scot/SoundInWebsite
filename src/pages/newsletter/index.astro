@@ -113,7 +113,10 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
 </Layout>
 
 <style>
-  .signup-section { padding-top: 80px; }
+  .signup-section {
+    padding-top: 80px;
+    background: radial-gradient(ellipse 70% 80% at 100% 50%, rgba(144, 75, 144, 0.06) 0%, transparent 60%);
+  }
 
   .signup-card {
     max-width: 1280px;
@@ -191,11 +194,13 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     list-style: none;
     margin: 0;
     padding: 0;
-    border-top: 1px solid var(--color-ghost);
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 10%, rgba(231, 223, 217, 0.12) 90%, transparent 100%) 1;
   }
 
   .archive-item {
-    border-bottom: 1px solid var(--color-ghost);
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 10%, rgba(231, 223, 217, 0.12) 90%, transparent 100%) 1;
   }
 
   .archive-link {

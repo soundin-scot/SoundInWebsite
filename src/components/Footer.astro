@@ -2,7 +2,7 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="footer relative z-[1] border-t border-[var(--color-ghost)] overflow-hidden">
+<footer class="footer">
   <div class="footer-bar flex items-center justify-between px-16 pt-10 pb-10 max-[900px]:flex-wrap max-[900px]:gap-4 max-[900px]:px-6 max-[900px]:pb-8">
     <span class="footer-bar-item">&copy; {year} SoundIn Limited</span>
     <div class="footer-bar-links flex gap-10 max-[600px]:gap-5">
@@ -23,6 +23,13 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
+  .footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 15%, rgba(144, 75, 144, 0.15) 50%, rgba(231, 223, 217, 0.12) 85%, transparent 100%) 1;
+  }
+
   .footer-bar-item {
     font-family: var(--font-sans);
     font-size: 13px;
