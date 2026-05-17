@@ -202,11 +202,17 @@ const blogPostSchema = {
     padding: 2px 6px;
     border-radius: 4px;
   }
+  [data-theme="light"] .post-body :global(code) {
+    background: rgba(36, 48, 44, 0.08);
+  }
   .post-body :global(hr) {
     border: none;
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba(231, 223, 217, 0.13) 20%, rgba(144, 75, 144, 0.15) 50%, rgba(231, 223, 217, 0.13) 80%, transparent);
+    background: linear-gradient(to right, transparent, rgba(231, 223, 217, 0.13) 20%, rgba(231, 223, 217, 0.13) 80%, transparent);
     margin: 48px 0;
+  }
+  [data-theme="light"] .post-body :global(hr) {
+    background: linear-gradient(to right, transparent, rgba(36, 48, 44, 0.13) 20%, rgba(36, 48, 44, 0.13) 80%, transparent);
   }
 
   /* Footer CTA */
@@ -214,8 +220,12 @@ const blogPostSchema = {
     margin-top: 96px;
     padding-top: 64px;
     border-top: 1px solid transparent;
-    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 15%, rgba(144, 75, 144, 0.15) 50%, rgba(231, 223, 217, 0.12) 85%, transparent 100%) 1;
+    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 15%, rgba(231, 223, 217, 0.12) 85%, transparent 100%) 1;
     text-align: center;
+  }
+
+  [data-theme="light"] .post-footer {
+    border-image: linear-gradient(to right, transparent 0%, rgba(36, 48, 44, 0.12) 15%, rgba(36, 48, 44, 0.12) 85%, transparent 100%) 1;
   }
 
   .post-footer-headline {

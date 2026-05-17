@@ -23,7 +23,7 @@ const contactSchema = {
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(contactSchema)} slot="head" />
 
-  <section class="contact page-top">
+  <section class="contact">
     <div>
       <h1>Tell me what you&rsquo;re working on</h1>
       <form id="contact-form">
@@ -67,17 +67,16 @@ const contactSchema = {
 </Layout>
 
 <style>
-  .page-top { padding-top: 200px; }
-
   .contact {
     position: relative;
     z-index: 1;
-    padding: 160px 64px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 180px 32px 120px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
-    min-height: 100vh;
-    min-height: 100dvh;
+    align-items: start;
   }
 
   .contact h1 {
@@ -87,7 +86,7 @@ const contactSchema = {
     font-size: clamp(36px, 5vw, 56px);
     line-height: 1.05;
     color: var(--color-snow);
-    margin-bottom: 48px;
+    margin-bottom: 40px;
     text-wrap: balance;
   }
 
@@ -121,6 +120,7 @@ const contactSchema = {
 
   textarea.contact-field { resize: none; }
   .contact-field::placeholder { color: rgba(231, 223, 217, 0.3); }
+  [data-theme="light"] .contact-field::placeholder { color: rgba(36, 48, 44, 0.3); }
 
   .contact-field:focus-visible {
     border-color: var(--color-salmon);
@@ -197,9 +197,8 @@ const contactSchema = {
   }
 
   @media (max-width: 900px) {
-    .contact { grid-template-columns: 1fr; padding: 100px 24px; gap: 48px; }
+    .contact { grid-template-columns: 1fr; padding: 140px 24px 80px; gap: 48px; }
     .contact-right { padding-top: 0; }
-    .page-top { padding-top: 140px; }
   }
 </style>
 

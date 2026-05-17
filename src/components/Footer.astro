@@ -27,7 +27,11 @@ const year = new Date().getFullYear();
     position: relative;
     z-index: 1;
     border-top: 1px solid transparent;
-    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 15%, rgba(144, 75, 144, 0.15) 50%, rgba(231, 223, 217, 0.12) 85%, transparent 100%) 1;
+    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 15%, rgba(231, 223, 217, 0.12) 85%, transparent 100%) 1;
+  }
+
+  [data-theme="light"] .footer {
+    border-image: linear-gradient(to right, transparent 0%, rgba(36, 48, 44, 0.12) 15%, rgba(36, 48, 44, 0.12) 85%, transparent 100%) 1;
   }
 
   .footer-bar-item {

@@ -35,11 +35,19 @@
     color-scheme: dark;
   }
 
+  [data-theme="light"] {
+    color-scheme: light;
+    --color-scarab: #e7dfd9;
+    --color-snow: #24302c;
+    --color-cream: rgba(36, 48, 44, 0.8);
+    --color-muted: rgba(36, 48, 44, 0.5);
+    --color-faint: rgba(36, 48, 44, 0.15);
+    --color-ghost: rgba(36, 48, 44, 0.08);
+  }
+
   body {
     background-color: var(--color-scarab);
-    background-image:
-      radial-gradient(ellipse 100% 55% at 50% -5%, rgba(144, 75, 144, 0.1) 0%, transparent 65%),
-      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255, 127, 107, 0.05) 0%, transparent 55%);
+    background-image: radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255, 127, 107, 0.04) 0%, transparent 55%);
     color: var(--color-snow);
     font-family: var(--font-sans);
     overflow-x: hidden;
@@ -234,6 +242,10 @@
     background: rgba(231, 223, 217, 0.07);
   }
 
+  [data-theme="light"] .practice-grid {
+    background: rgba(36, 48, 44, 0.07);
+  }
+
   .practice-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
   .practice-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
 
@@ -350,6 +362,10 @@
     background: linear-gradient(180deg, rgba(255, 127, 107, 0.04) 0%, rgba(0, 0, 0, 0.2) 100%);
     text-align: center;
     overflow: hidden;
+  }
+
+  [data-theme="light"] .cta-card {
+    background: linear-gradient(180deg, rgba(255, 127, 107, 0.04) 0%, rgba(36, 48, 44, 0.03) 100%);
   }
 
   .cta-card::after {

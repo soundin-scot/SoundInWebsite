@@ -63,7 +63,7 @@ const sections = [
   current={null}
   skipLink={{ href: '#privacy-content', label: 'Skip to content' }}
 >
-  <section class="vision page-top" id="privacy-content" tabindex="-1">
+  <section class="vision" id="privacy-content" tabindex="-1">
     <header class="privacy-header">
       <h1 class="privacy-title">Privacy Notice</h1>
       <p class="privacy-meta">Last updated {lastUpdated}</p>
@@ -84,13 +84,11 @@ const sections = [
 </Layout>
 
 <style>
-  .page-top { padding-top: 200px; }
-
   .vision {
     position: relative;
     z-index: 1;
-    padding: 160px 64px;
-    max-width: 900px;
+    padding: 180px 32px 120px;
+    max-width: 700px;
     margin: 0 auto;
   }
 
@@ -119,6 +117,10 @@ const sections = [
     padding: 48px 0;
     border-top: 1px solid transparent;
     border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 10%, rgba(231, 223, 217, 0.12) 90%, transparent 100%) 1;
+  }
+
+  [data-theme="light"] .vision-section {
+    border-image: linear-gradient(to right, transparent 0%, rgba(36, 48, 44, 0.12) 10%, rgba(36, 48, 44, 0.12) 90%, transparent 100%) 1;
   }
 
   .vision-header {
@@ -154,8 +156,7 @@ const sections = [
   .vision-body p { margin-bottom: 16px; }
   .vision-body p:last-child { margin-bottom: 0; }
 
-  @media (max-width: 900px) {
-    .vision { padding: 100px 24px; }
-    .page-top { padding-top: 140px; }
+  @media (max-width: 600px) {
+    .vision { padding: 140px 24px 80px; }
   }
 </style>

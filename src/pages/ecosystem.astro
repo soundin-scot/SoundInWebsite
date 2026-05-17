@@ -1,44 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import PageHeader from '@/components/PageHeader.astro';
-import RevealScript from '@/components/RevealScript.astro';
 
 const title = 'Products: SoundIn | Software We Build and Own';
-const description = 'Holocron is live and in production with paying customers. SoundIn builds compliance-first software for the UK night time economy.';
-
-type Card = {
-  id: string;
-  state: 'live' | 'soon';
-  name: string;
-  pill: string;
-  desc: string;
-  link?: { href: string; label: string; external?: boolean };
-};
-
-const cards: Card[] = [
-  {
-    id: 'holocron',
-    state: 'live',
-    name: 'Holocron',
-    pill: 'Live · Nightlife software',
-    desc: 'Compliance-first venue management for UK nightlife operators. Attendance, ticketing, incidents, guest lists, financial settlements - without the spreadsheets.',
-    link: { href: 'https://holocron.scot', label: 'holocron.scot', external: true },
-  },
-  {
-    id: 'soon-01',
-    state: 'soon',
-    name: 'Coming soon',
-    pill: 'In development',
-    desc: "Something I've been building quietly. You'll hear about it when it's ready.",
-  },
-  {
-    id: 'soon-02',
-    state: 'soon',
-    name: 'Coming soon',
-    pill: 'In development',
-    desc: "Something I've been building quietly. You'll hear about it when it's ready.",
-  },
-];
+const description = 'Holocron is live and in production with paying customers. Compliance-first venue management for UK nightlife operators.';
 
 const collectionSchema = {
   '@context': 'https://schema.org',
@@ -56,74 +20,154 @@ const collectionSchema = {
   description={description}
   canonical="https://soundin.scot/ecosystem"
   current="ecosystem"
-  skipLink={{ href: '#ecosystem-list', label: 'Skip to products' }}
+  skipLink={{ href: '#ecosystem-content', label: 'Skip to products' }}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionSchema)} slot="head" />
 
-  <PageHeader
-    label="products"
-    headline="Software we build"
-    accent="and own."
-  />
+  <main class="eco" id="ecosystem-content" tabindex="-1">
+    <header class="eco-head">
+      <h1>Products</h1>
+      <p class="eco-intro">What we build and own.</p>
+    </header>
 
-  <section class="section" id="ecosystem-list" tabindex="-1">
-    <div class="section-head reveal">
-      <span class="section-num">01 / the catalogue</span>
-      <h2 class="section-headline">
-        One in production. <span class="accent">More to come.</span>
-      </h2>
-      <p class="section-sub">
-        Each product started as a problem I couldn&rsquo;t buy a fix for. Holocron has paying customers; the rest are not announced because they&rsquo;re not ready.
-      </p>
-    </div>
-
-    <div class="practice-grid cols-2 reveal">
-      {cards.map((c) => (
-        <article id={c.id} class={`practice-card practice-product ${c.state === 'soon' ? 'card-soon' : ''}`}>
-          <div class="practice-card-head">
-            <span class="practice-name">{c.name}</span>
-            <span class="practice-pill">{c.pill}</span>
-          </div>
-          <p class="practice-desc">{c.desc}</p>
-          {c.link ? (
-            <a
-              class="practice-link"
-              href={c.link.href}
-              rel={c.link.external ? 'noopener noreferrer' : undefined}
-              target={c.link.external ? '_blank' : undefined}
-            >
-              {c.link.label} <span aria-hidden="true">{c.link.external ? '↗' : '→'}</span>
-            </a>
-          ) : (
-            <a class="practice-link" href="/newsletter">
-              Hear about it first <span aria-hidden="true">→</span>
-            </a>
-          )}
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="section cta-section">
-    <div class="cta-card reveal">
-      <span class="section-num">02 / get the next one early</span>
-      <h2 class="cta-headline">The next announcement goes to the newsletter first.</h2>
-      <p class="cta-sub">The newsletter goes out when something new is ready, not on a schedule. Quiet, and only the things worth your inbox.</p>
-      <div class="cta-actions">
-        <a href="/newsletter" class="cta-button">Subscribe to the newsletter <span aria-hidden="true">→</span></a>
-        <a href="/contact" class="cta-secondary">or build something with us</a>
+    <article class="product" id="holocron">
+      <div class="product-top">
+        <h2 class="product-name">Holocron</h2>
+        <span class="product-status">Live</span>
       </div>
-    </div>
-  </section>
+      <p class="product-desc">
+        Compliance-first venue management for UK nightlife operators. Attendance, ticketing, incidents, guest lists, financial settlements&nbsp;&mdash; without the spreadsheets.
+      </p>
+      <a
+        href="https://holocron.scot"
+        rel="noopener noreferrer"
+        target="_blank"
+        class="product-link"
+      >
+        Visit holocron.scot <span aria-hidden="true">↗</span>
+      </a>
+    </article>
 
-  <RevealScript />
+    <div class="eco-pipeline">
+      <p>More products are in development. Announcements go to the newsletter first&nbsp;&mdash; not a press release, not a Product Hunt post.</p>
+      <a href="/newsletter" class="cta-button">Subscribe <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </main>
 </Layout>
 
 <style>
-  .card-soon .practice-name {
-    color: rgba(255, 127, 107, 0.4);
+  .eco {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 180px 32px 120px;
   }
-  .card-soon .practice-desc {
+
+  .eco-head {
+    margin-bottom: 72px;
+  }
+
+  .eco-head h1 {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.05;
+    color: var(--color-snow);
+    margin-bottom: 12px;
+  }
+
+  .eco-intro {
+    font-family: var(--font-sans);
+    font-size: 16px;
     color: var(--color-muted);
+  }
+
+  /* Product */
+  .product {
+    padding: 48px 0;
+    border-top: 1px solid var(--color-ghost);
+  }
+
+  .product-top {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .product-name {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(28px, 4vw, 44px);
+    color: var(--color-salmon);
+    line-height: 1.1;
+  }
+
+  .product-status {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    border: 1px solid var(--color-faint);
+    border-radius: 999px;
+    padding: 3px 8px;
+  }
+
+  .product-desc {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--color-cream);
+    margin-bottom: 28px;
+    max-width: 560px;
+  }
+
+  .product-link {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-snow);
+    border-bottom: 1px solid var(--color-faint);
+    padding-bottom: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s ease, border-color 0.3s ease, gap 0.3s ease;
+  }
+
+  .product-link:hover {
+    color: var(--color-salmon);
+    border-bottom-color: var(--color-salmon);
+    gap: 10px;
+  }
+
+  .product-link:focus-visible {
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* Pipeline CTA */
+  .eco-pipeline {
+    padding: 48px 0;
+    border-top: 1px solid var(--color-ghost);
+  }
+
+  .eco-pipeline p {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin-bottom: 28px;
+    max-width: 480px;
+  }
+
+  @media (max-width: 600px) {
+    .eco { padding: 140px 24px 80px; }
+    .product-name { font-size: clamp(26px, 8vw, 36px); }
   }
 </style>

@@ -1,11 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import PageHeader from '@/components/PageHeader.astro';
-import RevealScript from '@/components/RevealScript.astro';
 import { getCollection } from 'astro:content';
 
 const title = 'Newsletter: SoundIn | Notes from the Highlands';
-const description = 'Quiet, irregular notes on building software, hosting events, and running a small agency from the Scottish Highlands. Subscribe or browse the archive.';
+const description = 'Quiet, irregular notes on building software, hosting events, and running a small company from the Scottish Highlands. Subscribe or browse the archive.';
 
 const posts = (await getCollection('newsletter')).sort(
   (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
@@ -44,138 +42,119 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(blogSchema)} slot="head" />
 
-  <PageHeader
-    label="newsletter"
-    headline="Quiet notes from"
-    accent="the Highlands."
-  />
+  <main class="nl" id="newsletter-content" tabindex="-1">
+    <header class="nl-head">
+      <h1>Notes from<br />the Highlands</h1>
+      <p class="nl-sub">
+        Quiet, irregular dispatches from SoundIn — event announcements, product launches, and the occasional honest write-up. Sent when there&rsquo;s something worth your inbox.
+      </p>
+    </header>
 
-  <section class="section signup-section" id="newsletter-signup" tabindex="-1">
-    <div class="signup-card reveal">
-      <div class="signup-text">
-        <span class="section-num">01 / subscribe</span>
-        <h2 class="section-headline">
-          The announcement <span class="accent">goes here first.</span>
-        </h2>
-        <p class="section-sub">
-          Event announcements, product launches, and the occasional honest write-up. Sent only when there&rsquo;s something worth your inbox.
-        </p>
-      </div>
+    <div class="nl-signup" id="newsletter-signup" tabindex="-1">
       <form id="signup-form" class="signup-form" novalidate>
         <label for="signup-email" class="sr-only">Email address</label>
-        <input
-          id="signup-email"
-          name="email"
-          type="email"
-          class="signup-input"
-          placeholder="you@example.com"
-          autocomplete="email"
-          spellcheck="false"
-          required
-        />
-        <button type="submit" class="cta-button">Subscribe <span aria-hidden="true">→</span></button>
+        <div class="signup-row">
+          <input
+            id="signup-email"
+            name="email"
+            type="email"
+            class="signup-input"
+            placeholder="you@example.com"
+            autocomplete="email"
+            spellcheck="false"
+            required
+          />
+          <button type="submit" class="cta-button">Subscribe <span aria-hidden="true">→</span></button>
+        </div>
         <p id="signup-status" class="signup-status" role="status" aria-live="polite"></p>
       </form>
     </div>
-  </section>
 
-  <section class="section archive-section">
-    <div class="section-head reveal">
-      <span class="section-num">02 / archive</span>
-      <h2 class="section-headline">
-        Past issues. <span class="accent">All of them.</span>
-      </h2>
-      <p class="section-sub">
-        Indexed by issue number, oldest at the bottom. Each one stays online forever. No link rot.
-      </p>
-    </div>
-
-    <ol class="archive-list reveal" reversed>
-      {posts.map((p) => (
-        <li class="archive-item">
-          <a href={`/newsletter/${p.id}`} class="archive-link">
-            <div class="archive-meta">
-              <span class="archive-issue">№ {String(p.data.issue).padStart(2, '0')}</span>
-              <time datetime={p.data.publishedAt.toISOString()} class="archive-date">
-                {dateFmt.format(p.data.publishedAt)}
-              </time>
-            </div>
-            <h3 class="archive-title">{p.data.title}</h3>
-            <p class="archive-summary">{p.data.summary}</p>
-            <span class="archive-cta">Read the issue <span aria-hidden="true">→</span></span>
-          </a>
-        </li>
-      ))}
-    </ol>
-  </section>
-
-  <RevealScript />
+    {posts.length > 0 && (
+      <section class="nl-archive">
+        <h2 class="nl-archive-title">Archive</h2>
+        <ol class="archive-list" reversed>
+          {posts.map((p) => (
+            <li class="archive-item">
+              <a href={`/newsletter/${p.id}`} class="archive-link">
+                <div class="archive-meta">
+                  <span class="archive-issue">№ {String(p.data.issue).padStart(2, '0')}</span>
+                  <time datetime={p.data.publishedAt.toISOString()} class="archive-date">
+                    {dateFmt.format(p.data.publishedAt)}
+                  </time>
+                </div>
+                <div class="archive-text">
+                  <h3 class="archive-title">{p.data.title}</h3>
+                  <p class="archive-summary">{p.data.summary}</p>
+                </div>
+                <span class="archive-cta" aria-hidden="true">Read →</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+  </main>
 </Layout>
 
 <style>
-  .signup-section {
-    padding-top: 80px;
-    background: radial-gradient(ellipse 70% 80% at 100% 50%, rgba(144, 75, 144, 0.06) 0%, transparent 60%);
-  }
-
-  .signup-card {
-    max-width: 1280px;
+  .nl {
+    max-width: 700px;
     margin: 0 auto;
-    padding: 80px 64px;
-    border: 1px solid var(--color-ghost);
-    border-radius: 24px;
-    background: linear-gradient(180deg, rgba(255, 127, 107, 0.04) 0%, rgba(0, 0, 0, 0.2) 100%);
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 64px;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+    padding: 180px 32px 120px;
   }
 
-  .signup-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at top right, rgba(255, 127, 107, 0.10) 0%, transparent 60%);
-    pointer-events: none;
+  .nl-head {
+    margin-bottom: 56px;
   }
 
-  .signup-card > * { position: relative; z-index: 1; }
+  .nl-head h1 {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.1;
+    color: var(--color-snow);
+    margin-bottom: 24px;
+  }
 
-  .signup-text .section-num { margin-bottom: 24px; }
-  .signup-text .section-headline { margin-bottom: 16px; font-size: clamp(32px, 4vw, 48px); }
-  .signup-text .section-sub { max-width: 480px; }
+  .nl-sub {
+    font-family: var(--font-sans);
+    font-size: clamp(15px, 1.4vw, 17px);
+    line-height: 1.7;
+    color: var(--color-cream);
+    max-width: 520px;
+  }
 
-  .signup-form {
+  /* Signup */
+  .nl-signup {
+    margin-bottom: 72px;
+  }
+
+  .signup-row {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     align-items: stretch;
   }
 
   .signup-input {
-    background: rgba(0, 0, 0, 0.25);
+    flex: 1;
+    background: var(--color-ghost);
     border: 1px solid var(--color-faint);
     border-radius: 999px;
-    padding: 16px 24px;
+    padding: 14px 20px;
     font-family: var(--font-sans);
     font-size: 15px;
     color: var(--color-snow);
     transition: border-color 0.3s ease, background 0.3s ease;
+    min-width: 0;
   }
 
-  .signup-input::placeholder { color: rgba(231, 223, 217, 0.4); }
+  .signup-input::placeholder { color: var(--color-muted); }
 
   .signup-input:focus {
     outline: none;
     border-color: var(--color-salmon);
-    background: rgba(0, 0, 0, 0.4);
-  }
-
-  .signup-form .cta-button {
-    width: 100%;
-    justify-content: center;
   }
 
   .signup-status {
@@ -183,36 +162,42 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     font-size: 13px;
     color: var(--color-muted);
     min-height: 18px;
-    text-align: center;
-    margin: 0;
+    margin-top: 12px;
   }
 
   /* Archive */
-  .archive-section { padding-top: 80px; }
+  .nl-archive {
+    border-top: 1px solid var(--color-ghost);
+    padding-top: 48px;
+  }
+
+  .nl-archive-title {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(22px, 2.8vw, 32px);
+    color: var(--color-snow);
+    margin-bottom: 32px;
+  }
 
   .archive-list {
     list-style: none;
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid transparent;
-    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 10%, rgba(231, 223, 217, 0.12) 90%, transparent 100%) 1;
   }
 
   .archive-item {
-    border-bottom: 1px solid transparent;
-    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 10%, rgba(231, 223, 217, 0.12) 90%, transparent 100%) 1;
+    border-top: 1px solid var(--color-ghost);
   }
 
   .archive-link {
-    display: grid;
-    grid-template-columns: 200px 1fr auto;
-    gap: 32px;
+    display: flex;
+    gap: 24px;
     align-items: baseline;
-    padding: 40px 0;
-    transition: padding 0.3s ease;
+    padding: 32px 0;
+    transition: padding-left 0.3s ease;
   }
 
-  .archive-link:hover { padding-left: 16px; }
+  .archive-link:hover { padding-left: 8px; }
+
   .archive-link:focus-visible {
     outline: 2px solid var(--color-salmon);
     outline-offset: 4px;
@@ -220,6 +205,8 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
   }
 
   .archive-meta {
+    flex-shrink: 0;
+    width: 140px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -229,27 +216,29 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     font-family: var(--font-serif);
     font-weight: 100;
     font-style: italic;
-    font-size: 22px;
+    font-size: 20px;
     color: var(--color-salmon);
   }
 
   .archive-date {
     font-family: var(--font-sans);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-muted);
   }
+
+  .archive-text { flex: 1; }
 
   .archive-title {
     font-family: var(--font-serif);
     font-weight: 100;
     font-style: italic;
-    font-size: clamp(24px, 2.4vw, 32px);
+    font-size: clamp(20px, 2.2vw, 26px);
     line-height: 1.2;
     color: var(--color-snow);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     text-wrap: balance;
   }
 
@@ -257,32 +246,27 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     font-family: var(--font-sans);
     font-size: 14px;
     line-height: 1.6;
-    color: var(--color-cream);
-    max-width: 540px;
+    color: var(--color-muted);
   }
 
   .archive-cta {
     font-family: var(--font-sans);
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
     color: var(--color-muted);
+    flex-shrink: 0;
     align-self: center;
-    transition: color 0.3s ease, gap 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    transition: color 0.3s ease;
   }
 
-  .archive-link:hover .archive-cta { color: var(--color-salmon); gap: 10px; }
+  .archive-link:hover .archive-cta { color: var(--color-salmon); }
 
-  @media (max-width: 900px) {
-    .signup-card { grid-template-columns: 1fr; padding: 56px 32px; gap: 32px; }
-    .archive-link { grid-template-columns: 1fr; gap: 8px; padding: 32px 0; }
-    .archive-link:hover { padding-left: 0; }
-    .archive-meta { flex-direction: row; align-items: baseline; gap: 16px; }
-    .archive-cta { margin-top: 8px; }
+  @media (max-width: 600px) {
+    .nl { padding: 140px 24px 80px; }
+    .signup-row { flex-direction: column; }
+    .archive-link { flex-wrap: wrap; gap: 12px; }
+    .archive-meta { width: auto; flex-direction: row; align-items: baseline; gap: 12px; }
+    .archive-cta { display: none; }
   }
 </style>
 
@@ -306,7 +290,6 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     button.disabled = true;
     status.textContent = '';
 
-    // Replace with real endpoint when ready (Buttondown/Resend/HubSpot)
     await new Promise((resolve) => setTimeout(resolve, 900));
     status.textContent = "You're on the list. We'll be in touch.";
     button.textContent = 'Subscribed';

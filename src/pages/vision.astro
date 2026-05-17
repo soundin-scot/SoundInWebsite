@@ -1,20 +1,17 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import RevealScript from '@/components/RevealScript.astro';
 
 const title = 'Our Mission & Values: SoundIn';
-const description = 'SoundIn is the company behind Holocron. One product, one founder, one standard of care - from the Scottish Highlands.';
+const description = 'SoundIn is the company behind Holocron. One product, one founder, one standard of care — from the Scottish Highlands.';
 
 const sections = [
   {
-    num: '01',
     heading: 'Our Mission',
     body: [
-      "I started SoundIn because I believed there was a better way to run a nightclub than a pile of spreadsheets and WhatsApp groups. Holocron is the product I wish had existed when I was on the floor - one place for attendance, incidents, guest lists, ticketing, and settlements, built around how venues actually operate.",
+      "I started SoundIn because I believed there was a better way to run a nightclub than a pile of spreadsheets and WhatsApp groups. Holocron is the product I wish had existed when I was on the floor — one place for attendance, incidents, guest lists, ticketing, and settlements, built around how venues actually operate.",
     ],
   },
   {
-    num: '02',
     heading: 'Highland Roots',
     body: [
       "I built this from the Scottish Highlands because that's where I live. Not as a brand story, but as a fact that shapes how I see time, scope, and what good work actually means.",
@@ -22,15 +19,13 @@ const sections = [
     ],
   },
   {
-    num: '03',
     heading: 'Our Approach',
     body: [
-      "Solo doesn't mean small. It means I have to be deliberate - deliberate about what goes in the product, deliberate about who I work with, deliberate about every hour spent.",
-      "The compliance moat that makes Holocron defensible isn't a feature list. It's a perspective on what nightlife operators actually need - and that perspective comes from being closer to the problem than anyone building from a desk in London.",
+      "Solo doesn't mean small. It means I have to be deliberate — deliberate about what goes in the product, deliberate about who I work with, deliberate about every hour spent.",
+      "The compliance moat that makes Holocron defensible isn't a feature list. It's a perspective on what nightlife operators actually need — and that perspective comes from being closer to the problem than anyone building from a desk in London.",
     ],
   },
   {
-    num: '04',
     heading: 'Values',
     body: [
       "Say what you mean. Charge what the work costs. Own your mistakes. Take on less so you can do more with it. Build things that outlast the brief. Care about the people on the other side of every contract, and about the communities they operate in.",
@@ -44,7 +39,7 @@ const aboutSchema = {
   '@type': 'AboutPage',
   '@id': 'https://soundin.scot/vision#webpage',
   url: 'https://soundin.scot/vision',
-  name: 'Our Mission & Values: SoundIn',
+  name: title,
   description,
   isPartOf: { '@id': 'https://soundin.scot/#organization' },
 };
@@ -59,171 +54,130 @@ const aboutSchema = {
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(aboutSchema)} slot="head" />
 
-  <blockquote class="pull-quote page-top" style="overflow: hidden;">
-    <p class="pull-quote-text">&ldquo;I&rsquo;d rather do fewer things properly than chase every brief that comes through the door.&rdquo;</p>
-    <cite class="pull-quote-attr">Cougar Macdougall, Founder, SoundIn</cite>
-  </blockquote>
+  <main class="essay" id="vision-content" tabindex="-1">
+    <header class="essay-head">
+      <h1>Mission &amp; Values</h1>
+    </header>
 
-  <hr class="section-divider" aria-hidden="true" />
-
-  <section class="vision" id="vision-content" tabindex="-1">
-    <h1 class="sr-only">Our Mission, Values & Approach</h1>
+    <blockquote class="essay-lead">
+      <p>&ldquo;I&rsquo;d rather do fewer things properly than chase every brief that comes through the door.&rdquo;</p>
+      <cite>Cougar Macdougall, Founder, SoundIn</cite>
+    </blockquote>
 
     {sections.map((s) => (
-      <div class="vision-section reveal">
-        <span class="vision-num">{s.num} / {s.heading.toLowerCase()}</span>
-        <h2 class="vision-heading">{s.heading}</h2>
-        <div class="vision-body">
+      <div class="essay-section">
+        <h2>{s.heading}</h2>
+        <div class="essay-body">
           {s.body.map((p) => <p>{p}</p>)}
         </div>
       </div>
     ))}
 
-    <div class="vision-section reveal vision-cta">
-      <h2 class="vision-cta-headline">Running a venue? We&rsquo;d like to hear from you.</h2>
-      <a href="/contact" class="cta-button">Get in touch <span aria-hidden="true">&rarr;</span></a>
+    <div class="essay-close">
+      <p>Running a venue? <a href="/contact">Get in touch &rarr;</a></p>
     </div>
-  </section>
-
-  <RevealScript />
+  </main>
 </Layout>
 
 <style>
-  .page-top { padding-top: 200px; }
-
-  .pull-quote {
-    position: relative;
-    z-index: 1;
-    padding: 160px 64px;
-    text-align: center;
-    background: radial-gradient(ellipse 70% 60% at 20% 50%, rgba(144, 75, 144, 0.07) 0%, transparent 60%);
+  .essay {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 180px 32px 120px;
   }
 
-  .pull-quote-text {
+  .essay-head {
+    margin-bottom: 56px;
+  }
+
+  .essay-head h1 {
     font-family: var(--font-serif);
     font-weight: 100;
     font-style: italic;
-    font-size: clamp(32px, 5vw, 64px);
-    line-height: 1.2;
-    color: rgba(231, 223, 217, 0.55);
-    max-width: 900px;
-    margin: 0 auto 24px;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.05;
+    color: var(--color-snow);
+  }
+
+  .essay-lead {
+    margin: 0 0 72px;
+    padding: 0 0 0 20px;
+    border-left: 2px solid var(--color-salmon);
+  }
+
+  .essay-lead p {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(19px, 2.4vw, 26px);
+    line-height: 1.45;
+    color: var(--color-snow);
+    margin-bottom: 10px;
     text-wrap: balance;
   }
 
-  .pull-quote-attr {
+  .essay-lead cite {
     font-family: var(--font-sans);
     font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 0.2em;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--color-muted);
     font-style: normal;
   }
 
-  .section-divider {
-    position: relative;
-    z-index: 1;
-    height: 1px;
-    border: none;
-    margin: 0 64px;
-    background: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.08) 25%, rgba(144, 75, 144, 0.18) 50%, rgba(231, 223, 217, 0.08) 75%, transparent 100%);
+  .essay-section {
+    padding: 48px 0;
+    border-top: 1px solid var(--color-ghost);
   }
 
-  .vision {
-    position: relative;
-    z-index: 1;
-    padding: 160px 64px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .vision-section {
-    padding: 64px 0;
-    border-top: 1px solid transparent;
-    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 10%, rgba(231, 223, 217, 0.12) 90%, transparent 100%) 1;
-  }
-
-  .vision-num {
-    display: inline-block;
-    font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: lowercase;
-    color: var(--color-muted);
-    margin-bottom: 24px;
-  }
-
-  .vision-heading {
+  .essay-section h2 {
     font-family: var(--font-serif);
     font-weight: 100;
     font-style: italic;
-    font-size: clamp(32px, 4.5vw, 56px);
-    line-height: 1.05;
+    font-size: clamp(22px, 2.8vw, 32px);
     color: var(--color-snow);
-    margin-bottom: 32px;
-    text-wrap: balance;
+    margin-bottom: 20px;
+    line-height: 1.2;
   }
 
-  .vision-body {
+  .essay-body p {
     font-family: var(--font-sans);
-    font-size: clamp(16px, 1.4vw, 18px);
-    font-weight: 400;
-    line-height: 1.7;
+    font-size: 17px;
+    line-height: 1.75;
     color: var(--color-cream);
+    margin-bottom: 16px;
   }
 
-  .vision-body p { margin-bottom: 20px; }
-  .vision-body p:last-child { margin-bottom: 0; }
+  .essay-body p:last-child { margin-bottom: 0; }
 
-  .vision-cta {
-    border-top: none;
-    text-align: center;
-    padding: 96px 0 0;
+  .essay-close {
+    padding: 48px 0;
+    border-top: 1px solid var(--color-ghost);
   }
 
-  .vision-cta-headline {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
-    font-size: clamp(32px, 4vw, 48px);
-    line-height: 1.1;
-    color: var(--color-snow);
-    margin-bottom: 32px;
-    text-wrap: balance;
-  }
-
-  .cta-button {
+  .essay-close p {
     font-family: var(--font-sans);
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--color-scarab);
-    background: var(--color-salmon);
-    padding: 16px 32px;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, gap 0.3s ease;
+    font-size: 16px;
+    color: var(--color-muted);
   }
 
-  .cta-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(255, 127, 107, 0.3);
-    gap: 12px;
+  .essay-close a {
+    color: var(--color-salmon);
+    border-bottom: 1px solid rgba(255, 127, 107, 0.3);
+    transition: border-color 0.3s ease;
   }
 
-  .cta-button:focus-visible {
-    outline: 2px solid var(--color-snow);
-    outline-offset: 4px;
+  .essay-close a:hover { border-bottom-color: var(--color-salmon); }
+
+  .essay-close a:focus-visible {
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 
-  @media (max-width: 900px) {
-    .section-divider { margin: 0 24px; }
-    .vision { padding: 100px 24px; }
-    .pull-quote { padding: 120px 24px; }
-    .page-top { padding-top: 140px; }
+  @media (max-width: 600px) {
+    .essay { padding: 140px 24px 80px; }
+    .essay-lead { margin-bottom: 56px; }
   }
 </style>

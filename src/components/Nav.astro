@@ -2,8 +2,9 @@
 type NavKey = 'vision' | 'ecosystem' | 'newsletter' | 'contact' | null;
 interface Props {
   current?: NavKey;
+  showToggle?: boolean;
 }
-const { current = null } = Astro.props;
+const { current = null, showToggle = false } = Astro.props;
 
 const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
   { key: 'vision', label: 'vision', href: '/vision' },
@@ -28,6 +29,21 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
           </li>
         ))}
       </ul>
+      {showToggle && (
+        <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode">
+          <span class="theme-icon theme-sun" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+            </svg>
+          </span>
+          <span class="theme-icon theme-moon" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </span>
+        </button>
+      )}
     </div>
   </div>
 </nav>
@@ -65,12 +81,27 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
   }
 
+  [data-theme="light"] .nav-island {
+    border-color: rgba(36, 48, 44, 0.1);
+    background: rgba(231, 223, 217, 0.6);
+  }
+
+  [data-theme="light"] .nav.scrolled .nav-island {
+    background: rgba(231, 223, 217, 0.9);
+    border-color: rgba(36, 48, 44, 0.15);
+    box-shadow: 0 8px 40px rgba(36, 48, 44, 0.1);
+  }
+
   /* Tier 1 — wordmark */
   .nav-tier-top {
     display: flex;
     justify-content: center;
     padding: 14px 48px 12px;
     border-bottom: 1px solid rgba(231, 223, 217, 0.07);
+  }
+
+  [data-theme="light"] .nav-tier-top {
+    border-bottom-color: rgba(36, 48, 44, 0.1);
   }
 
   .nav-wordmark {
@@ -88,9 +119,12 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
     border-radius: 2px;
   }
 
-  /* Tier 2 — links */
+  /* Tier 2 — links + toggle */
   .nav-tier-bottom {
-    padding: 10px 40px 11px;
+    padding: 10px 16px 11px 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
   .nav-links {
@@ -99,6 +133,7 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
     list-style: none;
     align-items: center;
     justify-content: center;
+    flex: 1;
   }
 
   .nav-links a {
@@ -124,10 +159,63 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
     border-radius: 2px;
   }
 
+  [data-theme="light"] .nav-links a {
+    color: rgba(36, 48, 44, 0.55);
+  }
+
+  [data-theme="light"] .nav-links a:hover {
+    color: rgba(36, 48, 44, 0.9);
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: rgba(231, 223, 217, 0.6);
+    border-radius: 6px;
+    flex-shrink: 0;
+    transition: color 0.3s ease;
+  }
+
+  .theme-toggle:hover { color: var(--color-snow); }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 2px;
+  }
+
+  [data-theme="light"] .theme-toggle {
+    color: rgba(36, 48, 44, 0.45);
+  }
+
+  [data-theme="light"] .theme-toggle:hover {
+    color: rgba(36, 48, 44, 0.9);
+  }
+
+  .theme-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Sun visible by default (light mode is default for inner pages) */
+  .theme-sun { opacity: 1; }
+  .theme-moon { opacity: 0; pointer-events: none; }
+
+  :global([data-theme="dark"]) .theme-sun { opacity: 0; pointer-events: none; }
+  :global([data-theme="dark"]) .theme-moon { opacity: 1; pointer-events: auto; }
+
   @media (max-width: 600px) {
     .nav { padding: 16px 16px; }
     .nav-tier-top { padding: 12px 32px 10px; }
-    .nav-tier-bottom { padding: 9px 24px 10px; }
+    .nav-tier-bottom { padding: 9px 10px 10px 24px; }
     .nav-links { gap: 18px; }
     .nav-wordmark { font-size: 17px; }
   }
@@ -136,6 +224,8 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
     .nav-island { transition: none; }
     .nav-wordmark { transition: none; }
     .nav-links a { transition: none; }
+    .theme-toggle { transition: none; }
+    .theme-icon { transition: none; }
   }
 </style>
 
@@ -152,5 +242,27 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
         ticking = true;
       }
     }, { passive: true });
+  }
+
+  const toggle = document.getElementById('theme-toggle');
+  if (toggle) {
+    const btn = toggle;
+    const root = document.documentElement;
+
+    function applyTheme(theme: 'light' | 'dark') {
+      root.setAttribute('data-theme', theme);
+      localStorage.setItem('soundin-theme', theme);
+      const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+      if (meta) meta.content = theme === 'dark' ? '#24302c' : '#e7dfd9';
+      btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+
+    btn.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    const initial = root.getAttribute('data-theme') ?? 'light';
+    btn.setAttribute('aria-label', initial === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
   }
 </script>
