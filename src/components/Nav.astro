@@ -1,5 +1,4 @@
 ---
-import Logo from './Logo.astro';
 type NavKey = 'vision' | 'ecosystem' | 'newsletter' | 'contact' | null;
 interface Props {
   current?: NavKey;
@@ -14,74 +13,129 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
 ];
 ---
 
-<nav class="nav fixed top-0 left-0 right-0 z-[100] h-20 border-b border-transparent transition-[background,border-color] duration-500">
-  <div class="nav-inner flex items-center justify-between h-full">
-    <a href="/" class="nav-home" aria-label="SoundIn home">
-      <Logo />
-    </a>
-    <ul class="nav-links flex gap-8 list-none max-[1100px]:gap-5">
-      {links.map((l, i) => (
-        <li class={i < links.length - 1 ? 'nav-hide-mobile' : ''}>
-          <a href={l.href} aria-current={current === l.key ? 'page' : undefined}>{l.label}</a>
-        </li>
-      ))}
-    </ul>
+<nav class="nav" aria-label="Site navigation">
+  <div class="nav-island">
+    <div class="nav-tier-top">
+      <a href="/" class="nav-wordmark" aria-label="SoundIn — return to homepage">
+        <span class="logo-s">Sound</span><span class="logo-i">In</span>
+      </a>
+    </div>
+    <div class="nav-tier-bottom">
+      <ul class="nav-links">
+        {links.map((l) => (
+          <li>
+            <a href={l.href} aria-current={current === l.key ? 'page' : undefined}>{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 </nav>
 
 <style>
-  .nav-home {
-    display: inline-flex;
-    align-items: center;
-    color: var(--color-snow);
-    font-family: var(--font-sans);
-    font-size: 18px;
-    font-weight: 900;
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    padding: 20px 24px;
+    pointer-events: none;
+  }
+
+  .nav-island {
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 18px;
+    border: 1px solid rgba(231, 223, 217, 0.07);
+    background: rgba(36, 48, 44, 0.22);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    overflow: hidden;
+    transition: border-color 0.5s ease, background 0.5s ease, box-shadow 0.5s ease;
+  }
+
+  .nav.scrolled .nav-island {
+    background: rgba(36, 48, 44, 0.65);
+    border-color: rgba(231, 223, 217, 0.12);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Tier 1 — wordmark */
+  .nav-tier-top {
+    display: flex;
+    justify-content: center;
+    padding: 14px 48px 12px;
+    border-bottom: 1px solid rgba(231, 223, 217, 0.07);
+  }
+
+  .nav-wordmark {
+    font-size: 19px;
     letter-spacing: 0.01em;
     transition: opacity 0.3s ease;
   }
-  .nav-home:hover { opacity: 0.7; }
-  .nav-home:focus-visible {
+
+  .nav-wordmark:hover { opacity: 0.65; }
+
+  .nav-wordmark:focus-visible {
+    opacity: 0.65;
     outline: 2px solid var(--color-salmon);
     outline-offset: 4px;
     border-radius: 2px;
   }
-  .nav-home :global(.logo) {
-    font-size: 18px;
+
+  /* Tier 2 — links */
+  .nav-tier-bottom {
+    padding: 10px 40px 11px;
   }
-  .nav-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 64px;
-    width: 100%;
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
   }
-  .nav.scrolled {
-    background: rgba(36, 48, 44, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom-color: rgba(231, 223, 217, 0.04);
-  }
+
   .nav-links a {
     font-family: var(--font-sans);
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--color-snow);
-    transition: opacity 0.3s ease;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: lowercase;
+    color: rgba(231, 223, 217, 0.55);
+    transition: color 0.3s ease;
   }
-  .nav-hide-mobile { }
-  @media (max-width: 900px) {
-    .nav-inner { padding: 0 24px; }
+
+  .nav-links a:hover { color: var(--color-snow); }
+
+  .nav-links a[aria-current="page"] {
+    color: var(--color-salmon);
   }
-  @media (max-width: 800px) {
-    .nav-hide-mobile { display: none; }
-  }
-  .nav-links a[aria-current="page"] { opacity: 0.6; }
-  .nav-links a:hover { opacity: 0.6; }
+
   .nav-links a:focus-visible {
-    opacity: 0.6;
+    color: var(--color-snow);
     outline: 2px solid var(--color-salmon);
     outline-offset: 4px;
     border-radius: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .nav { padding: 16px 16px; }
+    .nav-tier-top { padding: 12px 32px 10px; }
+    .nav-tier-bottom { padding: 9px 24px 10px; }
+    .nav-links { gap: 18px; }
+    .nav-wordmark { font-size: 17px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-island { transition: none; }
+    .nav-wordmark { transition: none; }
+    .nav-links a { transition: none; }
   }
 </style>
 
