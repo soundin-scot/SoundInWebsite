@@ -107,7 +107,12 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
   .nav-wordmark {
     font-size: 19px;
     letter-spacing: 0.01em;
+    color: #e7dfd9;
     transition: opacity 0.3s ease;
+  }
+
+  [data-theme="light"] .nav-wordmark {
+    color: #24302c;
   }
 
   .nav-wordmark:hover { opacity: 0.65; }
