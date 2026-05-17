@@ -2,21 +2,19 @@
 import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const title = 'SoundIn: Scottish Digital Agency | Web, Events & Venue Software';
-const description = 'SoundIn is a Scottish Highlands company building web applications, venue management software, and electronic music events in unique locations. Three founders. Six practices. One standard of care.';
+const title = 'SoundIn - Building for the UK Night Time Economy';
+const description = 'SoundIn is the company behind Holocron, compliance-first venue management for UK nightlife operators. Based in the Scottish Highlands.';
 
 type Pill = {
   label: string;
   href: string;
   external?: boolean;
-  icon: 'vision' | 'agency' | 'ecosystem' | 'events' | 'contact' | 'newsletter' | 'surprise';
+  icon: 'vision' | 'ecosystem' | 'contact' | 'newsletter' | 'surprise';
 };
 
 const pills: Pill[] = [
   { label: 'vision', href: '/vision', icon: 'vision' },
-  { label: 'agency', href: '/agency', icon: 'agency' },
-  { label: 'ecosystem', href: '/ecosystem', icon: 'ecosystem' },
-  { label: 'events', href: '/events', icon: 'events' },
+  { label: 'products', href: '/ecosystem', icon: 'ecosystem' },
   { label: 'contact', href: '/contact', icon: 'contact' },
   { label: 'newsletter', href: '/newsletter', icon: 'newsletter' },
   { label: 'surprise me', href: '#surprise', icon: 'surprise' },
@@ -42,31 +40,15 @@ const pageSuggestions: Suggestion[] = [
     label: 'Vision',
     description: 'Mission, values, and the founder story.',
     href: '/vision',
-    keywords: ['vision', 'about', 'mission', 'values', 'who', 'team', 'founders', 'story', 'cougar', 'emma', 'mark'],
-  },
-  {
-    id: 'sug-agency',
-    group: 'Pages',
-    label: 'Agency',
-    description: 'Web development, social media, marketing.',
-    href: '/agency',
-    keywords: ['agency', 'services', 'web', 'website', 'app', 'development', 'dev', 'next', 'nextjs', 'astro', 'social', 'marketing', 'instagram', 'tiktok', 'linkedin', 'content'],
+    keywords: ['vision', 'about', 'mission', 'values', 'who', 'founder', 'story', 'cougar'],
   },
   {
     id: 'sug-ecosystem',
     group: 'Pages',
-    label: 'Ecosystem',
-    description: 'Holocron and the products in development.',
+    label: 'Products',
+    description: 'Holocron and what we\'re building next.',
     href: '/ecosystem',
-    keywords: ['ecosystem', 'product', 'products', 'holocron', 'venue', 'nightlife', 'club', 'ticketing', 'incidents', 'photon', 'lighting', 'dmx', 'saas'],
-  },
-  {
-    id: 'sug-events',
-    group: 'Pages',
-    label: 'Events',
-    description: 'Electronic music in unique Highland locations.',
-    href: '/events',
-    keywords: ['event', 'events', 'gig', 'club', 'music', 'electronic', 'rave', 'dj', 'highland', 'distillery', 'venue night'],
+    keywords: ['products', 'ecosystem', 'holocron', 'venue', 'nightlife', 'club', 'ticketing', 'incidents', 'compliance', 'saas', 'software'],
   },
   {
     id: 'sug-newsletter',
@@ -74,13 +56,13 @@ const pageSuggestions: Suggestion[] = [
     label: 'Newsletter',
     description: 'Subscribe and read past issues.',
     href: '/newsletter',
-    keywords: ['newsletter', 'subscribe', 'email', 'updates', 'archive', 'posts', 'writing', 'subscribe'],
+    keywords: ['newsletter', 'subscribe', 'email', 'updates', 'archive', 'posts', 'writing'],
   },
   {
     id: 'sug-contact',
     group: 'Pages',
     label: 'Contact',
-    description: 'Send us an email or use the form.',
+    description: 'Get in touch with the team.',
     href: '/contact',
     keywords: ['contact', 'hello', 'talk', 'reach', 'enquire', 'enquiry', 'email', 'message'],
   },
@@ -88,10 +70,10 @@ const pageSuggestions: Suggestion[] = [
     id: 'sug-holocron-ext',
     group: 'Pages',
     label: 'Holocron',
-    description: 'holocron.scot — venue management SaaS.',
+    description: 'holocron.scot  -  compliance-first venue management.',
     href: 'https://holocron.scot',
     external: true,
-    keywords: ['holocron', 'venue', 'nightlife', 'club', 'ticketing', 'incidents', 'guest list'],
+    keywords: ['holocron', 'venue', 'nightlife', 'club', 'ticketing', 'incidents', 'guest list', 'settlements', 'compliance'],
   },
   {
     id: 'sug-privacy',
@@ -131,14 +113,15 @@ const orgSchema = {
       url: 'https://soundin.scot',
       email: 'hello@soundin.scot',
       foundingDate: '2025',
-      description: 'Scottish Highlands company delivering web development, venue management software, event production, lighting design, and social media management. Three founders, six practices, one standard of care.',
+      description: 'SoundIn is a Scottish Highlands software company and the company behind Holocron, compliance-first venue management for the UK night time economy.',
       identifier: { '@type': 'PropertyValue', name: 'Companies House', value: 'SC850719' },
       address: { '@type': 'PostalAddress', addressRegion: 'Highland', addressCountry: 'GB' },
+      founder: [{ '@type': 'Person', name: 'Cougar Macdougall' }],
       areaServed: [
         { '@type': 'Country', name: 'United Kingdom' },
         { '@type': 'AdministrativeArea', name: 'Scotland' },
       ],
-      knowsAbout: ['Web Development', 'Digital Marketing', 'Event Production', 'Venue Management Software', 'DMX Lighting Control', 'Social Media Management'],
+      knowsAbout: ['Venue Management Software', 'Nightlife Operations Software', 'Night Time Economy Compliance', 'UK Licensing Law', 'Hospitality SaaS'],
       sameAs: ['https://www.linkedin.com/company/soundin-ltd'],
     },
   ],
@@ -181,7 +164,7 @@ const orgSchema = {
             name="q"
             type="text"
             class="portal-search-input"
-            placeholder="e.g. events, holocron, who we are…"
+            placeholder="e.g. holocron, who we are, newsletter…"
             autocomplete="off"
             autocorrect="off"
             autocapitalize="off"
@@ -229,31 +212,12 @@ const orgSchema = {
                     <path d="M8 16h5"/>
                   </svg>
                 )}
-                {p.icon === 'agency' && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/>
-                    <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/>
-                    <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/>
-                    <path d="M10 6h4"/>
-                    <path d="M10 10h4"/>
-                    <path d="M10 14h4"/>
-                    <path d="M10 18h4"/>
-                  </svg>
-                )}
                 {p.icon === 'ecosystem' && (
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/>
                     <ellipse cx="12" cy="12" rx="10" ry="4"/>
                     <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>
                     <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>
-                  </svg>
-                )}
-                {p.icon === 'events' && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
-                    <path d="M13 5v2"/>
-                    <path d="M13 17v2"/>
-                    <path d="M13 11v2"/>
                   </svg>
                 )}
                 {p.icon === 'contact' && (
@@ -412,7 +376,7 @@ const orgSchema = {
     pointer-events: none;
   }
 
-  /* Listbox dropdown — :global so dynamically-injected items inherit styles */
+  /* Listbox dropdown  -  :global so dynamically-injected items inherit styles */
   :global(.portal-search-listbox) {
     position: absolute;
     top: calc(100% + 12px);
@@ -802,7 +766,7 @@ const orgSchema = {
     }
   });
 
-  // Surprise me — picks a random newsletter issue
+  // Surprise me  -  picks a random newsletter issue
   const surprisePill = document.querySelector<HTMLAnchorElement>('a[data-label="surprise me"]');
   surprisePill?.addEventListener('click', (e) => {
     e.preventDefault();
