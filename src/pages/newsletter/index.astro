@@ -39,7 +39,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
   title={title}
   description={description}
   canonical="https://soundin.scot/newsletter"
-  current={null}
+  current="newsletter"
   skipLink={{ href: '#newsletter-signup', label: 'Skip to signup' }}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(blogSchema)} slot="head" />

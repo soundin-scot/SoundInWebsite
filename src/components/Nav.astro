@@ -14,17 +14,19 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
 ];
 ---
 
-<nav class="nav fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 h-20 border-b border-transparent transition-[background,border-color] duration-500">
-  <a href="/" class="nav-home" aria-label="SoundIn home">
-    <Logo />
-  </a>
-  <ul class="nav-links flex gap-8 list-none max-[1100px]:gap-5">
-    {links.map((l, i) => (
-      <li class={i < links.length - 1 ? 'nav-hide-mobile' : ''}>
-        <a href={l.href} aria-current={current === l.key ? 'page' : undefined}>{l.label}</a>
-      </li>
-    ))}
-  </ul>
+<nav class="nav fixed top-0 left-0 right-0 z-[100] h-20 border-b border-transparent transition-[background,border-color] duration-500">
+  <div class="nav-inner flex items-center justify-between h-full">
+    <a href="/" class="nav-home" aria-label="SoundIn home">
+      <Logo />
+    </a>
+    <ul class="nav-links flex gap-8 list-none max-[1100px]:gap-5">
+      {links.map((l, i) => (
+        <li class={i < links.length - 1 ? 'nav-hide-mobile' : ''}>
+          <a href={l.href} aria-current={current === l.key ? 'page' : undefined}>{l.label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </nav>
 
 <style>
@@ -47,6 +49,12 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
   .nav-home :global(.logo) {
     font-size: 18px;
   }
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 64px;
+    width: 100%;
+  }
   .nav.scrolled {
     background: rgba(36, 48, 44, 0.4);
     backdrop-filter: blur(16px);
@@ -61,6 +69,9 @@ const links: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
     transition: opacity 0.3s ease;
   }
   .nav-hide-mobile { }
+  @media (max-width: 900px) {
+    .nav-inner { padding: 0 24px; }
+  }
   @media (max-width: 800px) {
     .nav-hide-mobile { display: none; }
   }
