@@ -3,22 +3,24 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
-  <div class="footer-bar flex items-center justify-between px-16 pt-10 pb-10 max-[900px]:flex-wrap max-[900px]:gap-4 max-[900px]:px-6 max-[900px]:pb-8">
-    <span class="footer-bar-item">&copy; {year} SoundIn Limited</span>
-    <div class="footer-bar-links flex gap-10 max-[600px]:gap-5">
-      <a href="/contact" class="footer-bar-item">Say Hello</a>
+  <div class="footer-inner">
+    <div class="footer-bar flex items-center justify-between pt-10 pb-10 max-[900px]:flex-wrap max-[900px]:gap-4 max-[900px]:pb-8">
+      <span class="footer-bar-item">&copy; {year} SoundIn Limited</span>
+      <div class="footer-bar-links flex gap-10 max-[600px]:gap-5">
+        <a href="/contact" class="footer-bar-item">Say Hello</a>
+        <a
+          href="https://www.linkedin.com/company/soundin-ltd"
+          rel="noopener noreferrer"
+          target="_blank"
+          class="footer-bar-item">LinkedIn</a>
+        <a href="/privacy" class="footer-bar-item">Privacy</a>
+      </div>
       <a
-        href="https://www.linkedin.com/company/soundin-ltd"
+        href="https://find-and-update.company-information.service.gov.uk/company/SC850719"
         rel="noopener noreferrer"
         target="_blank"
-        class="footer-bar-item">LinkedIn</a>
-      <a href="/privacy" class="footer-bar-item">Privacy</a>
+        class="footer-bar-item">SC850719</a>
     </div>
-    <a
-      href="https://find-and-update.company-information.service.gov.uk/company/SC850719"
-      rel="noopener noreferrer"
-      target="_blank"
-      class="footer-bar-item">SC850719</a>
   </div>
 </footer>
 
@@ -28,10 +30,16 @@ const year = new Date().getFullYear();
     z-index: 1;
     border-top: 1px solid transparent;
     border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 15%, rgba(231, 223, 217, 0.12) 85%, transparent 100%) 1;
+    padding: 0 64px;
   }
 
   [data-theme="light"] .footer {
     border-image: linear-gradient(to right, transparent 0%, rgba(36, 48, 44, 0.12) 15%, rgba(36, 48, 44, 0.12) 85%, transparent 100%) 1;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
   }
 
   .footer-bar-item {
@@ -48,5 +56,13 @@ const year = new Date().getFullYear();
     outline: 2px solid var(--color-salmon);
     outline-offset: 4px;
     border-radius: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .footer { padding: 0 24px; }
+  }
+
+  @media (max-width: 600px) {
+    .footer { padding: 0 16px; }
   }
 </style>
