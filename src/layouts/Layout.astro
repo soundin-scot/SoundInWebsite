@@ -8,8 +8,9 @@ interface Props {
   description: string;
   canonical: string;
   ogType?: 'website' | 'article';
-  current?: 'practices' | 'vision' | 'contact' | null;
+  current?: 'vision' | 'ecosystem' | 'newsletter' | 'contact' | null;
   skipLink?: { href: string; label: string };
+  chrome?: 'full' | 'minimal';
 }
 
 const {
@@ -19,17 +20,30 @@ const {
   ogType = 'website',
   current = null,
   skipLink,
+  chrome = 'full',
 } = Astro.props;
 
 const ogImage = 'https://soundin.scot/og-image.png';
+const isThemeable = chrome === 'full';
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme={isThemeable ? 'light' : undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#24302c" />
+    <meta name="theme-color" content={isThemeable ? '#e7dfd9' : '#24302c'} />
+    {isThemeable && (
+      <script is:inline>
+        (function () {
+          var s = localStorage.getItem('soundin-theme');
+          var el = document.documentElement;
+          if (s === 'dark') el.setAttribute('data-theme', 'dark');
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', el.getAttribute('data-theme') === 'dark' ? '#24302c' : '#e7dfd9');
+        })();
+      </script>
+    )}
     <title>{title}</title>
     <meta name="description" content={description} />
 
@@ -68,10 +82,10 @@ const ogImage = 'https://soundin.scot/og-image.png';
       <a href={skipLink.href} class="sr-only skip-link">{skipLink.label}</a>
     )}
 
-    <Nav current={current} />
+    {chrome === 'full' && <Nav current={current} showToggle={true} />}
 
     <slot />
 
-    <Footer />
+    {chrome === 'full' && <Footer />}
   </body>
 </html>

@@ -1,0 +1,214 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Products: SoundIn | Software We Build and Own';
+const description = 'Holocron is live and in production with paying customers. Compliance-first venue management for UK nightlife operators.';
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': 'https://soundin.scot/ecosystem#webpage',
+  name: title,
+  description,
+  url: 'https://soundin.scot/ecosystem',
+  isPartOf: { '@id': 'https://soundin.scot/#organization' },
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical="https://soundin.scot/ecosystem"
+  current="ecosystem"
+  skipLink={{ href: '#ecosystem-content', label: 'Skip to products' }}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionSchema)} slot="head" />
+
+  <div class="page-hero" id="ecosystem-content" tabindex="-1">
+    <div class="page-hero-inner">
+      <span class="page-hero-kicker">products</span>
+      <h1 class="page-hero-title">What we<br />build &amp; own</h1>
+    </div>
+  </div>
+
+  <main class="eco-body">
+    <article class="holocron" id="holocron">
+      <div class="holocron-head">
+        <h2 class="holocron-name">Holocron</h2>
+        <span class="holocron-badge">Live</span>
+      </div>
+      <p class="holocron-tagline">
+        Compliance-first venue management for the UK night time economy.
+      </p>
+      <p class="holocron-desc">
+        One place for attendance, incidents, guest lists, ticketing, and financial settlements&nbsp;&mdash; built around how venues actually operate, not how developers imagine they might.
+      </p>
+      <ul class="holocron-features">
+        <li>Attendance &amp; headcount tracking</li>
+        <li>Incident logging &amp; reporting</li>
+        <li>Guest lists &amp; door management</li>
+        <li>Ticketing integration</li>
+        <li>Financial settlements</li>
+      </ul>
+      <a
+        href="https://holocron.scot"
+        rel="noopener noreferrer"
+        target="_blank"
+        class="holocron-link"
+      >
+        Visit holocron.scot <span aria-hidden="true">↗</span>
+      </a>
+    </article>
+
+    <div class="eco-pipeline">
+      <h2 class="eco-pipeline-title">What&rsquo;s next</h2>
+      <p class="eco-pipeline-body">
+        More products are in development. Announcements go to the newsletter first&nbsp;&mdash; not a press release, not a Product Hunt post.
+      </p>
+      <a href="/newsletter" class="cta-button">Subscribe <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .eco-body {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 80px 64px 120px;
+  }
+
+  .holocron {
+    padding-bottom: 72px;
+    border-bottom: 1px solid var(--color-ghost);
+    margin-bottom: 72px;
+  }
+
+  .holocron-head {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  .holocron-name {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1;
+    color: var(--color-salmon);
+  }
+
+  .holocron-badge {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    border: 1px solid var(--color-faint);
+    border-radius: 999px;
+    padding: 3px 9px;
+    flex-shrink: 0;
+  }
+
+  .holocron-tagline {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(18px, 2.2vw, 26px);
+    line-height: 1.4;
+    color: var(--color-snow);
+    margin-bottom: 20px;
+    max-width: 580px;
+  }
+
+  .holocron-desc {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--color-cream);
+    margin-bottom: 36px;
+    max-width: 580px;
+  }
+
+  .holocron-features {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 0;
+    margin-bottom: 44px;
+    padding: 0;
+  }
+
+  .holocron-features li {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--color-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 50%;
+  }
+
+  .holocron-features li::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--color-salmon);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .holocron-link {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-snow);
+    border-bottom: 1px solid var(--color-faint);
+    padding-bottom: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s ease, border-color 0.3s ease, gap 0.3s ease;
+  }
+
+  .holocron-link:hover {
+    color: var(--color-salmon);
+    border-bottom-color: var(--color-salmon);
+    gap: 10px;
+  }
+
+  .holocron-link:focus-visible {
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .eco-pipeline-title {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(28px, 3.5vw, 44px);
+    color: var(--color-snow);
+    margin-bottom: 16px;
+  }
+
+  .eco-pipeline-body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-cream);
+    margin-bottom: 28px;
+    max-width: 480px;
+  }
+
+  @media (max-width: 900px) {
+    .eco-body { padding: 64px 24px 80px; }
+    .holocron-features li { width: 100%; }
+  }
+</style>

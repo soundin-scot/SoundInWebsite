@@ -1,91 +1,86 @@
-import type { APIContext } from 'astro';
-
 export const prerender = false;
 
-interface ContactBody {
-  name: string;
-  email: string;
-  company?: string;
-  message: string;
-}
+import type { APIRoute } from 'astro';
 
-export async function POST({ request }: APIContext): Promise<Response> {
-  let body: ContactBody;
+export const POST: APIRoute = async ({ request }) => {
+  const token = import.meta.env.HUBSPOT_PRIVATE_TOKEN;
+  if (!token) {
+    return new Response(JSON.stringify({ error: 'Server configuration error' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  let body: { name?: string; email?: string; company?: string; message?: string };
   try {
     body = await request.json();
   } catch {
-    return json({ error: 'Invalid request body' }, 400);
+    return new Response(JSON.stringify({ error: 'Invalid request body' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   const { name, email, company, message } = body;
-  if (!name?.trim() || !email?.trim() || !message?.trim()) {
-    return json({ error: 'Missing required fields' }, 400);
+
+  if (!name || !email || !message) {
+    return new Response(JSON.stringify({ error: 'Name, email, and message are required' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
-  const token = import.meta.env.HUBSPOT_PRIVATE_TOKEN;
-  if (!token) {
-    return json({ error: 'Server configuration error' }, 500);
-  }
-
-  const [firstname, ...rest] = name.trim().split(' ');
-  const lastname = rest.join(' ') || undefined;
-
-  const contactId = await upsertContact(token, { email, firstname, lastname, company });
-  if (!contactId) {
-    return json({ error: 'Failed to create CRM record' }, 500);
-  }
-
-  await createNote(token, contactId, message);
-
-  return json({ success: true }, 200);
-}
-
-async function upsertContact(
-  token: string,
-  props: { email: string; firstname: string; lastname?: string; company?: string }
-): Promise<string | null> {
-  const properties: Record<string, string> = {
-    email: props.email,
-    firstname: props.firstname,
-    lifecyclestage: 'lead',
-    hs_lead_status: 'NEW',
+  const hsHeaders = {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
   };
-  if (props.lastname) properties.lastname = props.lastname;
-  if (props.company) properties.company = props.company;
 
-  const res = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
+  // Upsert contact
+  const contactRes = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
     method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ properties }),
-  });
-
-  if (res.ok) {
-    const data = await res.json();
-    return data.id as string;
-  }
-
-  if (res.status === 409) {
-    // Contact already exists — fetch by email
-    const existing = await fetch(
-      `https://api.hubapi.com/crm/v3/objects/contacts/${encodeURIComponent(props.email)}?idProperty=email`,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    if (!existing.ok) return null;
-    const data = await existing.json();
-    return data.id as string;
-  }
-
-  return null;
-}
-
-async function createNote(token: string, contactId: string, message: string): Promise<void> {
-  await fetch('https://api.hubapi.com/crm/v3/objects/notes', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    headers: hsHeaders,
     body: JSON.stringify({
       properties: {
-        hs_note_body: `Website contact form:\n\n${message}`,
-        hs_timestamp: String(Date.now()),
+        firstname: name.split(' ')[0],
+        lastname: name.split(' ').slice(1).join(' ') || '',
+        email,
+        company: company || '',
+        lifecyclestage: 'lead',
+      },
+    }),
+  });
+
+  let contactId: string;
+
+  if (contactRes.status === 409) {
+    // Contact already exists — extract existing ID from error
+    const err = await contactRes.json();
+    const match = (err?.message as string | undefined)?.match(/existing ID: (\d+)/);
+    if (!match) {
+      return new Response(JSON.stringify({ error: 'Failed to upsert contact' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+    contactId = match[1];
+  } else if (!contactRes.ok) {
+    return new Response(JSON.stringify({ error: 'Failed to create contact' }), {
+      status: 502,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } else {
+    const contact = await contactRes.json();
+    contactId = contact.id;
+  }
+
+  // Create note and associate with contact
+  const noteRes = await fetch('https://api.hubapi.com/crm/v3/objects/notes', {
+    method: 'POST',
+    headers: hsHeaders,
+    body: JSON.stringify({
+      properties: {
+        hs_note_body: `Message from soundin.scot contact form:\n\n${message}`,
+        hs_timestamp: Date.now().toString(),
       },
       associations: [
         {
@@ -95,11 +90,14 @@ async function createNote(token: string, contactId: string, message: string): Pr
       ],
     }),
   });
-}
 
-function json(body: unknown, status: number): Response {
-  return new Response(JSON.stringify(body), {
-    status,
+  if (!noteRes.ok) {
+    // Note creation failure is non-fatal — contact was captured
+    console.error('Failed to create HubSpot note', await noteRes.text());
+  }
+
+  return new Response(JSON.stringify({ ok: true }), {
+    status: 200,
     headers: { 'Content-Type': 'application/json' },
   });
-}
+};

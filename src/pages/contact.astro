@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 
 const title = 'Contact SoundIn';
-const description = 'Get in touch with SoundIn. Based in the Scottish Highlands, building compliance-first software for the UK night time economy.';
+const description = 'Get in touch. Based in the Scottish Highlands - we build compliance-first software for the UK night time economy. Email, or use the form.';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -34,10 +34,16 @@ const pageSchema = {
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(pageSchema)} slot="head" />
 
-  <section class="contact page-top">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-hero-kicker">contact</span>
+      <h1 class="page-hero-title">Tell me what<br />you&rsquo;re working on</h1>
+    </div>
+  </div>
+
+  <section class="contact" id="contact-form">
     <div>
-      <h1>Tell me what you&rsquo;re working on</h1>
-      <form id="contact-form">
+      <form id="contact-form-el">
         <div class="field-group">
           <label for="contact-name" class="field-label">Name</label>
           <input id="contact-name" name="name" class="contact-field" type="text" autocomplete="name" required />
@@ -70,7 +76,7 @@ const pageSchema = {
         </div>
         <div class="contact-info-group">
           <dt class="contact-info-label">Socials</dt>
-          <dd class="contact-info-val"><a href="#">LinkedIn</a></dd>
+          <dd class="contact-info-val"><a href="https://www.linkedin.com/company/soundin-ltd" rel="noopener noreferrer" target="_blank">LinkedIn</a></dd>
         </div>
       </dl>
     </div>
@@ -78,28 +84,16 @@ const pageSchema = {
 </Layout>
 
 <style>
-  .page-top { padding-top: 200px; }
-
   .contact {
     position: relative;
     z-index: 1;
-    padding: 160px 64px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 64px 120px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
-
-  .contact h1 {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
-    font-size: clamp(36px, 5vw, 56px);
-    line-height: 1.05;
-    color: var(--color-snow);
-    margin-bottom: 48px;
-    text-wrap: balance;
+    align-items: start;
   }
 
   .field-group { margin-bottom: 0; }
@@ -132,6 +126,7 @@ const pageSchema = {
 
   textarea.contact-field { resize: none; }
   .contact-field::placeholder { color: rgba(231, 223, 217, 0.3); }
+  [data-theme="light"] .contact-field::placeholder { color: rgba(36, 48, 44, 0.3); }
 
   .contact-field:focus-visible {
     border-color: var(--color-salmon);
@@ -140,34 +135,38 @@ const pageSchema = {
   }
 
   .contact-submit {
-    margin-top: 32px;
+    margin-top: 40px;
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
-    color: var(--color-snow);
-    background: none;
-    border: 1px solid var(--color-faint);
-    border-radius: 24px;
-    padding: 12px 32px;
+    letter-spacing: 0.02em;
+    color: var(--color-scarab);
+    background: var(--color-salmon);
+    border: none;
+    border-radius: 999px;
+    padding: 16px 32px;
     cursor: pointer;
-    transition: border-color 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .contact-submit:hover {
-    border-color: var(--color-salmon);
-    background: rgba(255, 127, 107, 0.08);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(255, 127, 107, 0.3);
   }
 
   .contact-submit:focus-visible {
-    border-color: var(--color-salmon);
-    background: rgba(255, 127, 107, 0.08);
-    outline: 2px solid var(--color-salmon);
+    outline: 2px solid var(--color-snow);
     outline-offset: 4px;
   }
 
-  .contact-submit:disabled { opacity: 0.6; cursor: default; }
+  .contact-submit:disabled {
+    opacity: 0.6;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+  }
 
-  .contact-right { padding-top: 80px; }
+  .contact-right { padding-top: 24px; }
 
   .contact-info-group { margin-bottom: 40px; }
 
@@ -204,14 +203,13 @@ const pageSchema = {
   }
 
   @media (max-width: 900px) {
-    .contact { grid-template-columns: 1fr; padding: 100px 24px; gap: 48px; }
+    .contact { grid-template-columns: 1fr; padding: 64px 24px 80px; gap: 48px; }
     .contact-right { padding-top: 0; }
-    .page-top { padding-top: 140px; }
   }
 </style>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const form = document.getElementById('contact-form-el') as HTMLFormElement | null;
   const ta = document.getElementById('contact-message') as HTMLTextAreaElement | null;
 
   form?.addEventListener('submit', async (e) => {
@@ -220,13 +218,11 @@ const pageSchema = {
     const status = document.getElementById('form-status');
     if (!btn || !status) return;
 
-    const data = new FormData(form);
-    const body = {
-      name: (data.get('name') as string).trim(),
-      email: (data.get('email') as string).trim(),
-      company: (data.get('company') as string).trim(),
-      message: (data.get('message') as string).trim(),
-    };
+<<<<<<< HEAD
+    const name = (form.querySelector<HTMLInputElement>('#contact-name'))?.value ?? '';
+    const email = (form.querySelector<HTMLInputElement>('#contact-email'))?.value ?? '';
+    const company = (form.querySelector<HTMLInputElement>('#contact-company'))?.value ?? '';
+    const message = (form.querySelector<HTMLTextAreaElement>('#contact-message'))?.value ?? '';
 
     btn.textContent = 'Sending…';
     btn.disabled = true;
@@ -236,21 +232,21 @@ const pageSchema = {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        body: JSON.stringify({ name, email, company, message }),
       });
 
-      if (res.ok) {
-        btn.textContent = 'Sent';
-        status.textContent = "We'll be in touch.";
-        btn.style.borderColor = 'rgba(231,223,217,0.3)';
-        form.reset();
-      } else {
-        throw new Error('non-ok response');
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
       }
-    } catch {
+
+      btn.textContent = 'Sent';
+      status.textContent = "We'll be in touch.";
+      form.reset();
+    } catch (err) {
+      console.error('Contact form error:', err);
       btn.textContent = 'Send Message';
       btn.disabled = false;
-      status.textContent = 'Something went wrong  -  email us at hello@soundin.scot';
+      status.textContent = 'Something went wrong. Email us at hello@soundin.scot';
     }
   });
 

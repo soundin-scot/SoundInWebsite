@@ -1,0 +1,295 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const title = 'Newsletter: SoundIn | Notes from the Highlands';
+const description = 'Quiet, irregular notes on building software, hosting events, and running a small company from the Scottish Highlands. Subscribe or browse the archive.';
+
+const posts = (await getCollection('newsletter')).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': 'https://soundin.scot/newsletter#blog',
+  name: 'SoundIn Newsletter',
+  description,
+  url: 'https://soundin.scot/newsletter',
+  publisher: { '@id': 'https://soundin.scot/#organization' },
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.data.title,
+    description: p.data.summary,
+    datePublished: p.data.publishedAt.toISOString(),
+    url: `https://soundin.scot/newsletter/${p.id}`,
+  })),
+};
+
+const dateFmt = new Intl.DateTimeFormat('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical="https://soundin.scot/newsletter"
+  current="newsletter"
+  skipLink={{ href: '#newsletter-signup', label: 'Skip to signup' }}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(blogSchema)} slot="head" />
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-hero-kicker">newsletter</span>
+      <h1 class="page-hero-title">Notes from<br />the Highlands</h1>
+      <p class="page-hero-desc">
+        Quiet, irregular dispatches — event announcements, product launches, and the occasional honest write-up. Sent when there&rsquo;s something worth your inbox.
+      </p>
+    </div>
+  </div>
+
+  <main class="nl-body">
+    <section class="nl-signup" id="newsletter-signup" tabindex="-1">
+      <h2 class="nl-signup-title">The announcement goes here first.</h2>
+      <form id="signup-form" class="signup-form" novalidate>
+        <label for="signup-email" class="sr-only">Email address</label>
+        <div class="signup-row">
+          <input
+            id="signup-email"
+            name="email"
+            type="email"
+            class="signup-input"
+            placeholder="you@example.com"
+            autocomplete="email"
+            spellcheck="false"
+            required
+          />
+          <button type="submit" class="cta-button">Subscribe <span aria-hidden="true">→</span></button>
+        </div>
+        <p id="signup-status" class="signup-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    {posts.length > 0 && (
+      <section class="nl-archive">
+        <h2 class="nl-archive-title">Archive</h2>
+        <ol class="archive-list" reversed>
+          {posts.map((p) => (
+            <li class="archive-item">
+              <a href={`/newsletter/${p.id}`} class="archive-link">
+                <div class="archive-meta">
+                  <span class="archive-issue">№ {String(p.data.issue).padStart(2, '0')}</span>
+                  <time datetime={p.data.publishedAt.toISOString()} class="archive-date">
+                    {dateFmt.format(p.data.publishedAt)}
+                  </time>
+                </div>
+                <div class="archive-text">
+                  <h3 class="archive-title">{p.data.title}</h3>
+                  <p class="archive-summary">{p.data.summary}</p>
+                </div>
+                <span class="archive-cta" aria-hidden="true">Read →</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+  </main>
+</Layout>
+
+<style>
+  .nl-body {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 80px 64px 120px;
+  }
+
+  /* Signup */
+  .nl-signup {
+    padding-bottom: 72px;
+    border-bottom: 1px solid var(--color-ghost);
+    margin-bottom: 72px;
+  }
+
+  .nl-signup-title {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(28px, 3.5vw, 44px);
+    line-height: 1.1;
+    color: var(--color-snow);
+    margin-bottom: 32px;
+    text-wrap: balance;
+  }
+
+  .signup-form {
+    max-width: 520px;
+  }
+
+  .signup-row {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .signup-input {
+    flex: 1;
+    background: var(--color-ghost);
+    border: 1px solid var(--color-faint);
+    border-radius: 999px;
+    padding: 14px 20px;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--color-snow);
+    transition: border-color 0.3s ease, background 0.3s ease;
+    min-width: 0;
+  }
+
+  .signup-input::placeholder { color: var(--color-muted); }
+
+  .signup-input:focus {
+    outline: none;
+    border-color: var(--color-salmon);
+  }
+
+  .signup-status {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-muted);
+    min-height: 18px;
+    margin-top: 12px;
+  }
+
+  /* Archive */
+  .nl-archive-title {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(24px, 3vw, 36px);
+    color: var(--color-snow);
+    margin-bottom: 40px;
+  }
+
+  .archive-list {
+    list-style: none;
+  }
+
+  .archive-item {
+    border-top: 1px solid var(--color-ghost);
+  }
+
+  .archive-link {
+    display: flex;
+    gap: 24px;
+    align-items: baseline;
+    padding: 36px 0;
+    transition: padding-left 0.3s ease;
+  }
+
+  .archive-link:hover { padding-left: 8px; }
+
+  .archive-link:focus-visible {
+    outline: 2px solid var(--color-salmon);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  .archive-meta {
+    flex-shrink: 0;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .archive-issue {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--color-salmon);
+  }
+
+  .archive-date {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .archive-text { flex: 1; }
+
+  .archive-title {
+    font-family: var(--font-serif);
+    font-weight: 100;
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 28px);
+    line-height: 1.2;
+    color: var(--color-snow);
+    margin-bottom: 6px;
+    text-wrap: balance;
+  }
+
+  .archive-summary {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+
+  .archive-cta {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-muted);
+    flex-shrink: 0;
+    align-self: center;
+    transition: color 0.3s ease;
+  }
+
+  .archive-link:hover .archive-cta { color: var(--color-salmon); }
+
+  @media (max-width: 900px) {
+    .nl-body { padding: 64px 24px 80px; }
+  }
+
+  @media (max-width: 600px) {
+    .signup-row { flex-direction: column; }
+    .archive-link { flex-wrap: wrap; gap: 12px; }
+    .archive-meta { width: auto; flex-direction: row; align-items: baseline; gap: 12px; }
+    .archive-cta { display: none; }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('signup-form') as HTMLFormElement | null;
+  const input = document.getElementById('signup-email') as HTMLInputElement | null;
+  const status = document.getElementById('signup-status');
+  const button = form?.querySelector<HTMLButtonElement>('button');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!input || !status || !button) return;
+
+    if (!input.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+      status.textContent = "That doesn't look like an email. Try again?";
+      input.focus();
+      return;
+    }
+
+    button.textContent = 'Subscribing…';
+    button.disabled = true;
+    status.textContent = '';
+
+    await new Promise((resolve) => setTimeout(resolve, 900));
+    status.textContent = "You're on the list. We'll be in touch.";
+    button.textContent = 'Subscribed';
+    input.value = '';
+  });
+</script>
