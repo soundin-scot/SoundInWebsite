@@ -3,8 +3,8 @@ import Layout from '@/layouts/Layout.astro';
 import HeroTopo from '@/components/HeroTopo.astro';
 import RevealScript from '@/components/RevealScript.astro';
 
-const title = 'SoundIn — Scottish Digital Agency | Web, Events & Venue Software';
-const description = 'SoundIn is a Scottish Highlands digital agency building web applications, venue management software, DMX lighting systems, and event production. Purpose-driven businesses, long-term partnerships.';
+const title = 'SoundIn - Run a Tighter Venue. Stay Compliant. Get Paid.';
+const description = 'SoundIn helps UK nightlife operators stay compliant, in control, and profitable. Attendance, incidents, guest lists, ticketing, and financial settlements - without the spreadsheets.';
 
 type ProductLink = { href: string; label: string; aria: string; external?: boolean };
 type Product = { name: string; pill: string; desc: string; links: ProductLink[] };
@@ -13,37 +13,10 @@ const products: Product[] = [
   {
     name: 'Holocron',
     pill: 'Nightlife',
-    desc: 'Venue management SaaS — attendance, ticketing, incidents, guest lists, settlements, and payouts. Real-time operational intelligence for nightlife.',
+    desc: 'Attendance, ticketing, incidents, guest lists, financial settlements, and compliance reporting - all in one place. Stop firefighting. Run your venue.',
     links: [
       { href: 'https://holocron.scot', label: 'Website', aria: 'Holocron website', external: true },
     ],
-  },
-  {
-    name: 'Photon',
-    pill: 'Lighting',
-    desc: 'Open source DMX controller — 512 channels, sub-millisecond latency. Pre-built units, hardware kits, and lighting system design consulting.',
-    links: [],
-  },
-];
-
-const services = [
-  {
-    name: 'Events',
-    pill: 'Production',
-    desc: 'Production management, technical production — lighting, sound, AV — and venue consultation. From concept through teardown.',
-    enquire: 'Enquire about event production',
-  },
-  {
-    name: 'Social',
-    pill: 'Marketing',
-    desc: 'Strategy, content creation, and community management on monthly retainers. Transparent reporting, all platforms.',
-    enquire: 'Enquire about social media',
-  },
-  {
-    name: 'Web',
-    pill: 'Development',
-    desc: 'Marketing sites, e-commerce, and custom web applications. Responsive, WCAG 2.1 AA accessible, performance-first.',
-    enquire: 'Enquire about web development',
   },
 ];
 
@@ -64,7 +37,7 @@ const orgSchema = {
       },
       email: 'hello@soundin.scot',
       foundingDate: '2025',
-      description: 'Scottish Highlands technology and creative company building a family of B2B software products for the hospitality and nightlife industry, alongside agency services for purpose-driven businesses across the UK.',
+      description: 'Scottish Highlands software company building compliance-first venue management software for the UK night time economy. Holocron is their flagship B2B SaaS product for nightlife operators.',
       identifier: { '@type': 'PropertyValue', name: 'Companies House', value: 'SC850719' },
       address: {
         '@type': 'PostalAddress',
@@ -74,8 +47,6 @@ const orgSchema = {
       },
       founder: [
         { '@type': 'Person', name: 'Cougar Macdougall' },
-        { '@type': 'Person', name: 'Emma' },
-        { '@type': 'Person', name: 'Mark' },
       ],
       areaServed: [
         { '@type': 'Country', name: 'United Kingdom' },
@@ -84,16 +55,12 @@ const orgSchema = {
       knowsAbout: [
         'Venue Management Software',
         'Nightlife Operations Software',
-        'DMX Lighting Control',
-        'Web Development',
-        'Event Production',
-        'Social Media Management',
-        'Digital Signage',
-        'Music Platform',
+        'Night Time Economy Compliance',
+        'UK Licensing Law',
+        'Hospitality SaaS',
       ],
       sameAs: ['https://www.linkedin.com/company/soundin-ltd'],
     },
-    // Holocron — live B2B SaaS product
     {
       '@type': 'SoftwareApplication',
       '@id': 'https://soundin.scot/#holocron',
@@ -117,67 +84,6 @@ const orgSchema = {
         '@type': 'Offer',
         priceCurrency: 'GBP',
         description: 'Free trial available. Paid plans from £89/month.',
-      },
-      provider: { '@id': 'https://soundin.scot/#organization' },
-    },
-    // Photon — open-core DMX lighting product
-    {
-      '@type': 'SoftwareApplication',
-      '@id': 'https://soundin.scot/#photon',
-      name: 'Photon',
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Web, Embedded (ESP32-S3)',
-      description: 'Open-core DMX lighting control system for live events and installed venues. Controls 512 DMX channels with sub-millisecond latency. Core software is open-source; professional hardware and system design services available.',
-      featureList: [
-        '512-channel DMX-512 control',
-        'Sub-millisecond control latency',
-        'Open-source core software',
-        'Professional hardware specification and system design',
-        'OTA firmware updates',
-      ],
-      audience: {
-        '@type': 'BusinessAudience',
-        audienceType: 'Live event technicians, venue lighting operators, and AV professionals',
-      },
-      provider: { '@id': 'https://soundin.scot/#organization' },
-    },
-    // Doppler — open-core music platform
-    {
-      '@type': 'SoftwareApplication',
-      '@id': 'https://soundin.scot/#doppler',
-      name: 'Doppler',
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Web',
-      description: 'Open-core music platform for independent artists and hospitality venues. Uses machine learning to analyse tracks and match music to the energy and context of a live space.',
-      featureList: [
-        'Music catalogue management for independent artists',
-        'Machine learning audio feature extraction',
-        'Intelligent music matching for venues',
-        'Open-core architecture',
-      ],
-      audience: {
-        '@type': 'BusinessAudience',
-        audienceType: 'Independent music artists and hospitality venue operators',
-      },
-      provider: { '@id': 'https://soundin.scot/#organization' },
-    },
-    // Marquee — digital signage product
-    {
-      '@type': 'SoftwareApplication',
-      '@id': 'https://soundin.scot/#marquee',
-      name: 'Marquee',
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Web',
-      description: 'Digital signage and display system for hospitality venues. Provides a tenant-configurable display layer connected to live venue operational data. Phase one is a hosted web-based display with real-time updates.',
-      featureList: [
-        'Live venue data display',
-        'Tenant-configurable templates',
-        'Real-time updates via server-sent events',
-        'Hospitality-specific display layouts',
-      ],
-      audience: {
-        '@type': 'BusinessAudience',
-        audienceType: 'Hospitality venues, clubs, and bars needing dynamic digital displays',
       },
       provider: { '@id': 'https://soundin.scot/#organization' },
     },
@@ -210,7 +116,7 @@ const orgSchema = {
     </div>
 
     <h1 class="hero-headline">
-      Software, events, and open-source tools out of the Scottish Highlands. We don&rsquo;t pick a lane because <span class="accent">the problems don&rsquo;t.</span>
+      Most venues run on spreadsheets and gut instinct. <span class="accent">There&rsquo;s a better way.</span>
     </h1>
     <a href="/vision" class="hero-link">Read vision <span aria-hidden="true">&rarr;</span></a>
   </header>
@@ -219,7 +125,7 @@ const orgSchema = {
     <HeroTopo variant="practices" />
 
     <div class="practices-header reveal">
-      <h2 class="practices-title">Practices<sup>06</sup></h2>
+      <h2 class="practices-title">Products<sup>01</sup></h2>
       <a href="/contact" class="practices-cta">Work with us <span aria-hidden="true">&rarr;</span></a>
     </div>
 
@@ -263,23 +169,6 @@ const orgSchema = {
       </div>
     </div>
 
-    <div class="cards-row reveal">
-      {services.map((s) => (
-        <div class="card">
-          <div class="card-visual">
-            <span class="card-visual-label">{s.name}</span>
-          </div>
-          <div class="card-meta">
-            <span class="card-name">{s.name}</span>
-            <span class="card-pill">{s.pill}</span>
-          </div>
-          <p class="card-desc">{s.desc}</p>
-          <div class="card-links">
-            <a href="/contact" aria-label={s.enquire}>Enquire <span aria-hidden="true">&#8599;</span></a>
-          </div>
-        </div>
-      ))}
-    </div>
   </section>
 
   <RevealScript />
