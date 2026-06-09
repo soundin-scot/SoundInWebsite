@@ -151,6 +151,10 @@ const orgSchema = {
         <span class="gaelic">Fàilte.</span> What are you looking for?
       </p>
 
+      <p class="portal-subtitle">
+        SoundIn builds compliance-first software for UK nightlife venues.
+      </p>
+
       <div class="portal-search-wrap">
         <form id="portal-search" class="portal-search" role="search" aria-label="Site search">
           <span class="portal-search-icon" aria-hidden="true">
@@ -310,6 +314,16 @@ const orgSchema = {
 
   .portal-tagline .gaelic {
     color: var(--color-salmon);
+  }
+
+  .portal-subtitle {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 15px;
+    color: rgba(231, 223, 217, 0.7);
+    margin: -24px 0 48px;
+    opacity: 0;
+    animation: enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
   }
 
   /* Search */
