@@ -47,14 +47,14 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
       <span class="page-hero-kicker">newsletter</span>
       <h1 class="page-hero-title">Notes from<br />the Highlands</h1>
       <p class="page-hero-desc">
-        When something moves — a product launches, a market shifts, something worth saying — it goes here first. Quiet, irregular, no filler.
+        When a product launches, a market shifts, or something is worth saying, it goes here first. Quiet and irregular.
       </p>
     </div>
   </div>
 
   <main class="nl-body">
     <section class="nl-signup" id="newsletter-signup" tabindex="-1">
-      <h2 class="nl-signup-title">The announcement goes here first.</h2>
+      <h2 class="nl-signup-title">When Holocron launches something, you hear it here first.</h2>
       <form id="signup-form" class="signup-form" novalidate>
         <label for="signup-email" class="sr-only">Email address</label>
         <div class="signup-row">
@@ -278,7 +278,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     if (!input || !status || !button) return;
 
     if (!input.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
-      status.textContent = "That doesn't look like an email. Try again?";
+      status.textContent = "That doesn't look like a valid email address.";
       input.focus();
       return;
     }
