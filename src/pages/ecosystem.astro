@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 
-const title = 'Products: SoundIn | Software We Build and Own';
+const title = 'Products | SoundIn';
 const description = 'Holocron is live and in production with paying customers. Compliance-first venue management for UK nightlife operators.';
 
 const collectionSchema = {
@@ -27,7 +27,7 @@ const collectionSchema = {
   <div class="page-hero" id="ecosystem-content" tabindex="-1">
     <div class="page-hero-inner">
       <span class="page-hero-kicker">products</span>
-      <h1 class="page-hero-title">What we<br />build &amp; own</h1>
+      <h1 class="page-hero-title">Our products</h1>
     </div>
   </div>
 
@@ -50,6 +50,9 @@ const collectionSchema = {
         <li>Ticketing integration</li>
         <li>Financial settlements</li>
       </ul>
+      <p class="holocron-traction">
+        Live and in production. Venue count coming soon.
+      </p>
       <a
         href="https://holocron.scot"
         rel="noopener noreferrer"
@@ -63,7 +66,7 @@ const collectionSchema = {
     <div class="eco-pipeline">
       <h2 class="eco-pipeline-title">What&rsquo;s next</h2>
       <p class="eco-pipeline-body">
-        More products are in development. Announcements go to the newsletter first&nbsp;&mdash; not a press release, not a Product Hunt post.
+        One product ships at a time. The next announcement goes here, not on Product Hunt.
       </p>
       <a href="/newsletter" class="cta-button">Subscribe <span aria-hidden="true">&rarr;</span></a>
     </div>
@@ -161,6 +164,15 @@ const collectionSchema = {
     background: var(--color-salmon);
     border-radius: 50%;
     flex-shrink: 0;
+  }
+
+  .holocron-traction {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-muted);
+    margin-bottom: 44px;
   }
 
   .holocron-link {

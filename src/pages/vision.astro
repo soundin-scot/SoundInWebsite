@@ -1,39 +1,41 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 
-const title = 'Our Mission & Values: SoundIn';
-const description = 'SoundIn is the company behind Holocron. One product, one founder, one standard of care — from the Scottish Highlands.';
+const title = 'Vision | SoundIn';
+const description = 'SoundIn builds compliance infrastructure for UK nightlife. The Terrorism Act 2025 changes what operators need — we are building it.';
 
 const sections = [
   {
     num: '01',
-    heading: 'Our Mission',
+    heading: 'The state of the industry',
     body: [
-      "I started SoundIn because I believed there was a better way to run a nightclub than a pile of spreadsheets and WhatsApp groups. Holocron is the product I wish had existed when I was on the floor — one place for attendance, incidents, guest lists, ticketing, and settlements, built around how venues actually operate.",
+      "Most venues in the UK still manage attendance with a clicker, log incidents in a notebook, and run guest lists from a WhatsApp thread. When something goes wrong — and in nightlife, things go wrong — there is no record, no data, and no accountability.",
+      "That is not a technology problem. It is a safety problem wearing a technology mask.",
     ],
   },
   {
     num: '02',
-    heading: 'Highland Roots',
+    heading: "What's changing",
     body: [
-      "I built this from the Scottish Highlands because that's where I live. Not as a brand story, but as a fact that shapes how I see time, scope, and what good work actually means.",
-      "You don't build slowly here by accident. The distance from the noise is a feature. It keeps me honest about what I take on and who I take it on for.",
+      "New legislation now requires venues to meet formal compliance standards for the first time. Venue operators need documented procedures, trained staff, and verifiable records — not as a best practice, but as a legal requirement.",
+      "Most venues are not ready. Most of the software that claims to help them is built for concerts and festivals, not the 11pm crowd at a 250-cap club in Glasgow.",
     ],
   },
   {
     num: '03',
-    heading: 'Our Approach',
+    heading: "What we're building toward",
     body: [
-      "Solo doesn't mean small. It means I have to be deliberate — deliberate about what goes in the product, deliberate about who I work with, deliberate about every hour spent.",
-      "The compliance moat that makes Holocron defensible isn't a feature list. It's a perspective on what nightlife operators actually need — and that perspective comes from being closer to the problem than anyone building from a desk in London.",
+      "A venue that can prove its headcount, log incidents in real time, and close a night with a clean financial record is not just legally compliant — it is a better place to work, a better place to operate, and a safer place to be.",
+      "That is the standard we are building Holocron toward. One place for everything a venue operator actually needs, without the spreadsheets.",
     ],
   },
   {
     num: '04',
-    heading: 'Values',
+    heading: 'One product. One founder.',
     body: [
+      "I built this from the Scottish Highlands because that's where I live. Not as a brand story, but as a fact that shapes how I work.",
+      "Solo doesn't mean small. It means I have to be deliberate — deliberate about what goes in the product, deliberate about who I work with, deliberate about every hour spent.",
       "Say what you mean. Charge what the work costs. Own your mistakes. Take on less so you can do more with it. Build things that outlast the brief. Care about the people on the other side of every contract, and about the communities they operate in.",
-      "That's not a values framework. That's just how I prefer to work.",
     ],
   },
 ];
@@ -61,8 +63,8 @@ const aboutSchema = {
   <div class="page-hero" id="vision-content" tabindex="-1">
     <div class="page-hero-inner">
       <span class="page-hero-kicker">vision</span>
-      <h1 class="page-hero-title">Mission &amp;<br />Values</h1>
-      <p class="page-hero-desc">One product. One founder. One standard of care — from the Scottish Highlands.</p>
+      <h1 class="page-hero-title">Safer venues.<br />Better nights.</h1>
+      <p class="page-hero-desc">The UK night time economy has a technology problem. We're building the fix.</p>
     </div>
   </div>
 
@@ -87,7 +89,7 @@ const aboutSchema = {
     ))}
 
     <div class="vision-cta">
-      <p>Running a venue?</p>
+      <p>Managing a venue?</p>
       <a href="/contact" class="cta-button">Get in touch <span aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
