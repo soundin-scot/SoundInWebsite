@@ -4,6 +4,18 @@ import Layout from '@/layouts/Layout.astro';
 const title = 'Products | SoundIn';
 const description = 'Holocron launches July 2026 — compliance-first venue management built for Scottish nightlife venues under 300 capacity.';
 
+type StatsResponse = { venueCount: number; userCount: number };
+
+let stats: StatsResponse | null = null;
+try {
+  const res = await fetch('https://api.holocron.scot/api/v1/public/stats', {
+    signal: AbortSignal.timeout(3000),
+  });
+  if (res.ok) stats = (await res.json()) as StatsResponse;
+} catch {
+  // API unavailable — render without live counts
+}
+
 const collectionSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -55,7 +67,9 @@ const collectionSchema = {
         <li>Free access for artists, promoters &amp; security</li>
       </ul>
       <p class="holocron-traction">
-        Founding access open until 31 July 2026.
+        {stats && stats.venueCount > 0
+          ? `Live with ${stats.venueCount} venue${stats.venueCount !== 1 ? 's' : ''} across Scotland. Founding access open until 31 July 2026.`
+          : 'Founding access open until 31 July 2026.'}
       </p>
       <a
         href="https://holocron.scot"
