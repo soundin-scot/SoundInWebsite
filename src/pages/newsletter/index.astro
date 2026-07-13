@@ -2,8 +2,8 @@
 import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const title = 'Newsletter: SoundIn | Notes from the Highlands';
-const description = 'Quiet, irregular notes on building software, hosting events, and running a small company from the Scottish Highlands. Subscribe or browse the archive.';
+const title = 'Newsletter: SoundIn | Notes from Scotland';
+const description = 'Quiet, irregular notes on building software, hosting events, and running a Scottish technology company. Subscribe or browse the archive.';
 
 const posts = (await getCollection('newsletter')).sort(
   (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
@@ -45,7 +45,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
   <div class="page-hero">
     <div class="page-hero-inner">
       <span class="page-hero-kicker">newsletter</span>
-      <h1 class="page-hero-title">Notes from<br />the Highlands</h1>
+      <h1 class="page-hero-title">Notes from<br />Scotland</h1>
       <p class="page-hero-desc">
         When a product launches, a market shifts, or something is worth saying, it goes here first. Quiet and irregular.
       </p>
@@ -54,8 +54,9 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
 
   <main class="nl-body">
     <section class="nl-signup" id="newsletter-signup" tabindex="-1">
-      <h2 class="nl-signup-title">When Holocron launches something, you hear it here first.</h2>
-      <form id="signup-form" class="signup-form" novalidate>
+      <h2 class="nl-signup-title">Notes on building the operational record nightlife has been missing.</h2>
+      <p class="nl-signup-intro">Occasional dispatches from SoundIn: product progress, the practical work of running nights, and what we are learning with the founding cohort.</p>
+      <form id="signup-form" class="signup-form">
         <label for="signup-email" class="sr-only">Email address</label>
         <div class="signup-row">
           <input
@@ -66,10 +67,13 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
             placeholder="you@example.com"
             autocomplete="email"
             spellcheck="false"
+            aria-describedby="signup-help signup-status"
+            aria-invalid="false"
             required
           />
           <button type="submit" class="cta-button">Subscribe <span aria-hidden="true">→</span></button>
         </div>
+        <p id="signup-help" class="signup-help">The notes are occasional. Read our <a href="/privacy">privacy notice</a> before subscribing.</p>
         <p id="signup-status" class="signup-status" role="status" aria-live="polite"></p>
       </form>
     </section>
@@ -98,52 +102,68 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
         </ol>
       </section>
     )}
+
+    {posts.length === 0 && (
+      <section class="nl-empty-archive" aria-labelledby="first-note-title">
+        <span>Archive / forthcoming</span>
+        <h2 id="first-note-title">The first note is being prepared.</h2>
+        <p>Subscribe for the first published issue and product updates from the founding phase.</p>
+      </section>
+    )}
   </main>
 </Layout>
 
 <style>
   .nl-body {
-    max-width: 820px;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 80px 64px 120px;
+    padding: 90px clamp(18px, 4vw, 64px) 130px;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 0;
   }
 
   /* Signup */
   .nl-signup {
-    padding-bottom: 72px;
-    border-bottom: 1px solid var(--color-ghost);
-    margin-bottom: 72px;
+    margin: 0;
+    padding: 0 clamp(36px, 7vw, 110px) 72px 0;
+    border-right: 1px solid var(--color-faint);
+    border-bottom: 0;
   }
 
   .nl-signup-title {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
-    font-size: clamp(28px, 3.5vw, 44px);
-    line-height: 1.1;
+    font-family: var(--font-sans);
+    font-weight: 560;
+    font-style: normal;
+    font-size: clamp(40px, 5vw, 72px);
+    letter-spacing: -.055em;
+    line-height: .98;
     color: var(--color-snow);
     margin-bottom: 32px;
     text-wrap: balance;
   }
 
+  .nl-signup-intro { max-width: 570px; margin: 20px 0 30px; color: var(--color-muted); font-size: 15px; line-height: 1.7; }
+
   .signup-form {
-    max-width: 520px;
+    max-width: 620px;
   }
 
   .signup-row {
     display: flex;
-    gap: 12px;
+    gap: 0;
     align-items: stretch;
   }
 
   .signup-input {
     flex: 1;
-    background: var(--color-ghost);
-    border: 1px solid var(--color-faint);
-    border-radius: 999px;
-    padding: 14px 20px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--color-faint);
+    border-radius: 0;
+    padding: 14px 0;
     font-family: var(--font-sans);
-    font-size: 15px;
+    font-size: 18px;
     color: var(--color-snow);
     transition: border-color 0.3s ease, background 0.3s ease;
     min-width: 0;
@@ -156,6 +176,19 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     border-color: var(--color-salmon);
   }
 
+  .signup-input[aria-invalid="true"] { border-color: var(--color-snow); }
+  .signup-row .cta-button { min-width: 132px; justify-content: space-between; }
+
+  .signup-help {
+    margin-top: 13px;
+    color: var(--color-muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .signup-help a { color: var(--color-cream); text-decoration: underline; text-underline-offset: 3px; }
+  .signup-help a:focus-visible { outline: 2px solid var(--color-salmon); outline-offset: 3px; }
+
   .signup-status {
     font-family: var(--font-sans);
     font-size: 13px;
@@ -164,11 +197,19 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     margin-top: 12px;
   }
 
+  .nl-empty-archive { max-width: none; padding: 4px 0 0 clamp(36px, 5vw, 76px); }
+  .nl-empty-archive > span { color: var(--color-muted); font-family: var(--font-mono); font-size: 8px; font-weight: 400; letter-spacing: .05em; text-transform: uppercase; }
+  .nl-empty-archive h2 { margin-top: 72px; color: var(--color-snow); font-family: var(--font-sans); font-size: clamp(34px, 4vw, 58px); font-style: normal; font-weight: 560; letter-spacing: -.05em; line-height: 1; }
+  .nl-empty-archive p { max-width: 500px; margin-top: 18px; color: var(--color-muted); font-size: 14px; line-height: 1.65; }
+
   /* Archive */
+  .nl-archive { padding-left: clamp(36px, 5vw, 76px); }
+
   .nl-archive-title {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
+    font-family: var(--font-sans);
+    font-weight: 560;
+    font-style: normal;
+    letter-spacing: -.04em;
     font-size: clamp(24px, 3vw, 36px);
     color: var(--color-snow);
     margin-bottom: 40px;
@@ -207,9 +248,9 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
   }
 
   .archive-issue {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-style: normal;
     font-size: 22px;
     color: var(--color-salmon);
   }
@@ -226,9 +267,9 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
   .archive-text { flex: 1; }
 
   .archive-title {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
+    font-family: var(--font-sans);
+    font-weight: 560;
+    font-style: normal;
     font-size: clamp(20px, 2.2vw, 28px);
     line-height: 1.2;
     color: var(--color-snow);
@@ -256,7 +297,9 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
   .archive-link:hover .archive-cta { color: var(--color-salmon); }
 
   @media (max-width: 900px) {
-    .nl-body { padding: 64px 24px 80px; }
+    .nl-body { padding: 64px 24px 80px; grid-template-columns: 1fr; }
+    .nl-signup { padding-right: 0; border-right: 0; border-bottom: 1px solid var(--color-faint); }
+    .nl-empty-archive, .nl-archive { padding: 64px 0 0; }
   }
 
   @media (max-width: 600px) {
@@ -277,19 +320,38 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
     e.preventDefault();
     if (!input || !status || !button) return;
 
-    if (!input.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+    if (!input.checkValidity()) {
       status.textContent = "That doesn't look like a valid email address.";
+      input.setAttribute('aria-invalid', 'true');
       input.focus();
+      input.reportValidity();
       return;
     }
 
     button.textContent = 'Subscribing…';
     button.disabled = true;
     status.textContent = '';
+    input.setAttribute('aria-invalid', 'false');
 
-    await new Promise((resolve) => setTimeout(resolve, 900));
-    status.textContent = "You're on the list. We'll be in touch.";
-    button.textContent = 'Subscribed';
-    input.value = '';
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: input.value }),
+      });
+      const payload = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(payload.error || 'Unable to subscribe right now.');
+      }
+
+      status.textContent = "You're on the list. We'll be in touch.";
+      button.textContent = 'Subscribed';
+      input.value = '';
+    } catch (error) {
+      status.textContent = error instanceof Error ? error.message : 'Unable to subscribe right now.';
+      button.textContent = 'Subscribe';
+      button.disabled = false;
+    }
   });
 </script>

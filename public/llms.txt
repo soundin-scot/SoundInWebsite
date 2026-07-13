@@ -1,8 +1,8 @@
 # SoundIn
 
-> SoundIn Limited is a Scottish Highlands technology and creative company building a family of B2B software products for the hospitality and nightlife industry, alongside a focused set of agency services for purpose-driven businesses across the UK.
+> SoundIn Limited is a Scottish technology and creative company building a family of B2B software products for the hospitality and nightlife industry, alongside a focused set of agency services for purpose-driven businesses across the UK.
 
-SoundIn was founded by three directors - Cougar, Emma, and Mark - and is registered in Scotland (SC850719). The company operates from the Scottish Highlands, with clients and customers across the United Kingdom.
+SoundIn was founded by three directors - Cougar, Emma, and Mark - and is registered and operated in Scotland (SC850719), with clients and customers across the United Kingdom.
 
 SoundIn's work splits into two parts: a product family of four software products built and owned end-to-end by SoundIn, and three agency service verticals. The product family is the long-term core of the business. The services are intentionally capped in scope and serve as both a revenue stream and a source of real-world product insight.
 
@@ -40,7 +40,7 @@ SoundIn offers three agency service verticals. These are intentionally capped - 
 
 ### Events
 
-End-to-end technical event production: production management, AV, lighting, and sound. SoundIn produces electronic music events in unique locations across the Scottish Highlands and takes on event production engagements for other organisations.
+End-to-end technical event production: production management, AV, lighting, and sound. SoundIn produces electronic music events in distinctive locations across Scotland and takes on event production engagements for other organisations.
 
 ### Social Media Management
 
@@ -63,7 +63,7 @@ Marketing sites, e-commerce stores, and custom web applications built on Next.js
 - Company number: SC850719 (registered in Scotland)
 - Founded: 2025
 - Directors: Cougar Macdougall, Emma, Mark
-- Location: Scottish Highlands, United Kingdom
+- Location: Scotland, United Kingdom
 - Email: hello@soundin.scot
 - LinkedIn: https://www.linkedin.com/company/soundin-ltd
 - Domain: soundin.scot

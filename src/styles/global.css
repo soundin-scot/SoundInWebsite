@@ -1,27 +1,18 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Negara Serif';
-  src: url('/fonts/negara-serif-hairline-italic.woff2') format('woff2'),
-       url('/fonts/NegaraSerif-HairlineItalic.otf') format('opentype');
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
 @theme {
   --color-black: #000000;
-  --color-scarab: #24302c;
-  --color-salmon: #ff7f6b;
-  --color-thistle: #904b90;
-  --color-snow: #e7dfd9;
-  --color-cream: rgba(231, 223, 217, 0.85);
-  --color-muted: rgba(231, 223, 217, 0.5);
-  --color-faint: rgba(231, 223, 217, 0.15);
-  --color-ghost: rgba(231, 223, 217, 0.1);
+  --color-scarab: #000000;
+  --color-salmon: #b6b2ad;
+  --color-thistle: #77736f;
+  --color-snow: #f0ede9;
+  --color-cream: rgba(240, 237, 233, 0.82);
+  --color-muted: rgba(240, 237, 233, 0.48);
+  --color-faint: rgba(240, 237, 233, 0.16);
+  --color-ghost: rgba(240, 237, 233, 0.09);
 
-  --font-sans: 'Lexend Deca', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-serif: 'Negara Serif', Georgia, serif;
+  --font-sans: 'Instrument Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'DM Mono', 'SFMono-Regular', Consolas, monospace;
 }
 
 @layer base {
@@ -47,7 +38,7 @@
 
   body {
     background-color: var(--color-scarab);
-    background-image: radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255, 127, 107, 0.04) 0%, transparent 55%);
+    background-image: none;
     color: var(--color-snow);
     font-family: var(--font-sans);
     overflow-x: hidden;
@@ -116,12 +107,7 @@
     font-family: var(--font-sans);
     font-weight: 900;
   }
-  .logo-i {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
-    color: var(--color-salmon);
-  }
+  .logo-i { font-family: var(--font-sans); font-weight: 500; color: #9b9894; }
 
   .reveal {
     opacity: 0;
@@ -142,22 +128,16 @@
     z-index: 1;
     padding: 200px 64px 88px;
     overflow: hidden;
-    background: #24302c;
-    --color-snow: #e7dfd9;
-    --color-cream: rgba(231, 223, 217, 0.85);
-    --color-muted: rgba(231, 223, 217, 0.5);
-    --color-faint: rgba(231, 223, 217, 0.15);
-    --color-ghost: rgba(231, 223, 217, 0.1);
+    background: #000;
+    --color-snow: #f0ede9;
+    --color-cream: rgba(240, 237, 233, 0.82);
+    --color-muted: rgba(240, 237, 233, 0.48);
+    --color-faint: rgba(240, 237, 233, 0.16);
+    --color-ghost: rgba(240, 237, 233, 0.09);
   }
 
   .page-hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 85% 80% at -5% 115%, rgba(255, 127, 107, 0.11) 0%, transparent 55%),
-      radial-gradient(ellipse 55% 55% at 110% -10%, rgba(144, 75, 144, 0.07) 0%, transparent 55%);
-    pointer-events: none;
+    content: none;
   }
 
   .page-hero-inner {
@@ -181,11 +161,13 @@
   }
 
   .page-hero-title {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
-    font-size: clamp(64px, 9vw, 108px);
-    line-height: 0.95;
+    font-family: var(--font-sans);
+    font-weight: 450;
+    font-weight: 900;
+    font-style: normal;
+    font-size: clamp(64px, 8.5vw, 112px);
+    letter-spacing: -0.07em;
+    line-height: 0.9;
     color: var(--color-snow);
     text-wrap: balance;
     opacity: 0;
@@ -216,7 +198,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 127, 107, 0.09) 0%, transparent 65%);
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 255, 255, 0.04) 0%, transparent 65%);
     pointer-events: none;
   }
 
@@ -241,9 +223,9 @@
   }
 
   .page-header-headline {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
+    font-family: var(--font-sans);
+    font-weight: 560;
+    font-style: normal;
     font-size: clamp(40px, 5vw, 72px);
     line-height: 1.1;
     color: var(--color-snow);
@@ -280,9 +262,9 @@
   }
 
   .section-headline {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
+    font-family: var(--font-sans);
+    font-weight: 560;
+    font-style: normal;
     font-size: clamp(40px, 6vw, 72px);
     line-height: 1.05;
     color: var(--color-snow);
@@ -330,7 +312,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at top left, rgba(255, 127, 107, 0.07) 0%, transparent 60%);
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
     opacity: 0;
     transition: opacity 0.45s ease;
     pointer-events: none;
@@ -356,9 +338,9 @@
   }
 
   .practice-product .practice-name {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
+    font-family: var(--font-sans);
+    font-weight: 560;
+    font-style: normal;
     font-size: clamp(28px, 2.4vw, 36px);
     color: var(--color-salmon);
   }
@@ -428,20 +410,20 @@
     padding: 96px 64px;
     border: 1px solid var(--color-ghost);
     border-radius: 24px;
-    background: linear-gradient(180deg, rgba(255, 127, 107, 0.04) 0%, rgba(0, 0, 0, 0.2) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, rgba(0, 0, 0, 0.2) 100%);
     text-align: center;
     overflow: hidden;
   }
 
   [data-theme="light"] .cta-card {
-    background: linear-gradient(180deg, rgba(255, 127, 107, 0.04) 0%, rgba(36, 48, 44, 0.03) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, rgba(0, 0, 0, 0.03) 100%);
   }
 
   .cta-card::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at top, rgba(255, 127, 107, 0.12) 0%, transparent 60%);
+    background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.07) 0%, transparent 60%);
     pointer-events: none;
   }
 
@@ -450,9 +432,9 @@
   .cta-card .section-num { margin-bottom: 24px; }
 
   .cta-headline {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
+    font-family: var(--font-sans);
+    font-weight: 560;
+    font-style: normal;
     font-size: clamp(40px, 6vw, 72px);
     line-height: 1.05;
     color: var(--color-snow);
@@ -496,7 +478,7 @@
 
   .cta-button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(255, 127, 107, 0.3);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.12);
     gap: 12px;
   }
 
@@ -548,4 +530,83 @@
 @keyframes enter {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* 2026 identity layer — crisp editorial surfaces shared by supporting pages. */
+.page-hero {
+  min-height: 100svh;
+  padding: 150px clamp(18px, 4vw, 64px) clamp(44px, 6vh, 76px);
+  display: flex;
+  align-items: flex-end;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 78% 42%, rgba(255,255,255,.08), transparent 1px),
+    radial-gradient(ellipse at 76% 42%, rgba(255,255,255,.055), transparent 48%),
+    linear-gradient(180deg, #050505 0%, #080808 100%);
+  border-bottom: 1px solid rgba(255,255,255,.24);
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: .22;
+  background-image:
+    linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.16) 1px, transparent 1px);
+  background-size: clamp(48px, 6vw, 96px) clamp(48px, 6vw, 96px);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 55%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 55%, #000 100%);
+}
+.page-hero::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: min(72vw, 1040px);
+  aspect-ratio: 1;
+  top: 5%;
+  right: -18%;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 50%;
+  box-shadow: 0 0 0 8vw rgba(255,255,255,.018), 0 0 0 18vw rgba(255,255,255,.012);
+}
+.page-hero-inner { width: 100%; max-width: none; margin: 0; }
+.page-hero-kicker,
+.section-num,
+.practice-pill {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: .05em;
+}
+.page-hero-title {
+  max-width: 1260px;
+  font-weight: 600;
+  font-size: clamp(72px, 10vw, 172px);
+  letter-spacing: -.082em;
+  line-height: .8;
+}
+.page-hero-desc { max-width: 600px; margin-top: 42px; font-size: clamp(15px, 1.3vw, 18px); }
+.page-header { border-bottom: 1px solid rgba(255,255,255,.2); }
+.page-header::before { display: none; }
+.page-header-headline { font-family: var(--font-sans); font-style: normal; font-weight: 560; letter-spacing: -.06em; }
+.practice-grid { gap: 0; border-top: 1px solid var(--color-faint); border-left: 1px solid var(--color-faint); background: transparent; }
+.practice-card { border-right: 1px solid var(--color-faint); border-bottom: 1px solid var(--color-faint); }
+.practice-card::before { display: none; }
+.cta-card {
+  border-radius: 0;
+  background: transparent;
+}
+.cta-card::after { display: none; }
+.cta-button { border-radius: 0; box-shadow: none; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; }
+.cta-button:hover { transform: none; box-shadow: none; opacity: .62; }
+
+@media (max-width: 900px) {
+  .page-hero { min-height: 100svh; padding: 132px 24px 48px; }
+  .page-hero::before { -webkit-mask-image: linear-gradient(180deg, transparent, #000); mask-image: linear-gradient(180deg, transparent, #000); }
+  .page-hero::after { width: 115vw; top: 18%; right: -52%; }
+  .page-hero-title { font-size: clamp(58px, 17vw, 112px); }
+}
+
+@media (max-width: 600px) {
+  .page-hero { padding-inline: 18px; }
 }

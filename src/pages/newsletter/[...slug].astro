@@ -116,9 +116,9 @@ const blogPostSchema = {
   }
 
   .post-issue {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-style: normal;
     font-size: 22px;
     color: var(--color-salmon);
   }
@@ -133,9 +133,9 @@ const blogPostSchema = {
   }
 
   .post-title {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-style: normal;
     font-size: clamp(40px, 5vw, 64px);
     line-height: 1.05;
     color: var(--color-snow);
@@ -160,9 +160,9 @@ const blogPostSchema = {
 
   .post-body :global(p) { margin: 0 0 24px; }
   .post-body :global(h2) {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
+    font-family: var(--font-sans);
+    font-weight: 560;
+    font-style: normal;
     font-size: clamp(28px, 3vw, 36px);
     line-height: 1.1;
     color: var(--color-snow);
@@ -177,7 +177,7 @@ const blogPostSchema = {
   }
   .post-body :global(a) {
     color: var(--color-salmon);
-    border-bottom: 1px solid rgba(255, 127, 107, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
     transition: border-color 0.3s ease;
   }
   .post-body :global(a:hover) { border-bottom-color: var(--color-salmon); }
@@ -185,10 +185,10 @@ const blogPostSchema = {
     border-left: 2px solid var(--color-salmon);
     padding-left: 24px;
     margin: 32px 0;
-    font-style: italic;
+    font-style: normal;
     color: var(--color-snow);
   }
-  .post-body :global(em) { color: var(--color-snow); font-style: italic; }
+  .post-body :global(em) { color: var(--color-snow); font-style: normal; font-weight: 600; }
   .post-body :global(ul), .post-body :global(ol) {
     margin: 0 0 24px;
     padding-left: 24px;
@@ -228,9 +228,9 @@ const blogPostSchema = {
   }
 
   .post-footer-headline {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
+    font-family: var(--font-sans);
+    font-weight: 560;
+    font-style: normal;
     font-size: clamp(28px, 3.5vw, 40px);
     line-height: 1.1;
     color: var(--color-snow);
@@ -243,5 +243,161 @@ const blogPostSchema = {
   @media (max-width: 600px) {
     .post { padding: 140px 24px 80px; }
     .post-header { margin-bottom: 48px; }
+  }
+</style>
+
+<style>
+  /* Editorial article shell shared with the 2026 site identity. */
+  .post.post {
+    max-width: none;
+    margin: 0;
+    padding: 170px clamp(18px, 4vw, 64px) 120px;
+  }
+
+  .post .post-header {
+    position: relative;
+    min-height: calc(100svh - 290px);
+    display: grid;
+    grid-template-columns: minmax(180px, .35fr) minmax(520px, 1fr);
+    align-content: end;
+    column-gap: clamp(48px, 9vw, 160px);
+    margin: 0;
+    padding-bottom: clamp(64px, 8vw, 112px);
+    border-bottom: 1px solid var(--color-ghost);
+  }
+
+  .post .post-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    grid-column: 1;
+    align-self: start;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: .05em;
+  }
+
+  .post .post-meta {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0 0 64px;
+    gap: 28px;
+  }
+
+  .post .post-issue,
+  .post .post-date {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: .05em;
+    color: var(--color-muted);
+  }
+
+  .post .post-title,
+  .post .post-summary {
+    grid-column: 2;
+  }
+
+  .post .post-title {
+    margin: 0;
+    max-width: 1000px;
+    font-family: var(--font-sans);
+    font-size: clamp(58px, 8vw, 132px);
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: -.075em;
+    line-height: .88;
+  }
+
+  .post .post-summary {
+    max-width: 720px;
+    margin-top: 42px;
+    font-size: clamp(17px, 1.6vw, 23px);
+    line-height: 1.5;
+  }
+
+  .post .post-body {
+    width: min(100%, 760px);
+    margin: 0 0 0 auto;
+    padding: clamp(64px, 8vw, 112px) 0;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .post .post-body :global(h2) {
+    margin: 72px 0 24px;
+    font-family: var(--font-sans);
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 560;
+    font-style: normal;
+    letter-spacing: -.05em;
+    line-height: 1;
+  }
+
+  .post .post-body :global(h3) {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 560;
+    letter-spacing: -.02em;
+  }
+
+  .post .post-body :global(a) { color: var(--color-snow); }
+  .post .post-body :global(blockquote) {
+    margin: 48px 0;
+    padding: 8px 0 8px 28px;
+    border-left: 1px solid var(--color-snow);
+    font-family: var(--font-sans);
+    font-size: clamp(21px, 2.4vw, 30px);
+    font-style: normal;
+    letter-spacing: -.025em;
+    line-height: 1.35;
+  }
+
+  .post .post-footer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 48px;
+    margin: 0;
+    padding: 72px 0 0;
+    border-top: 1px solid var(--color-ghost);
+    border-image: none;
+    text-align: left;
+  }
+
+  .post .post-footer-headline {
+    max-width: 800px;
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: clamp(36px, 5vw, 76px);
+    font-weight: 560;
+    font-style: normal;
+    letter-spacing: -.06em;
+    line-height: .96;
+  }
+
+  .post .post-footer-headline .accent { color: inherit; }
+
+  @media (max-width: 800px) {
+    .post.post { padding-top: 140px; }
+    .post .post-header { grid-template-columns: 1fr; }
+    .post .post-back,
+    .post .post-meta,
+    .post .post-title,
+    .post .post-summary { grid-column: 1; }
+    .post .post-back { position: static; grid-row: auto; margin-bottom: 52px; }
+    .post .post-meta { grid-row: auto; margin-bottom: 36px; }
+    .post .post-footer { grid-template-columns: 1fr; align-items: start; }
+    .post .post-footer .cta-button { width: max-content; }
+  }
+
+  @media (max-width: 600px) {
+    .post.post { padding: 124px 18px 80px; }
+    .post .post-title { font-size: clamp(52px, 17vw, 76px); }
+    .post .post-body { padding: 64px 0; }
+    .post .post-footer { padding-top: 52px; gap: 28px; }
   }
 </style>

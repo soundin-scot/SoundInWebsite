@@ -1,0 +1,119 @@
+<figure class="night-record" aria-labelledby="night-record-caption">
+  <header class="night-record__header">
+    <span>H/01</span>
+    <span>Illustrative operational record</span>
+    <span>Live</span>
+  </header>
+
+  <div class="night-record__clock">
+    <span>Sat / 18 Jul</span>
+    <strong>23:48</strong>
+    <span>Doors 22:00 — Close 03:00</span>
+  </div>
+
+  <div class="night-record__grid">
+    <section class="night-record__attendance" aria-label="Illustrative attendance">
+      <div class="record-label"><span>01</span>Attendance</div>
+      <strong>684</strong>
+      <div class="record-capacity"><span style="--fill: 76%"></span></div>
+      <p>76% of sample capacity</p>
+    </section>
+
+    <section class="night-record__status" aria-label="Illustrative event status">
+      <div class="record-label"><span>02</span>Floor status</div>
+      <div class="status-orbit">
+        <span></span>
+        <b>Steady</b>
+      </div>
+      <p>Last check / 23:46</p>
+    </section>
+
+    <section class="night-record__events" aria-label="Illustrative event timeline">
+      <div class="record-label"><span>03</span>Shared timeline</div>
+      <ol>
+        <li><time>22:08</time><span>Doors opened</span><b>Venue</b></li>
+        <li><time>22:41</time><span>Guest allocation closed</span><b>Promoter</b></li>
+        <li><time>23:17</time><span>Floor note resolved</span><b>Security</b></li>
+        <li class="is-current"><time>23:48</time><span>Live record active</span><b>Shared</b></li>
+      </ol>
+    </section>
+  </div>
+
+  <figcaption id="night-record-caption">
+    <span>Sample data only</span>
+    <span>One record / every responsible team</span>
+  </figcaption>
+</figure>
+
+<style>
+  .night-record {
+    position: relative;
+    width: 100%;
+    min-height: 720px;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    color: #f0efe9;
+    background: #0a0a0a;
+    border: 1px solid #0a0a0a;
+    overflow: hidden;
+  }
+  .night-record::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: .12;
+    background-image: linear-gradient(rgba(255,255,255,.32) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.32) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+  .night-record > * { position: relative; z-index: 1; }
+  .night-record__header,
+  .night-record figcaption {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .night-record__header span:nth-child(2) { justify-self: center; opacity: .55; }
+  .night-record__header span:last-child { justify-self: end; display: flex; align-items: center; gap: 7px; }
+  .night-record__header span:last-child::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #f0efe9; animation: live-pulse 1.8s ease-in-out infinite; }
+  .night-record__clock { margin: 62px 0 44px; }
+  .night-record__clock span { display: block; font-family: var(--font-mono); font-size: 8px; text-transform: uppercase; opacity: .5; }
+  .night-record__clock strong { display: block; margin: 8px 0 5px; font-size: clamp(72px, 10vw, 144px); font-weight: 500; letter-spacing: -.075em; line-height: .88; }
+  .night-record__grid { display: grid; grid-template-columns: 1fr 1fr; margin-top: auto; border-top: 1px solid rgba(255,255,255,.35); border-left: 1px solid rgba(255,255,255,.35); }
+  .night-record__grid section { min-height: 186px; padding: 16px; border-right: 1px solid rgba(255,255,255,.35); border-bottom: 1px solid rgba(255,255,255,.35); }
+  .record-label { display: flex; gap: 8px; font-family: var(--font-mono); font-size: 8px; text-transform: uppercase; opacity: .6; }
+  .record-label span { opacity: .55; }
+  .night-record__attendance strong { display: block; margin-top: 28px; font-size: 54px; font-weight: 500; letter-spacing: -.06em; line-height: 1; }
+  .record-capacity { height: 3px; margin-top: 16px; background: rgba(255,255,255,.2); }
+  .record-capacity span { display: block; width: var(--fill); height: 100%; background: #f0efe9; }
+  .night-record p { margin-top: 10px; font-family: var(--font-mono); font-size: 7px; text-transform: uppercase; opacity: .45; }
+  .status-orbit { position: relative; width: 94px; height: 94px; margin: 18px auto 0; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.38); border-radius: 50%; }
+  .status-orbit span { position: absolute; inset: 9px; border: 1px dashed rgba(255,255,255,.3); border-radius: 50%; animation: live-spin 10s linear infinite; }
+  .status-orbit b { font-family: var(--font-mono); font-size: 8px; font-weight: 400; text-transform: uppercase; }
+  .night-record__status p { text-align: center; }
+  .night-record__events { grid-column: 1 / -1; }
+  .night-record__events ol { margin-top: 17px; list-style: none; }
+  .night-record__events li { display: grid; grid-template-columns: 58px 1fr auto; gap: 12px; padding: 8px 0; border-top: 1px solid rgba(255,255,255,.16); font-family: var(--font-mono); font-size: 8px; }
+  .night-record__events time,
+  .night-record__events b { opacity: .45; font-weight: 400; text-transform: uppercase; }
+  .night-record__events .is-current { color: #0a0a0a; margin: 0 -8px; padding: 8px; background: #f0efe9; }
+  .night-record figcaption { grid-template-columns: 1fr 1fr; margin-top: 16px; opacity: .52; }
+  .night-record figcaption span:last-child { justify-self: end; }
+  @keyframes live-pulse { 50% { opacity: .25; } }
+  @keyframes live-spin { to { transform: rotate(360deg); } }
+  @media (max-width: 680px) {
+    .night-record { min-height: 650px; }
+    .night-record__clock { margin-top: 54px; }
+    .night-record__clock strong { font-size: 21vw; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .night-record__header span:last-child::before,
+    .status-orbit span { animation: none; }
+  }
+</style>
