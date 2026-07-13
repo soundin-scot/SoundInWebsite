@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 
 const title = 'Contact SoundIn';
-const description = 'Get in touch. Based in the Scottish Highlands - we build compliance-first software for the UK night time economy. Email, or use the form.';
+const description = 'Get in touch with SoundIn, a Scottish company building compliance-first software for the UK night-time economy.';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -61,7 +61,8 @@ const pageSchema = {
           <label for="contact-message" class="field-label">Message</label>
           <textarea id="contact-message" name="message" class="contact-field" rows="4" required></textarea>
         </div>
-        <button class="contact-submit" type="submit">Send</button>
+        <button class="contact-submit" type="submit">Start a conversation</button>
+        <p class="contact-reassurance">Tell us a little about your operation and we will reply by email. Your details are handled under our <a href="/privacy">privacy notice</a>.</p>
         <div id="form-status" role="status" aria-live="polite"></div>
       </form>
     </div>
@@ -73,7 +74,7 @@ const pageSchema = {
         </div>
         <div class="contact-info-group">
           <dt class="contact-info-label">Location</dt>
-          <dd class="contact-info-val">Scottish Highlands, UK</dd>
+          <dd class="contact-info-val">Scotland, UK</dd>
         </div>
         <div class="contact-info-group">
           <dt class="contact-info-label">Socials</dt>
@@ -88,26 +89,28 @@ const pageSchema = {
   .contact {
     position: relative;
     z-index: 1;
-    max-width: 1000px;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 80px 64px 120px;
+    padding: 88px clamp(18px, 4vw, 64px) 130px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 0;
     align-items: start;
   }
+
+  .contact > div:first-child { padding-right: clamp(36px, 7vw, 110px); }
 
   .field-group { margin-bottom: 0; }
 
   .field-label {
     display: block;
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: .05em;
     text-transform: uppercase;
     color: var(--color-muted);
-    padding-top: 16px;
+    padding-top: 20px;
     margin-bottom: 0;
   }
 
@@ -117,9 +120,10 @@ const pageSchema = {
     background: none;
     border: none;
     border-bottom: 1px solid var(--color-faint);
-    padding: 8px 0 16px;
+    min-height: 56px;
+    padding: 8px 0 15px;
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: 19px;
     font-weight: 400;
     color: var(--color-snow);
     transition: border-color 0.3s ease;
@@ -131,28 +135,30 @@ const pageSchema = {
 
   .contact-field:focus-visible {
     border-color: var(--color-salmon);
-    outline: 2px solid rgba(255, 127, 107, 0.4);
+    outline: 2px solid rgba(255, 255, 255, 0.4);
     outline-offset: 4px;
   }
 
   .contact-submit {
-    margin-top: 40px;
-    font-family: var(--font-sans);
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
+    margin-top: 42px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: .04em;
+    text-transform: uppercase;
     color: var(--color-scarab);
     background: var(--color-salmon);
     border: none;
-    border-radius: 999px;
-    padding: 16px 32px;
+    border-radius: 0;
+    padding: 16px 20px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .contact-submit:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(255, 127, 107, 0.3);
+    transform: none;
+    box-shadow: none;
+    opacity: .62;
   }
 
   .contact-submit:focus-visible {
@@ -167,22 +173,24 @@ const pageSchema = {
     box-shadow: none;
   }
 
-  .contact-right { padding-top: 24px; }
+  .contact-right { min-height: 100%; padding: 20px 0 0 clamp(36px, 5vw, 76px); border-left: 1px solid var(--color-faint); }
 
   .contact-info-group { margin-bottom: 40px; }
 
   .contact-info-label {
-    font-family: var(--font-serif);
-    font-weight: 100;
-    font-style: italic;
-    font-size: 18px;
-    color: var(--color-salmon);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 8px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--color-muted);
     margin-bottom: 4px;
   }
 
   .contact-info-val {
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     color: var(--color-cream);
   }
@@ -203,9 +211,14 @@ const pageSchema = {
     min-height: 20px;
   }
 
+  .contact-reassurance { max-width: 390px; margin-top: 20px; color: var(--color-muted); font-size: 12px; line-height: 1.6; }
+  .contact-reassurance a { color: var(--color-cream); text-decoration: underline; text-underline-offset: 3px; }
+  .contact-reassurance a:focus-visible { outline: 2px solid var(--color-salmon); outline-offset: 3px; }
+
   @media (max-width: 900px) {
     .contact { grid-template-columns: 1fr; padding: 64px 24px 80px; gap: 48px; }
-    .contact-right { padding-top: 0; }
+    .contact > div:first-child { padding-right: 0; }
+    .contact-right { padding: 42px 0 0; border-top: 1px solid var(--color-faint); border-left: 0; }
   }
 </style>
 
@@ -244,7 +257,7 @@ const pageSchema = {
       form.reset();
     } catch (err) {
       console.error('Contact form error:', err);
-      btn.textContent = 'Send Message';
+      btn.textContent = 'Start a conversation';
       btn.disabled = false;
       status.textContent = 'Something went wrong. Email us at hello@soundin.scot';
     }

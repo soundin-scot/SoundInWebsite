@@ -1,68 +1,95 @@
 ---
+import Logo from '@/components/Logo.astro';
 const year = new Date().getFullYear();
 ---
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-bar flex items-center justify-between pt-10 pb-10 max-[900px]:flex-wrap max-[900px]:gap-4 max-[900px]:pb-8">
-      <span class="footer-bar-item">&copy; {year} SoundIn Limited</span>
-      <div class="footer-bar-links flex gap-10 max-[600px]:gap-5">
-        <a href="/contact" class="footer-bar-item">Say Hello</a>
-        <a
-          href="https://www.linkedin.com/company/soundin-ltd"
-          rel="noopener noreferrer"
-          target="_blank"
-          class="footer-bar-item">LinkedIn</a>
-        <a href="/privacy" class="footer-bar-item">Privacy</a>
-      </div>
-      <a
-        href="https://find-and-update.company-information.service.gov.uk/company/SC850719"
-        rel="noopener noreferrer"
-        target="_blank"
-        class="footer-bar-item">SC850719</a>
-    </div>
+<footer class="site-footer">
+  <div class="site-footer__top">
+    <Logo />
+    <p>Independent software for the people and places behind Scotland's night-time economy.</p>
+    <a class="site-footer__contact" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
+  </div>
+
+  <div class="site-footer__word" aria-hidden="true">SOUND/IN</div>
+
+  <div class="site-footer__meta">
+    <span>{year} © SoundIn Limited</span>
+    <span>Scotland / United Kingdom</span>
+    <nav aria-label="Footer navigation">
+      <a href="/vision">Vision</a>
+      <a href="/ecosystem">Products</a>
+      <a href="/newsletter">Notes</a>
+      <a href="/privacy">Privacy</a>
+      <a href="https://www.linkedin.com/company/soundin-ltd" rel="noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    </nav>
+    <a href="https://find-and-update.company-information.service.gov.uk/company/SC850719" rel="noopener noreferrer" target="_blank">SC850719 ↗</a>
   </div>
 </footer>
 
 <style>
-  .footer {
+  .site-footer {
     position: relative;
     z-index: 1;
-    border-top: 1px solid transparent;
-    border-image: linear-gradient(to right, transparent 0%, rgba(231, 223, 217, 0.12) 15%, rgba(231, 223, 217, 0.12) 85%, transparent 100%) 1;
-    padding: 0 64px;
+    padding: 56px clamp(18px, 3vw, 46px) 28px;
+    color: #f0efe9;
+    background: #080808;
+    border-top: 1px solid rgba(255,255,255,.2);
+    overflow: hidden;
   }
-
-  [data-theme="light"] .footer {
-    border-image: linear-gradient(to right, transparent 0%, rgba(36, 48, 44, 0.12) 15%, rgba(36, 48, 44, 0.12) 85%, transparent 100%) 1;
+  .site-footer__top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: start;
+    gap: 32px;
   }
-
-  .footer-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .footer-bar-item {
-    font-family: var(--font-sans);
+  .site-footer__top p {
+    max-width: 390px;
+    color: rgba(240,239,233,.58);
     font-size: 13px;
-    font-weight: 400;
-    color: var(--color-muted);
+    line-height: 1.6;
   }
-
-  .footer-bar a { transition: color 0.3s ease; }
-  .footer-bar a:hover { color: var(--color-snow); }
-  .footer-bar a:focus-visible {
-    color: var(--color-snow);
-    outline: 2px solid var(--color-salmon);
-    outline-offset: 4px;
-    border-radius: 2px;
+  .site-footer__contact {
+    justify-self: end;
+    display: inline-flex;
+    gap: 22px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,.46);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
   }
-
-  @media (max-width: 900px) {
-    .footer { padding: 0 24px; }
+  .site-footer__word {
+    margin: clamp(110px, 14vw, 210px) 0 40px;
+    font-size: clamp(82px, 18.1vw, 340px);
+    font-weight: 650;
+    letter-spacing: -.09em;
+    line-height: .67;
+    white-space: nowrap;
   }
+  .site-footer__meta {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    align-items: center;
+    gap: 32px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,.18);
+    color: rgba(240,239,233,.46);
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .site-footer__meta nav { justify-self: center; display: flex; gap: 25px; }
+  .site-footer a { transition: opacity 160ms ease; }
+  .site-footer a:hover { opacity: .58; }
+  .site-footer a:focus-visible { outline: 1px solid #fff; outline-offset: 5px; }
 
-  @media (max-width: 600px) {
-    .footer { padding: 0 16px; }
+  @media (max-width: 800px) {
+    .site-footer__top { grid-template-columns: 1fr; }
+    .site-footer__contact { justify-self: start; margin-top: 24px; }
+    .site-footer__word { margin-top: 110px; font-size: 19vw; }
+    .site-footer__meta { grid-template-columns: 1fr 1fr; }
+    .site-footer__meta nav { grid-column: 1 / -1; grid-row: 2; justify-self: start; flex-wrap: wrap; gap: 16px 22px; }
+    .site-footer__meta > a { justify-self: end; }
   }
 </style>

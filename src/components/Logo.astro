@@ -2,10 +2,28 @@
 interface Props {
   ariaLabel?: string;
   href?: string;
+  compact?: boolean;
 }
-const { ariaLabel = 'SoundIn: return to homepage', href = '/' } = Astro.props;
+const { ariaLabel = 'SoundIn: return to homepage', href = '/', compact = false } = Astro.props;
 ---
 
-<a href={href} class="logo" aria-label={ariaLabel}>
-  <span class="logo-s">Sound</span><span class="logo-i">In</span>
+<a href={href} class:list={['brand', { 'brand--compact': compact }]} aria-label={ariaLabel}>
+  <span class="brand-word">SOUND<span>/IN</span></span>
 </a>
+
+<style>
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    color: currentColor;
+    line-height: 1;
+  }
+  .brand-word {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 650;
+    letter-spacing: -.055em;
+  }
+  .brand-word span { font-weight: 450; opacity: .58; }
+  .brand--compact .brand-word { font-size: 15px; }
+</style>
