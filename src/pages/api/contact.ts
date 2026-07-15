@@ -1,103 +1,81 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
+import { AirtableClient } from '@/lib/forms/airtable';
+import { getAirtableConfig, getResendConfig, IntegrationConfigurationError } from '@/lib/forms/config';
+import { sendContactNotification } from '@/lib/forms/resend';
+import { cleanText, isEmail, json, normaliseEmail } from '@/lib/forms/validation';
+
+interface ContactBody {
+  name?: unknown;
+  email?: unknown;
+  company?: unknown;
+  message?: unknown;
+  website?: unknown;
+}
 
 export const POST: APIRoute = async ({ request }) => {
-  const token = import.meta.env.HUBSPOT_PRIVATE_TOKEN;
-  if (!token) {
-    return new Response(JSON.stringify({ error: 'Server configuration error' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
-
-  let body: { name?: string; email?: string; company?: string; message?: string };
+  let body: ContactBody;
   try {
     body = await request.json();
   } catch {
-    return new Response(JSON.stringify({ error: 'Invalid request body' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return json({ error: 'The request could not be read.' }, 400);
   }
 
-  const { name, email, company, message } = body;
+  // Honeypot submissions receive a generic success response and are not stored.
+  if (cleanText(body.website, 200)) return json({ ok: true });
 
-  if (!name || !email || !message) {
-    return new Response(JSON.stringify({ error: 'Name, email, and message are required' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    });
+  const name = cleanText(body.name, 120);
+  const email = normaliseEmail(body.email);
+  const company = cleanText(body.company, 160);
+  const message = cleanText(body.message, 5000);
+
+  if (name.length < 2 || !isEmail(email) || message.length < 10) {
+    return json({ error: 'Please provide your name, a valid email address and a short message.' }, 400);
   }
 
-  const hsHeaders = {
-    Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  };
+  try {
+    const airtableConfig = getAirtableConfig(import.meta.env);
+    const resendConfig = getResendConfig(import.meta.env);
+    const airtable = new AirtableClient(airtableConfig);
+    const submittedAt = new Date().toISOString();
+    const enquiry = await airtable.create(airtableConfig.enquiriesTableId, {
+      Name: name,
+      Email: email,
+      Company: company || undefined,
+      Message: message,
+      Source: 'soundin.scot/contact',
+      Status: 'New',
+      'Submitted At': submittedAt,
+      'Notification Status': 'Pending',
+    });
 
-  // Upsert contact
-  const contactRes = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
-    method: 'POST',
-    headers: hsHeaders,
-    body: JSON.stringify({
-      properties: {
-        firstname: name.split(' ')[0],
-        lastname: name.split(' ').slice(1).join(' ') || '',
+    try {
+      const emailId = await sendContactNotification(resendConfig, {
+        id: enquiry.id,
+        name,
         email,
-        company: company || '',
-        lifecyclestage: 'lead',
-      },
-    }),
-  });
-
-  let contactId: string;
-
-  if (contactRes.status === 409) {
-    // Contact already exists — extract existing ID from error
-    const err = await contactRes.json();
-    const match = (err?.message as string | undefined)?.match(/existing ID: (\d+)/);
-    if (!match) {
-      return new Response(JSON.stringify({ error: 'Failed to upsert contact' }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
+        company: company || undefined,
+        message,
       });
+      await airtable.update(airtableConfig.enquiriesTableId, enquiry.id, {
+        'Notification Status': 'Sent',
+        'Notification Email ID': emailId,
+      });
+    } catch (error) {
+      console.error('Contact notification failed after enquiry capture', error);
+      await airtable.update(airtableConfig.enquiriesTableId, enquiry.id, {
+        'Notification Status': 'Failed',
+      }).catch((updateError) => console.error('Unable to record contact notification failure', updateError));
     }
-    contactId = match[1];
-  } else if (!contactRes.ok) {
-    return new Response(JSON.stringify({ error: 'Failed to create contact' }), {
-      status: 502,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  } else {
-    const contact = await contactRes.json();
-    contactId = contact.id;
+
+    return json({ ok: true });
+  } catch (error) {
+    if (error instanceof IntegrationConfigurationError) {
+      console.error('Contact form is missing server configuration', error.missing);
+      return json({ error: 'The contact form is unavailable right now. Please email cougar@soundin.scot.' }, 503);
+    }
+    console.error('Contact form provider failure', error);
+    return json({ error: 'We could not save your message. Please email cougar@soundin.scot.' }, 502);
   }
-
-  // Create note and associate with contact
-  const noteRes = await fetch('https://api.hubapi.com/crm/v3/objects/notes', {
-    method: 'POST',
-    headers: hsHeaders,
-    body: JSON.stringify({
-      properties: {
-        hs_note_body: `Message from soundin.scot contact form:\n\n${message}`,
-        hs_timestamp: Date.now().toString(),
-      },
-      associations: [
-        {
-          to: { id: contactId },
-          types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 202 }],
-        },
-      ],
-    }),
-  });
-
-  if (!noteRes.ok) {
-    // Note creation failure is non-fatal — contact was captured
-    console.error('Failed to create HubSpot note', await noteRes.text());
-  }
-
-  return new Response(JSON.stringify({ ok: true }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
 };

@@ -1,9 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import SoundObject from '@/components/SoundObject.astro';
 
 const title = 'Products | SoundIn';
-const description = 'Holocron launches July 2026 — compliance-first venue management built for Scottish nightlife venues under 300 capacity.';
+const description = 'Holocron brings attendance, incidents, guest lists, ticketing and settlements into one record for independent Scottish venues.';
 
 const collectionSchema = {
   '@context': 'https://schema.org',
@@ -33,19 +32,15 @@ const collectionSchema = {
       </div>
       <h1>Operational systems for Scotland after dark.</h1>
       <p>
-        SoundIn builds focused operational software for the people responsible for venues, events and the night-time economy.
+        SoundIn builds focused software for the people responsible for venues, events and Scotland’s night-time economy.
       </p>
       <div class="products-header__actions">
-        <a class="product-primary-action" href="#holocron">Explore Holocron <span aria-hidden="true">→</span></a>
-        <a class="product-secondary-action" href="/contact">Discuss your operation <span aria-hidden="true">→</span></a>
+        <a class="product-primary-action" href="#holocron">See how Holocron works <span aria-hidden="true">→</span></a>
+        <a class="product-secondary-action" href="/contact">Tell us about your venue <span aria-hidden="true">→</span></a>
       </div>
     </header>
 
     <article class="product" id="holocron">
-      <div class="product-object">
-        <SoundObject />
-      </div>
-
       <header class="product-header">
         <div>
           <span class="product-index">01</span>
@@ -53,34 +48,33 @@ const collectionSchema = {
           <p class="product-category">Venue operations / Scotland</p>
         </div>
         <p class="product-summary">
-          One operational record for the entire night. Holocron connects attendance, incidents, guest lists, ticketing and settlements without adding another administrative burden.
+          One operational record for the whole night. Holocron keeps attendance, incidents, guest lists, ticketing and settlements together, without creating more admin.
         </p>
       </header>
 
       <div class="product-details">
         <div>
           <span>Designed for</span>
-          <p>Scottish venues under 300 capacity.</p>
+          <p>Venues operating under Scottish licensing law.</p>
         </div>
         <div>
           <span>Shared with</span>
-          <p>Artists, promoters and security teams.</p>
+          <p>Artists, promoters, production teams and security.</p>
         </div>
         <div>
           <span>Operational record</span>
-          <p>Attendance, incidents, bookings and settlements.</p>
+          <p>Attendance, incidents, guest lists, ticketing and settlements.</p>
         </div>
         <div>
           <span>Intelligence</span>
-          <p>Calibrated guidance after ten events.</p>
+          <p>Patterns begin to surface after ten events.</p>
         </div>
       </div>
 
       <footer class="product-footer">
-        <p>Built for Scottish venues under 300 capacity. Founding access is open until 31 August 2026.</p>
+        <p>Built for venues operating under Scottish licensing law. Founding access is open until 31 August 2026.</p>
         <div>
-          <a href="https://holocron.scot" rel="noopener noreferrer" target="_blank">Website ↗</a>
-          <a href="/contact">Talk through your operation →</a>
+          <a href="/contact">Request founding access →</a>
         </div>
       </footer>
     </article>
@@ -90,8 +84,8 @@ const collectionSchema = {
         <span>Next</span>
         <span>02</span>
       </div>
-      <h2 id="next-title">One product ships at a time.</h2>
-      <p>People Pro will bring deeper intelligence to artists and promoters through the same shared record. Product announcements go to the newsletter first.</p>
+      <h2 id="next-title">We ship one product at a time.</h2>
+      <p>People Pro is next: deeper intelligence for artists and promoters, built on the same shared record. Newsletter subscribers hear about new products first.</p>
       <a href="/newsletter">Read the notes →</a>
     </section>
   </main>
@@ -155,8 +149,8 @@ const collectionSchema = {
     padding-top: 84px;
     font-size: clamp(70px, 9.5vw, 160px);
     font-weight: 600;
-    letter-spacing: -0.08em;
-    line-height: 0.88;
+    letter-spacing: -0.055em;
+    line-height: 0.92;
   }
 
   .products-header > p {
@@ -177,17 +171,6 @@ const collectionSchema = {
     padding: 80px 40px 110px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   }
-
-  .product-object {
-    min-height: 760px;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-    background: #070707;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
-  :global(.product-object .signal-object) { width: min(48vw, 560px); }
 
   .product-header {
     padding: 64px 0 70px;
@@ -211,8 +194,8 @@ const collectionSchema = {
     margin-top: 18px;
     font-size: clamp(58px, 8vw, 126px);
     font-weight: 600;
-    letter-spacing: -0.08em;
-    line-height: 0.85;
+    letter-spacing: -0.052em;
+    line-height: 0.9;
   }
 
   .product-category { display: block; margin-top: 28px; }
@@ -245,7 +228,7 @@ const collectionSchema = {
   }
 
   .product-next > div { margin-bottom: auto; }
-  .product-next h2 { max-width: 860px; font-size: clamp(54px, 7vw, 112px); font-weight: 560; letter-spacing: -0.075em; line-height: 0.9; }
+  .product-next h2 { max-width: 860px; font-size: clamp(54px, 7vw, 112px); font-weight: 560; letter-spacing: -0.05em; line-height: 0.94; }
   .product-next > p { max-width: 560px; margin-top: 38px; color: rgba(240, 237, 233, 0.6); font-size: 15px; line-height: 1.7; }
   .product-next > a { width: max-content; margin-top: 36px; color: #f0ede9; font-family: var(--font-mono); font-size: 10px; letter-spacing: .04em; text-transform: uppercase; }
 
@@ -256,8 +239,6 @@ const collectionSchema = {
     .products-header h1 { font-size: 17vw; }
     .products-header__actions { margin-top: 28px; }
     .product { padding: 44px 18px 80px; }
-    .product-object { min-height: 520px; }
-    :global(.product-object .signal-object) { width: min(62vw, 320px); }
     .product-header { padding: 50px 0; grid-template-columns: 1fr; gap: 45px; }
     .product-details { grid-template-columns: repeat(2, 1fr); }
     .product-details > div { min-height: 175px; border-bottom: 1px solid rgba(255, 255, 255, 0.14); }

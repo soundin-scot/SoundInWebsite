@@ -1,0 +1,114 @@
+---
+export const prerender = false;
+
+import Layout from '@/layouts/Layout.astro';
+
+const token = Astro.url.searchParams.get('token') ?? '';
+const validShape = /^[A-Za-z0-9_-]{40,100}$/.test(token);
+---
+
+<Layout
+  title="Confirm your subscription: SoundIn"
+  description="Confirm your SoundIn Notes email subscription."
+  canonical="https://soundin.scot/newsletter/confirm"
+  current="newsletter"
+  skipLink={{ href: '#confirmation', label: 'Skip to confirmation' }}
+>
+  <meta name="robots" content="noindex, nofollow" slot="head" />
+
+  <main class="confirmation" id="confirmation" tabindex="-1">
+    <span class="confirmation-kicker">SoundIn / Notes</span>
+    <h1>{validShape ? 'Confirm the signal.' : 'This link has expired.'}</h1>
+    <p id="confirmation-copy">
+      {validShape
+        ? 'One deliberate click confirms that you want to receive occasional notes from SoundIn.'
+        : 'Return to the newsletter page and request a new confirmation email.'}
+    </p>
+
+    {validShape ? (
+      <form id="confirmation-form">
+        <input type="hidden" name="token" value={token} />
+        <button type="submit" class="cta-button">Confirm subscription <span aria-hidden="true">→</span></button>
+        <p id="confirmation-status" role="status" aria-live="polite"></p>
+      </form>
+    ) : (
+      <a class="cta-button" href="/newsletter#newsletter-signup">Request another link <span aria-hidden="true">→</span></a>
+    )}
+  </main>
+</Layout>
+
+<style>
+  .confirmation {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 150px clamp(18px, 8vw, 130px) 100px;
+    background: radial-gradient(circle at 78% 32%, rgba(255,255,255,.08), transparent 34%), #050505;
+  }
+  .confirmation-kicker {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  h1 {
+    max-width: 900px;
+    margin: 34px 0 28px;
+    font-family: var(--font-sans);
+    font-size: clamp(62px, 10vw, 150px);
+    font-weight: 600;
+    letter-spacing: -.055em;
+    line-height: .88;
+    color: var(--color-snow);
+  }
+  .confirmation > p {
+    max-width: 590px;
+    margin-bottom: 34px;
+    color: var(--color-cream);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  #confirmation-status {
+    min-height: 22px;
+    margin-top: 18px;
+    color: var(--color-muted);
+    font-size: 13px;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('confirmation-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const button = form.querySelector<HTMLButtonElement>('button');
+    const token = form.querySelector<HTMLInputElement>('input[name="token"]')?.value ?? '';
+    const status = document.getElementById('confirmation-status');
+    const copy = document.getElementById('confirmation-copy');
+    if (!button || !status || !copy) return;
+
+    button.disabled = true;
+    button.textContent = 'Confirming…';
+    status.textContent = '';
+
+    try {
+      const response = await fetch('/api/newsletter/confirm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || 'We could not confirm your subscription.');
+
+      copy.textContent = 'You are confirmed. The next worthwhile note will arrive by email.';
+      button.textContent = 'Subscription confirmed';
+      status.textContent = 'You can close this page.';
+    } catch (error) {
+      button.disabled = false;
+      button.textContent = 'Try again';
+      status.textContent = error instanceof Error ? error.message : 'We could not confirm your subscription.';
+    }
+  });
+</script>
