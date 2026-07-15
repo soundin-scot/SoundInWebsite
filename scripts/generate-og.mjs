@@ -16,8 +16,8 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <text x="54" y="76" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="-1" fill="#efeee8">SOUND/IN</text>
 
   <text x="54" y="188" font-family="monospace" font-size="11" letter-spacing="1" fill="#efeee8" opacity=".62">INDEPENDENT SOFTWARE COMPANY / SCOTLAND</text>
-  <text x="54" y="280" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="600" letter-spacing="-4" fill="#efeee8">Infrastructure for</text>
-  <text x="54" y="348" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="600" letter-spacing="-4" fill="#efeee8">Scotland after dark.</text>
+  <text x="54" y="280" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="600" letter-spacing="-2.5" fill="#efeee8">Infrastructure for</text>
+  <text x="54" y="348" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="600" letter-spacing="-2.5" fill="#efeee8">Scotland after dark.</text>
   <line x1="54" y1="434" x2="720" y2="434" stroke="#efeee8" stroke-opacity=".3"/>
   <text x="54" y="482" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#efeee8" opacity=".72">Calm, accountable systems for Scotland's night-time economy.</text>
   <text x="54" y="574" font-family="monospace" font-size="10" letter-spacing="1" fill="#efeee8" opacity=".55">SOUNDIN.SCOT / SCOTLAND / SC850719</text>
@@ -31,7 +31,7 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
     <text x="28" y="48" font-family="monospace" font-size="10" fill="#efeee8">H/01</text>
     <text x="402" y="48" text-anchor="end" font-family="monospace" font-size="9" fill="#efeee8" opacity=".6">ILLUSTRATIVE RECORD</text>
     <text x="28" y="137" font-family="monospace" font-size="9" fill="#efeee8" opacity=".55">SAT / 18 JUL</text>
-    <text x="24" y="264" font-family="Arial, Helvetica, sans-serif" font-size="116" font-weight="500" letter-spacing="-8" fill="#efeee8">23:48</text>
+    <text x="24" y="264" font-family="Arial, Helvetica, sans-serif" font-size="116" font-weight="500" letter-spacing="-4" fill="#efeee8">23:48</text>
     <text x="28" y="293" font-family="monospace" font-size="8" fill="#efeee8" opacity=".55">DOORS 22:00 — CLOSE 03:00</text>
     <rect x="28" y="368" width="374" height="170" fill="none" stroke="#efeee8" stroke-opacity=".4"/>
     <line x1="244" y1="368" x2="244" y2="538" stroke="#efeee8" stroke-opacity=".4"/>

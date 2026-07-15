@@ -15,7 +15,7 @@ const orgSchema = {
       name: 'SoundIn',
       legalName: 'SoundIn Limited',
       url: 'https://soundin.scot',
-      email: 'hello@soundin.scot',
+      email: 'cougar@soundin.scot',
       foundingDate: '2025',
       description,
       identifier: { '@type': 'PropertyValue', name: 'Companies House', value: 'SC850719' },
@@ -28,10 +28,10 @@ const orgSchema = {
 };
 
 const recordStages = [
-  ['21:00', 'Briefing', 'The plan, roles and responsible people agree before doors.'],
-  ['22:00', 'Entry', 'Attendance and guest decisions move into one live record.'],
-  ['00:20', 'Floor', 'Notes are assigned, resolved and retained with context.'],
-  ['03:00', 'Close', 'Settlement and actions remain visible after the room empties.'],
+  ['21:00', 'Briefing', 'Before doors open, everyone agrees the plan, their role and who owns each decision.'],
+  ['22:00', 'Entry', 'Headcounts and guest-list decisions move into one live record.'],
+  ['00:20', 'Floor', 'Incidents are assigned, resolved and kept with their context.'],
+  ['03:00', 'Close', 'Settlements and follow-up actions remain visible after the room empties.'],
 ];
 ---
 
@@ -54,7 +54,7 @@ const recordStages = [
         <h1 id="home-title">Infrastructure for Scotland <span>after dark.</span></h1>
 
         <div class="hero-intro">
-          <p>Operational software for Scotland’s venues, promoters and security teams—starting with Holocron, one accountable record from briefing to close.</p>
+          <p>SoundIn builds operational software for Scotland’s venues, promoters and security teams. Holocron gives them one accountable record, from briefing to close.</p>
           <div class="hero-actions">
             <a class="button-primary" href="/ecosystem">Explore Holocron <span aria-hidden="true">↗</span></a>
             <a class="button-text" href="/vision">Our point of view <span aria-hidden="true">→</span></a>
@@ -87,8 +87,8 @@ const recordStages = [
       </header>
 
       <div class="thesis__statement">
-        <h2 id="thesis-title">The night is live.<br />Its systems are not.</h2>
-        <p>Most nights are still held together by disconnected tools and private conversations. SoundIn gives responsible teams a calmer, shared way to know what happened—and what happens next.</p>
+          <h2 id="thesis-title">The night is live.<br />Its systems are not.</h2>
+        <p>Most nights still depend on disconnected tools and private messages. SoundIn gives the people in charge one calm, shared record of what happened and what needs to happen next.</p>
       </div>
 
       <ol class="record-sequence">
@@ -114,7 +114,7 @@ const recordStages = [
           <span class="product-kicker">Venue operations</span>
           <h2 id="holocron-title">Holocron</h2>
         </div>
-        <p>One operational record for the entire night. Attendance, incidents, guest lists, ticketing and settlements stay connected without adding another administrative burden.</p>
+        <p>One operational record for the whole night. Keep attendance, incidents, guest lists, ticketing and settlements together, without creating more admin.</p>
       </div>
 
       <div class="holocron__theatre">
@@ -123,19 +123,19 @@ const recordStages = [
         <div class="holocron__spec">
           <div class="spec-intro">
             <span>H/01</span>
-            <p>Designed around the sequence of a real event, not the structure of a generic CRM.</p>
+            <p>Built around how an event actually unfolds, not how a generic CRM expects it to.</p>
           </div>
 
           <dl>
-            <div><dt>Designed for</dt><dd>Independent Scottish venues under 300 capacity.</dd></div>
-            <div><dt>Shared with</dt><dd>Promoters, artists, production and security teams.</dd></div>
-            <div><dt>One record</dt><dd>Attendance, incidents, bookings and settlements.</dd></div>
-            <div><dt>Working principle</dt><dd>Clear at 23:00. Accountable at 09:00.</dd></div>
+            <div><dt>Designed for</dt><dd>Venues operating under Scottish licensing law.</dd></div>
+            <div><dt>Shared with</dt><dd>Promoters, artists, production teams and security.</dd></div>
+            <div><dt>One record</dt><dd>Attendance, incidents, guest lists and settlements.</dd></div>
+            <div><dt>Working principle</dt><dd>Clear during the night. Accountable the next morning.</dd></div>
           </dl>
 
           <div class="holocron__links">
-            <a class="button-primary button-primary--light" href="https://holocron.scot" rel="noopener noreferrer">Visit Holocron <span aria-hidden="true">↗</span></a>
-            <a class="button-text" href="/contact">Discuss your operation <span aria-hidden="true">→</span></a>
+            <a class="button-primary button-primary--light" href="/ecosystem#holocron">Explore Holocron <span aria-hidden="true">→</span></a>
+            <a class="button-text" href="/contact">Tell us how your venue works <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
@@ -153,17 +153,17 @@ const recordStages = [
         <article>
           <span>01</span>
           <h3>Calm under pressure</h3>
-          <p>Interfaces should get quieter as the room gets louder. The next responsible action stays obvious.</p>
+          <p>As the room gets louder, the interface should get quieter. The next responsible action should always be clear.</p>
         </article>
         <article>
           <span>02</span>
           <h3>Accountable by design</h3>
-          <p>Important decisions need context, ownership and a durable record—not another disappearing message.</p>
+          <p>Important decisions need context, an owner and a record that lasts. They should not disappear into another message thread.</p>
         </article>
         <article>
           <span>03</span>
-          <h3>Made with the floor</h3>
-          <p>We build around the people carrying the responsibility, the real sequence of the night and the constraints they face.</p>
+          <h3>Made for the people on the floor</h3>
+          <p>We build around the people carrying the responsibility, the real order of the night and the limits they work within.</p>
         </article>
       </div>
     </section>
@@ -172,7 +172,7 @@ const recordStages = [
       <div class="home-cta__meta"><span>Founding cohort</span><span>Scotland / 2026</span></div>
       <h2 id="cta-title">Build a better record of the night.</h2>
       <div class="home-cta__footer">
-        <p>We are speaking with independent venues and operators shaping Holocron’s founding release.</p>
+        <p>We’re working with independent venues and operators to shape Holocron’s first release.</p>
         <a href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
       </div>
     </section>
@@ -218,8 +218,8 @@ const recordStages = [
     margin-top: auto;
     font-size: clamp(76px, 9.4vw, 164px);
     font-weight: 600;
-    letter-spacing: -.083em;
-    line-height: .79;
+    letter-spacing: -.055em;
+    line-height: .84;
     text-wrap: balance;
   }
   .home-hero h1 span { display: block; font-weight: 450; color: rgba(240,239,233,.62); }
@@ -287,21 +287,21 @@ const recordStages = [
   .home-cta h2 {
     font-size: clamp(62px, 8.4vw, 146px);
     font-weight: 560;
-    letter-spacing: -.075em;
-    line-height: .86;
+    letter-spacing: -.05em;
+    line-height: .91;
   }
   .thesis__statement p { max-width: 500px; color: rgba(239,238,232,.6); font-size: 16px; line-height: 1.7; }
   .record-sequence { list-style: none; border-top: 1px solid rgba(255,255,255,.3); }
   .record-sequence li { min-height: 112px; display: grid; grid-template-columns: 50px 90px 1fr minmax(280px, .7fr); align-items: center; gap: 20px; border-bottom: 1px solid rgba(255,255,255,.3); }
   .record-sequence__index,
   .record-sequence time { font-family: var(--font-mono); font-size: 8px; opacity: .44; }
-  .record-sequence h3 { font-size: clamp(28px, 3vw, 48px); font-weight: 500; letter-spacing: -.045em; }
+  .record-sequence h3 { font-size: clamp(28px, 3vw, 48px); font-weight: 500; letter-spacing: -.03em; line-height: 1.04; }
   .record-sequence p { max-width: 490px; color: rgba(239,238,232,.54); font-size: 13px; line-height: 1.58; }
 
   .holocron { padding: 52px clamp(18px, 3vw, 46px) 130px; color: #111; background: #d9d8d2; }
   .holocron__headline { padding: 80px 0 100px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 80px; align-items: end; }
   .product-kicker { display: block; margin-bottom: 22px; font-family: var(--font-mono); font-size: 8px; text-transform: uppercase; }
-  .holocron__headline h2 { font-size: clamp(86px, 12vw, 210px); font-weight: 620; letter-spacing: -.09em; line-height: .69; }
+  .holocron__headline h2 { font-size: clamp(86px, 12vw, 210px); font-weight: 620; letter-spacing: -.055em; line-height: .78; }
   .holocron__headline > p { max-width: 540px; font-size: 16px; line-height: 1.65; }
   .holocron__theatre { display: grid; grid-template-columns: 1fr 1fr; min-height: 720px; border: 1px solid rgba(0,0,0,.42); }
   .holocron__object { display: grid; place-items: center; border-right: 1px solid rgba(0,0,0,.42); overflow: hidden; }
@@ -323,7 +323,7 @@ const recordStages = [
   .principles__grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.3); border-left: 1px solid rgba(255,255,255,.3); }
   .principles article { min-height: 380px; padding: 22px; display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,.3); border-bottom: 1px solid rgba(255,255,255,.3); }
   .principles article > span { font-family: var(--font-mono); font-size: 8px; opacity: .45; }
-  .principles h3 { margin-top: auto; font-size: clamp(28px, 3vw, 48px); font-weight: 500; letter-spacing: -.05em; }
+  .principles h3 { margin-top: auto; font-size: clamp(28px, 3vw, 48px); font-weight: 500; letter-spacing: -.03em; line-height: 1.04; }
   .principles article p { max-width: 360px; margin-top: 22px; color: rgba(239,238,232,.54); font-size: 13px; line-height: 1.6; }
 
   .home-cta { min-height: 760px; padding: 52px clamp(18px, 3vw, 46px); display: flex; flex-direction: column; color: #111; background: #efeee8; }
@@ -344,7 +344,7 @@ const recordStages = [
   @media (max-width: 760px) {
     .home-hero { padding-top: 92px; }
     .home-hero__copy { min-height: calc(100svh - 134px); }
-    .home-hero h1 { font-size: 17vw; line-height: .82; }
+    .home-hero h1 { font-size: 15vw; line-height: .9; }
     .hero-intro { grid-template-columns: 1fr; }
     .hero-facts { grid-template-columns: 1fr; gap: 12px; padding-top: 14px; }
     .hero-facts li { padding: 0; }

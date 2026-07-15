@@ -6,15 +6,15 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="site-footer__top">
     <Logo />
-    <p>Independent software for the people and places behind Scotland's night-time economy.</p>
+    <p>Independent software for the people who run Scotland’s night-time economy.</p>
     <a class="site-footer__contact" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
   </div>
 
   <div class="site-footer__word" aria-hidden="true">SOUND/IN</div>
 
   <div class="site-footer__meta">
-    <span>{year} © SoundIn Limited</span>
-    <span>Scotland / United Kingdom</span>
+    <span>© {year} SoundIn Limited</span>
+    <span>Scotland</span>
     <nav aria-label="Footer navigation">
       <a href="/vision">Vision</a>
       <a href="/ecosystem">Products</a>
@@ -62,8 +62,8 @@ const year = new Date().getFullYear();
     margin: clamp(110px, 14vw, 210px) 0 40px;
     font-size: clamp(82px, 18.1vw, 340px);
     font-weight: 650;
-    letter-spacing: -.09em;
-    line-height: .67;
+    letter-spacing: -.055em;
+    line-height: .74;
     white-space: nowrap;
   }
   .site-footer__meta {
@@ -76,7 +76,7 @@ const year = new Date().getFullYear();
     color: rgba(240,239,233,.46);
     font-family: var(--font-mono);
     font-size: 8px;
-    letter-spacing: .04em;
+    letter-spacing: .06em;
     text-transform: uppercase;
   }
   .site-footer__meta nav { justify-self: center; display: flex; gap: 25px; }

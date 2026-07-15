@@ -162,12 +162,11 @@
 
   .page-hero-title {
     font-family: var(--font-sans);
-    font-weight: 450;
     font-weight: 900;
     font-style: normal;
     font-size: clamp(64px, 8.5vw, 112px);
-    letter-spacing: -0.07em;
-    line-height: 0.9;
+    letter-spacing: -0.05em;
+    line-height: 0.94;
     color: var(--color-snow);
     text-wrap: balance;
     opacity: 0;
@@ -582,13 +581,13 @@
   max-width: 1260px;
   font-weight: 600;
   font-size: clamp(72px, 10vw, 172px);
-  letter-spacing: -.082em;
-  line-height: .8;
+  letter-spacing: -.055em;
+  line-height: .86;
 }
 .page-hero-desc { max-width: 600px; margin-top: 42px; font-size: clamp(15px, 1.3vw, 18px); }
 .page-header { border-bottom: 1px solid rgba(255,255,255,.2); }
 .page-header::before { display: none; }
-.page-header-headline { font-family: var(--font-sans); font-style: normal; font-weight: 560; letter-spacing: -.06em; }
+.page-header-headline { font-family: var(--font-sans); font-style: normal; font-weight: 560; letter-spacing: -.04em; }
 .practice-grid { gap: 0; border-top: 1px solid var(--color-faint); border-left: 1px solid var(--color-faint); background: transparent; }
 .practice-card { border-right: 1px solid var(--color-faint); border-bottom: 1px solid var(--color-faint); }
 .practice-card::before { display: none; }
