@@ -15,7 +15,7 @@ githubApp:
   secretScanningEnabled: true
 
 issueRules:
-  # Critical — block on any of these
+  # Critical: block on any of these
   malware: error
   gptMalware: error
   didYouMean: error
@@ -43,7 +43,7 @@ issueRules:
   dynamicRequire: warn
   telemetry: warn
 
-  # Noise — suppress
+  # Noise: suppress
   unpopularPackage: false
   minifiedFile: false
   badSemverDependency: false
@@ -52,5 +52,5 @@ issueRules:
 
 # NOTE: min-release-age (7-day rule) is configured in the Socket dashboard
 # under Organisation Settings -> Security Policy -> Package Age Threshold.
-# This blocks installs of packages published within 7 days — requires paid plan.
+# This blocks installs of packages published within 7 days. It requires a paid plan.
 

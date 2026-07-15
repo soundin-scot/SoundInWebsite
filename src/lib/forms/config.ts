@@ -94,5 +94,5 @@ export function getNewsletterResendConfig(env: ServerEnv): NewsletterResendConfi
 }
 
 export function getSiteUrl(env: ServerEnv): string {
-  return (read(env, 'SITE_URL') ?? 'https://soundin.scot').replace(/\/$/, '');
+  return (read(env, 'SITE_URL') ?? 'https://www.soundin.scot').replace(/\/$/, '');
 }

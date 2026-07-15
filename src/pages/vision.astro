@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 
-const title = 'Vision | SoundIn';
+const title = 'Why SoundIn | Better systems for Scottish nightlife';
 const description = 'SoundIn builds calm, accountable software for Scottish nightlife. Holocron gives every team one operational record, from briefing to close.';
 
 const sections = [
@@ -43,18 +43,19 @@ const sections = [
 const aboutSchema = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
-  '@id': 'https://soundin.scot/vision#webpage',
-  url: 'https://soundin.scot/vision',
+  '@id': 'https://www.soundin.scot/vision#webpage',
+  url: 'https://www.soundin.scot/vision',
   name: title,
   description,
-  isPartOf: { '@id': 'https://soundin.scot/#organization' },
+  inLanguage: 'en-GB',
+  isPartOf: { '@id': 'https://www.soundin.scot/#website' },
 };
 ---
 
 <Layout
   title={title}
   description={description}
-  canonical="https://soundin.scot/vision"
+  canonical="https://www.soundin.scot/vision"
   current="vision"
   skipLink={{ href: '#vision-content', label: 'Skip to content' }}
 >

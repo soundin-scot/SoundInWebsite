@@ -32,7 +32,7 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
     <text x="402" y="48" text-anchor="end" font-family="monospace" font-size="9" fill="#efeee8" opacity=".6">ILLUSTRATIVE RECORD</text>
     <text x="28" y="137" font-family="monospace" font-size="9" fill="#efeee8" opacity=".55">SAT / 18 JUL</text>
     <text x="24" y="264" font-family="Arial, Helvetica, sans-serif" font-size="116" font-weight="500" letter-spacing="-4" fill="#efeee8">23:48</text>
-    <text x="28" y="293" font-family="monospace" font-size="8" fill="#efeee8" opacity=".55">DOORS 22:00 — CLOSE 03:00</text>
+    <text x="28" y="293" font-family="monospace" font-size="8" fill="#efeee8" opacity=".55">DOORS 22:00 / CLOSE 03:00</text>
     <rect x="28" y="368" width="374" height="170" fill="none" stroke="#efeee8" stroke-opacity=".4"/>
     <line x1="244" y1="368" x2="244" y2="538" stroke="#efeee8" stroke-opacity=".4"/>
     <text x="45" y="398" font-family="monospace" font-size="8" fill="#efeee8" opacity=".6">01 / ATTENDANCE</text>

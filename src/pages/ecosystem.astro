@@ -1,28 +1,56 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 
-const title = 'Products | SoundIn';
+const title = 'Holocron | Venue operations software for Scotland';
 const description = 'Holocron brings attendance, incidents, guest lists, ticketing and settlements into one record for independent Scottish venues.';
 
-const collectionSchema = {
+const productSchema = {
   '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  '@id': 'https://soundin.scot/ecosystem#webpage',
-  name: title,
-  description,
-  url: 'https://soundin.scot/ecosystem',
-  isPartOf: { '@id': 'https://soundin.scot/#organization' },
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      '@id': 'https://www.soundin.scot/ecosystem#webpage',
+      name: title,
+      description,
+      url: 'https://www.soundin.scot/ecosystem',
+      inLanguage: 'en-GB',
+      isPartOf: { '@id': 'https://www.soundin.scot/#website' },
+      mainEntity: { '@id': 'https://www.soundin.scot/ecosystem#holocron' },
+    },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': 'https://www.soundin.scot/ecosystem#holocron',
+      name: 'Holocron',
+      description,
+      url: 'https://www.soundin.scot/ecosystem#holocron',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      provider: { '@id': 'https://www.soundin.scot/#organization' },
+      areaServed: { '@type': 'AdministrativeArea', name: 'Scotland' },
+      audience: {
+        '@type': 'BusinessAudience',
+        audienceType: 'Venues operating under Scottish licensing law',
+      },
+      featureList: [
+        'Attendance records',
+        'Incident management',
+        'Guest lists',
+        'Ticketing records',
+        'Event settlements',
+      ],
+    },
+  ],
 };
 ---
 
 <Layout
   title={title}
   description={description}
-  canonical="https://soundin.scot/ecosystem"
+  canonical="https://www.soundin.scot/ecosystem"
   current="ecosystem"
   skipLink={{ href: '#products', label: 'Skip to products' }}
 >
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionSchema)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} slot="head" />
 
   <main id="products" class="products" tabindex="-1">
     <header class="products-header">

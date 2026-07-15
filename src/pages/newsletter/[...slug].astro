@@ -15,7 +15,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const title = `${post.data.title} | SoundIn Newsletter`;
-const canonical = `https://soundin.scot/newsletter/${post.id}`;
+const canonical = `https://www.soundin.scot/newsletter/${post.id}`;
 
 const dateFmt = new Intl.DateTimeFormat('en-GB', {
   year: 'numeric',
@@ -31,9 +31,9 @@ const blogPostSchema = {
   description: post.data.summary,
   datePublished: post.data.publishedAt.toISOString(),
   url: canonical,
-  isPartOf: { '@id': 'https://soundin.scot/newsletter#blog' },
-  publisher: { '@id': 'https://soundin.scot/#organization' },
-  author: { '@id': 'https://soundin.scot/#organization' },
+  isPartOf: { '@id': 'https://www.soundin.scot/newsletter#blog' },
+  publisher: { '@id': 'https://www.soundin.scot/#organization' },
+  author: { '@id': 'https://www.soundin.scot/#organization' },
   keywords: post.data.tags.join(', '),
 };
 ---
