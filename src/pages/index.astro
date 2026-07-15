@@ -3,26 +3,49 @@ import Layout from '@/layouts/Layout.astro';
 import NightRecord from '@/components/NightRecord.astro';
 import SoundObject from '@/components/SoundObject.astro';
 
-const title = 'SoundIn — Infrastructure for Scotland after dark';
-const description = 'SoundIn builds calm, accountable operational software for the people responsible for Scotland’s night-time economy.';
+const title = "SoundIn | Venue operations software for Scotland";
+const description = "SoundIn builds Holocron, venue operations software for Scottish venues, promoters and security teams. One shared record from briefing to close.";
 
 const orgSchema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': ['Organization', 'LocalBusiness'],
-      '@id': 'https://soundin.scot/#organization',
+      '@id': 'https://www.soundin.scot/#organization',
       name: 'SoundIn',
       legalName: 'SoundIn Limited',
-      url: 'https://soundin.scot',
+      url: 'https://www.soundin.scot',
+      logo: 'https://www.soundin.scot/favicon.svg',
       email: 'cougar@soundin.scot',
       foundingDate: '2025',
       description,
       identifier: { '@type': 'PropertyValue', name: 'Companies House', value: 'SC850719' },
       address: { '@type': 'PostalAddress', addressRegion: 'Scotland', addressCountry: 'GB' },
-      founder: [{ '@type': 'Person', name: 'Cougar Macdougall' }],
+      founder: { '@id': 'https://www.soundin.scot/#founder' },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'founder and customer enquiries',
+        email: 'cougar@soundin.scot',
+        areaServed: 'Scotland',
+      },
       areaServed: [{ '@type': 'AdministrativeArea', name: 'Scotland' }],
       sameAs: ['https://www.linkedin.com/company/soundin-ltd'],
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://www.soundin.scot/#founder',
+      name: 'Cougar Macdougall',
+      email: 'cougar@soundin.scot',
+      worksFor: { '@id': 'https://www.soundin.scot/#organization' },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://www.soundin.scot/#website',
+      url: 'https://www.soundin.scot',
+      name: 'SoundIn',
+      description,
+      inLanguage: 'en-GB',
+      publisher: { '@id': 'https://www.soundin.scot/#organization' },
     },
   ],
 };
@@ -38,7 +61,7 @@ const recordStages = [
 <Layout
   title={title}
   description={description}
-  canonical="https://soundin.scot/"
+  canonical="https://www.soundin.scot"
   skipLink={{ href: '#main-content', label: 'Skip to main content' }}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(orgSchema)} slot="head" />
@@ -74,9 +97,13 @@ const recordStages = [
     </section>
 
     <div class="operational-rail" aria-label="The operational record">
-      <div>
-        <span>Briefing</span><i>01</i><span>Entry</span><i>02</i><span>Incidents</span><i>03</i><span>Guests</span><i>04</i><span>Settlement</span><i>05</i><span>Close</span><i>06</i>
-        <span>Briefing</span><i>01</i><span>Entry</span><i>02</i><span>Incidents</span><i>03</i><span>Guests</span><i>04</i><span>Settlement</span><i>05</i><span>Close</span><i>06</i>
+      <div class="operational-rail__track">
+        <div class="operational-rail__set">
+          <span>Briefing</span><i>01</i><span>Entry</span><i>02</i><span>Incidents</span><i>03</i><span>Guests</span><i>04</i><span>Settlement</span><i>05</i><span>Close</span><i>06</i>
+        </div>
+        <div class="operational-rail__set" aria-hidden="true">
+          <span>Briefing</span><i>01</i><span>Entry</span><i>02</i><span>Incidents</span><i>03</i><span>Guests</span><i>04</i><span>Settlement</span><i>05</i><span>Close</span><i>06</i>
+        </div>
       </div>
     </div>
 
@@ -271,8 +298,9 @@ const recordStages = [
   :global(.home-hero__record .night-record) { height: 100%; min-height: 100svh; border: 0; }
 
   .operational-rail { overflow: hidden; color: #efeee8; background: #111; border-top: 1px solid #111; border-bottom: 1px solid #111; }
-  .operational-rail > div { width: max-content; padding: 14px 0; display: flex; align-items: center; animation: rail 34s linear infinite; }
-  .operational-rail span { padding: 0 31px; font-size: 11px; text-transform: uppercase; }
+  .operational-rail__track { width: max-content; display: flex; align-items: stretch; animation: rail 34s linear infinite; }
+  .operational-rail__set { min-width: 100vw; padding: 14px 0; display: flex; align-items: center; justify-content: space-around; }
+  .operational-rail span { padding: 0 24px; font-size: 11px; text-transform: uppercase; }
   .operational-rail i { font-family: var(--font-mono); font-size: 7px; font-style: normal; opacity: .42; }
   @keyframes rail { to { transform: translateX(-50%); } }
 
@@ -375,6 +403,7 @@ const recordStages = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .operational-rail > div { animation: none; transform: translateX(-12%); }
+    .operational-rail__track { animation: none; transform: none; }
+    .operational-rail__set[aria-hidden="true"] { display: none; }
   }
 </style>

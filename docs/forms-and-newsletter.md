@@ -49,7 +49,7 @@ Create a Personal Access Token restricted to this base with only the record read
 1. Verify the SoundIn sending domain.
 2. Create a Segment for SoundIn Notes.
 3. Create a Topic for SoundIn Notes preferences.
-4. Add a webhook pointing to `https://soundin.scot/api/webhooks/resend`.
+4. Add a webhook pointing to `https://www.soundin.scot/api/webhooks/resend`.
 5. Subscribe the webhook to `contact.updated`, `contact.deleted`, `email.bounced`, `email.complained`, and `email.suppressed`.
 6. Store the webhook signing secret in `RESEND_WEBHOOK_SECRET`.
 

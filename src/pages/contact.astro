@@ -1,24 +1,25 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 
-const title = 'Contact SoundIn';
-const description = 'Get in touch with SoundIn, the independent Scottish software company behind Holocron.';
+const title = 'Contact SoundIn | Holocron and venue operations';
+const description = 'Contact SoundIn about Holocron, founding access and venue operations software for venues operating under Scottish licensing law.';
 
 const pageSchema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'ContactPage',
-      '@id': 'https://soundin.scot/contact/#webpage',
-      url: 'https://soundin.scot/contact/',
+      '@id': 'https://www.soundin.scot/contact#webpage',
+      url: 'https://www.soundin.scot/contact',
       name: 'Contact SoundIn',
-      isPartOf: { '@id': 'https://soundin.scot/#organization' },
+      inLanguage: 'en-GB',
+      isPartOf: { '@id': 'https://www.soundin.scot/#website' },
     },
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://soundin.scot/' },
-        { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://soundin.scot/contact/' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.soundin.scot/' },
+        { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://www.soundin.scot/contact' },
       ],
     },
   ],
@@ -28,7 +29,7 @@ const pageSchema = {
 <Layout
   title={title}
   description={description}
-  canonical="https://soundin.scot/contact/"
+  canonical="https://www.soundin.scot/contact"
   current="contact"
   skipLink={{ href: '#contact-form', label: 'Skip to contact form' }}
 >

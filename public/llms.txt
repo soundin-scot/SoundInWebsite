@@ -17,7 +17,15 @@ The product is intended for:
 - Production teams
 - Security teams
 
-Founding access is open until 31 August 2026. Contact SoundIn at https://soundin.scot/contact.
+Founding access is open until 31 August 2026. Contact SoundIn at https://www.soundin.scot/contact.
+
+## Direct answers
+
+- What is SoundIn? An independent Scottish software company founded by Cougar Macdougall.
+- What is Holocron? Venue operations software that keeps the operational record of an event in one place.
+- Who is Holocron for? Venues operating under Scottish licensing law, plus the artists, promoters, production teams and security teams they work with.
+- Where does SoundIn operate? Scotland.
+- How do I contact the founder? Email cougar@soundin.scot.
 
 ## Principles
 
@@ -28,12 +36,12 @@ Founding access is open until 31 August 2026. Contact SoundIn at https://soundin
 
 ## Key pages
 
-- [Homepage](https://soundin.scot/): SoundIn’s purpose, principles and first product
-- [Vision](https://soundin.scot/vision): The problem with fragmented nightlife tools and SoundIn’s point of view
-- [Products](https://soundin.scot/ecosystem): Holocron’s audience, operational record and founding access
-- [Notes](https://soundin.scot/newsletter): Occasional writing on Holocron, live events and Scotland’s night-time economy
-- [Contact](https://soundin.scot/contact): Start a conversation with SoundIn
-- [Privacy](https://soundin.scot/privacy): How SoundIn handles personal data
+- [Homepage](https://www.soundin.scot/): SoundIn’s purpose, principles and first product
+- [Vision](https://www.soundin.scot/vision): The problem with fragmented nightlife tools and SoundIn’s point of view
+- [Products](https://www.soundin.scot/ecosystem): Holocron’s audience, operational record and founding access
+- [Notes](https://www.soundin.scot/newsletter): Occasional writing on Holocron, live events and Scotland’s night-time economy
+- [Contact](https://www.soundin.scot/contact): Start a conversation with SoundIn
+- [Privacy](https://www.soundin.scot/privacy): How SoundIn handles personal data
 
 ## Company details
 
@@ -43,4 +51,4 @@ Founding access is open until 31 August 2026. Contact SoundIn at https://soundin
 - Location: Scotland
 - Founder email: cougar@soundin.scot
 - LinkedIn: https://www.linkedin.com/company/soundin-ltd
-- Website: https://soundin.scot
+- Website: https://www.soundin.scot

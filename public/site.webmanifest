@@ -1,0 +1,16 @@
+{
+  "name": "SoundIn",
+  "short_name": "SoundIn",
+  "description": "Venue operations software for Scotland's night-time economy.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

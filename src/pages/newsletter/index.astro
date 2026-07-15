@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const title = 'Newsletter: SoundIn | Notes from Scotland';
+const title = 'SoundIn Notes | Scottish nightlife and venue software';
 const description = 'Quiet, irregular notes on building software, hosting events, and running a Scottish technology company. Subscribe or browse the archive.';
 
 const posts = (await getCollection('newsletter')).sort(
@@ -12,17 +12,18 @@ const posts = (await getCollection('newsletter')).sort(
 const blogSchema = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
-  '@id': 'https://soundin.scot/newsletter#blog',
+  '@id': 'https://www.soundin.scot/newsletter#blog',
   name: 'SoundIn Newsletter',
   description,
-  url: 'https://soundin.scot/newsletter',
-  publisher: { '@id': 'https://soundin.scot/#organization' },
+  url: 'https://www.soundin.scot/newsletter',
+  inLanguage: 'en-GB',
+  publisher: { '@id': 'https://www.soundin.scot/#organization' },
   blogPost: posts.map((p) => ({
     '@type': 'BlogPosting',
     headline: p.data.title,
     description: p.data.summary,
     datePublished: p.data.publishedAt.toISOString(),
-    url: `https://soundin.scot/newsletter/${p.id}`,
+    url: `https://www.soundin.scot/newsletter/${p.id}`,
   })),
 };
 
@@ -36,7 +37,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
 <Layout
   title={title}
   description={description}
-  canonical="https://soundin.scot/newsletter"
+  canonical="https://www.soundin.scot/newsletter"
   current="newsletter"
   skipLink={{ href: '#newsletter-signup', label: 'Skip to signup' }}
 >

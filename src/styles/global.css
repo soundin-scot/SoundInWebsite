@@ -121,7 +121,7 @@
   }
 
   /* ============================================================
-     PAGE HERO — always dark, atmospheric, full-width
+     PAGE HERO: always dark, atmospheric, full-width
   ============================================================ */
   .page-hero {
     position: relative;
@@ -531,7 +531,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 2026 identity layer — crisp editorial surfaces shared by supporting pages. */
+/* 2026 identity layer: crisp editorial surfaces shared by supporting pages. */
 .page-hero {
   min-height: 100svh;
   padding: 150px clamp(18px, 4vw, 64px) clamp(44px, 6vh, 76px);
