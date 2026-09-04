@@ -1,8 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 
-const title = 'Holocron | Venue operations software for Scotland';
-const description = 'Holocron brings attendance, incidents, guest lists, ticketing and settlements into one record for independent Scottish venues.';
+const title = 'Holocron | Event operations for Scottish nightlife';
+const description = 'Holocron brings attendance, incidents, guest lists, ticketing and settlements into one shared record for DJs, artists, promoters, production and security teams.';
 
 const productSchema = {
   '@context': 'https://schema.org',
@@ -28,10 +28,11 @@ const productSchema = {
       provider: { '@id': 'https://www.soundin.scot/#organization' },
       areaServed: { '@type': 'AdministrativeArea', name: 'Scotland' },
       audience: {
-        '@type': 'BusinessAudience',
-        audienceType: 'Venues operating under Scottish licensing law',
+        '@type': 'Audience',
+        audienceType: 'DJs, artists, promoters, production teams and security teams in Scotland’s night-time economy',
       },
       featureList: [
+        'Shared records for DJs, artists, promoters, production teams and security teams',
         'Attendance records',
         'Incident management',
         'Guest lists',
@@ -60,11 +61,11 @@ const productSchema = {
       </div>
       <h1>Operational systems for Scotland after dark.</h1>
       <p>
-        SoundIn builds focused software for the people responsible for venues, events and Scotland’s night-time economy.
+        SoundIn builds Holocron for People — DJs, artists, promoters, production and security teams — who make Scotland’s nights happen.
       </p>
       <div class="products-header__actions">
         <a class="product-primary-action" href="#holocron">See how Holocron works <span aria-hidden="true">→</span></a>
-        <a class="product-secondary-action" href="/contact">Tell us about your venue <span aria-hidden="true">→</span></a>
+        <a class="product-secondary-action" href="/contact">Join the People waitlist <span aria-hidden="true">→</span></a>
       </div>
     </header>
 
@@ -73,7 +74,7 @@ const productSchema = {
         <div>
           <span class="product-index">01</span>
           <h2>Holocron</h2>
-          <p class="product-category">Venue operations / Scotland</p>
+          <p class="product-category">People-first event operations / Scotland</p>
         </div>
         <p class="product-summary">
           One operational record for the whole night. Holocron keeps attendance, incidents, guest lists, ticketing and settlements together, without creating more admin.
@@ -82,39 +83,38 @@ const productSchema = {
 
       <div class="product-details">
         <div>
-          <span>Designed for</span>
-          <p>Venues operating under Scottish licensing law.</p>
+          <span>For People</span>
+          <p>DJs, artists, promoters, production teams and security teams.</p>
         </div>
         <div>
-          <span>Shared with</span>
-          <p>Artists, promoters, production teams and security.</p>
+          <span>Small free trial</span>
+          <p>Open through a rolling waitlist with no access deadline.</p>
         </div>
         <div>
           <span>Operational record</span>
           <p>Attendance, incidents, guest lists, ticketing and settlements.</p>
         </div>
         <div>
-          <span>Intelligence</span>
-          <p>Patterns begin to surface after ten events.</p>
+          <span>Venue side</span>
+          <p>Venue operations remain planned, but are not part of the current trial.</p>
         </div>
       </div>
 
       <footer class="product-footer">
-        <p>Built for venues operating under Scottish licensing law. Founding access is open until 31 August 2026.</p>
+        <p>Holocron is SoundIn’s only product. The current focus is a small free trial for People.</p>
         <div>
-          <a href="/contact">Request founding access →</a>
+          <a href="/contact">Join the People waitlist →</a>
         </div>
       </footer>
     </article>
 
     <section class="product-next" aria-labelledby="next-title">
       <div>
-        <span>Next</span>
-        <span>02</span>
+        <span>Focus</span>
       </div>
-      <h2 id="next-title">We ship one product at a time.</h2>
-      <p>People Pro is next: deeper intelligence for artists and promoters, built on the same shared record. Newsletter subscribers hear about new products first.</p>
-      <a href="/newsletter">Read the notes →</a>
+      <h2 id="next-title">One product, built with focus.</h2>
+      <p>We’re inviting People into a small free trial through an open, rolling waitlist.</p>
+      <a href="/contact">Join the waitlist →</a>
     </section>
   </main>
 </Layout>
