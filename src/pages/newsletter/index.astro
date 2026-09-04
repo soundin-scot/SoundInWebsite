@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const title = 'SoundIn Notes | Scottish nightlife and venue software';
+const title = 'SoundIn Notes | Scottish nightlife and event software';
 const description = 'Quiet, irregular notes on building software, hosting events, and running a Scottish technology company. Subscribe or browse the archive.';
 
 const posts = (await getCollection('newsletter')).sort(
@@ -112,7 +112,7 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', {
       <section class="nl-empty-archive" aria-labelledby="first-note-title">
         <span>Archive / forthcoming</span>
         <h2 id="first-note-title">The first note is on its way.</h2>
-        <p>Subscribe to receive it, along with occasional updates from Holocron’s founding phase.</p>
+        <p>Subscribe to receive it, along with occasional updates from Holocron’s early development.</p>
       </section>
     )}
   </main>

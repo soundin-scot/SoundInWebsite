@@ -2,28 +2,24 @@
 
 > SoundIn Limited is an independent Scottish software company building calm, accountable systems for Scotland’s night-time economy.
 
-SoundIn builds for the people responsible for venues and live events. Its first product, Holocron, brings the operational record of a night into one place so venue teams, artists, promoters, production teams and security can work from the same information.
+SoundIn is a bootstrapped, solo-founder company founded by Cougar Macdougall. It builds for the people who make nights happen: DJs and artists, promoters, production teams and security teams. Its first and only product is Holocron.
 
 ## Holocron
 
-Holocron is venue operations software for venues operating under Scottish licensing law. It keeps attendance, incidents, guest lists, ticketing and settlements in one shared record, from briefing to close.
+Holocron is event operations software that keeps attendance, incidents, guest lists, ticketing and settlements in one shared record, from briefing to close.
 
 Holocron is designed around the order of a real event rather than the structure of a generic customer relationship management system. Shared records reduce duplicate admin, preserve the context behind decisions and make follow-up work visible after the night ends.
 
-The product is intended for:
+The current priority is People — DJs and artists, promoters, production teams and security teams. Venue operations are a real part of the longer-term product, but are currently secondary and in the backlog.
 
-- Independent venue operators
-- Artists and promoters
-- Production teams
-- Security teams
-
-Founding access is open until 31 August 2026. Contact SoundIn at https://www.soundin.scot/contact.
+SoundIn is currently running a small free trial for People through an open, rolling waitlist. There is no access deadline. Contact SoundIn at https://www.soundin.scot/contact.
 
 ## Direct answers
 
-- What is SoundIn? An independent Scottish software company founded by Cougar Macdougall.
-- What is Holocron? Venue operations software that keeps the operational record of an event in one place.
-- Who is Holocron for? Venues operating under Scottish licensing law, plus the artists, promoters, production teams and security teams they work with.
+- What is SoundIn? An independent, bootstrapped Scottish software company founded and run by Cougar Macdougall.
+- What is Holocron? Event operations software that keeps the operational record of a night in one place.
+- Who is Holocron for? DJs and artists, promoters, production teams and security teams in Scotland’s night-time economy. Venue operations are planned for later.
+- What is available now? A small free trial for People, via an open, rolling waitlist.
 - Where does SoundIn operate? Scotland.
 - How do I contact the founder? Email cougar@soundin.scot.
 
@@ -38,9 +34,9 @@ Founding access is open until 31 August 2026. Contact SoundIn at https://www.sou
 
 - [Homepage](https://www.soundin.scot/): SoundIn’s purpose, principles and first product
 - [Vision](https://www.soundin.scot/vision): The problem with fragmented nightlife tools and SoundIn’s point of view
-- [Products](https://www.soundin.scot/ecosystem): Holocron’s audience, operational record and founding access
+- [Holocron](https://www.soundin.scot/ecosystem): Holocron’s People-first audience, shared record and small free trial
 - [Notes](https://www.soundin.scot/newsletter): Occasional writing on Holocron, live events and Scotland’s night-time economy
-- [Contact](https://www.soundin.scot/contact): Start a conversation with SoundIn
+- [Contact](https://www.soundin.scot/contact): Join the open, rolling waitlist or start a conversation with SoundIn
 - [Privacy](https://www.soundin.scot/privacy): How SoundIn handles personal data
 
 ## Company details
